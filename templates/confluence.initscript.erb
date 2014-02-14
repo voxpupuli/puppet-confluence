@@ -1,0 +1,61 @@
+#!/bin/sh -e
+# Confluence startup script
+#chkconfig: 2345 80 05
+#description: Confluence
+ 
+# Define some variables
+# Name of app ( JIRA, Confluence, etc )
+
+APP=<%= scope.lookupvar('confluence::product') %>
+# Name of the user to run as
+USER=<%= scope.lookupvar('confluence::user') %>
+# Location of application's bin directory
+CATALINA_HOME=<%= scope.lookupvar('confluence::webappdir') %>
+# Location of Java JDK
+export JAVA_HOME=<%= scope.lookupvar('confluence::javahome') %>
+ 
+case "$1" in
+  # Start command
+  start)
+      echo "Starting $APP"
+      /bin/su -m $USER -c "$CATALINA_HOME/bin/startup.sh"
+      ;;
+  # Stop command
+  stop)
+      echo "Stopping $APP"
+      /bin/su -m $USER -c "$CATALINA_HOME/bin/shutdown.sh -force"
+      echo "$?: $APP stopped successfully"
+      ;;
+   # Restart command
+   restart)
+        sleep 5
+        $0 stop
+        sleep 5
+        $0 start
+        ;;
+   # Status command
+   status)
+        STATUS=$( ps aux | grep "[c]atalina.base=$CATALINA_HOME" | wc -l )
+        if [ $STATUS -gt 0 ];then
+            ps -ef |grep $APP |grep -v grep |awk '{ print $2 }' | <%= scope.lookupvar('confluence::javahome') %>/bin/jps |grep -v Jps |grep -v grep > /dev/null
+            RETVAL=$?
+            if [ $RETVAL -eq 0 ];then
+                echo "$APP is running"
+                exit $RETVAL
+            else
+                echo "$APP is stopped"
+                exit $RETVAL
+            fi
+            exit $RETVAL
+        else
+            echo "$APP is stopped"
+            exit 1
+        fi
+        ;;
+   *)
+        echo "Usage: /etc/init.d/$APP {start|restart|stop}"
+        exit 1
+        ;;
+esac
+ 
+exit 0
