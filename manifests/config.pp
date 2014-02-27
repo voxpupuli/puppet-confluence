@@ -44,7 +44,7 @@ class confluence::config {
 
   file {"${confluence::webappdir}/bin/setenv.sh":
     ensure  => present,
-    content => template('crowd/setenv.sh.erb'),
+    content => template('confluence/setenv.sh.erb'),
     mode    => '0755',
   } ~>
 
