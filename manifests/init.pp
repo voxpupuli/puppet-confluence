@@ -39,8 +39,8 @@ class confluence (
 
   # JVM Settings
   $javahome,
-#UNUSED  $jvm_xmx      = '1024m',
-#UNUSED  $jvm_optional = '-XX:-HeapDumpOnOutOfMemoryError',
+  $jvm_xms      = '256m',
+  $jvm_xmx      = '1024m',
 
   # Confluence Settings
   $version      = '5.1.3',

@@ -42,6 +42,12 @@ class confluence::config {
     group => $confluence::group,
   }
 
+  file {"${confluence::webappdir}/bin/setenv.sh":
+    ensure  => present,
+    content => template('crowd/setenv.sh.erb'),
+    mode    => '0755',
+  } ~>
+
   file { "${confluence::webappdir}/confluence/WEB-INF/classes/confluence-init.properties":
     content => template('confluence/confluence-init.properties.erb'),
     mode    => '0755',
