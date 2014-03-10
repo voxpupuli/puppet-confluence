@@ -63,7 +63,6 @@ class confluence::install {
     ensure  => 'directory',
     owner   => $confluence::user,
     group   => $confluence::group,
-    recurse => true,
   } ->
 
   exec { "chown_${confluence::webappdir}":
