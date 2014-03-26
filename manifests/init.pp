@@ -41,6 +41,7 @@ class confluence (
   $javahome,
   $jvm_xms      = '256m',
   $jvm_xmx      = '1024m',
+  $java_opts    = '',
 
   # Confluence Settings
   $version      = '5.1.3',
