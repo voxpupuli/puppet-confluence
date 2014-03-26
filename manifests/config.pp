@@ -55,6 +55,13 @@ class confluence::config {
     notify  => Class['confluence::service'],
   }
 
+  file { "${confluence::webappdir}/conf/server.xml":
+    content => template("confluence/server.xml.erb"),
+    mode    => '0600',
+    require => Class['confluence::install'],
+    notify  => Class['confluence::service'],
+  }
+
 #  file { "${confluence::homedir}/confluence/confluence.cfg.xml":
 #    content => template("confluence/confluence.cfg.xml.erb"),
 #    mode    => '0600',

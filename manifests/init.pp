@@ -60,6 +60,9 @@ class confluence (
   # Manage confluence server
   $manage_service = true,
 
+  # Reverse https proxy
+  $proxy = {},
+
 ) {
 
   $webappdir    = "${installdir}/atlassian-${product}-${version}"
