@@ -41,6 +41,7 @@ class confluence (
   $javahome,
   $jvm_xms      = '256m',
   $jvm_xmx      = '1024m',
+  $java_opts    = '',
 
   # Confluence Settings
   $version      = '5.1.3',
@@ -58,6 +59,9 @@ class confluence (
 
   # Manage confluence server
   $manage_service = true,
+
+  # Reverse https proxy
+  $proxy = {},
 
 ) {
 
