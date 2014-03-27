@@ -38,16 +38,8 @@
 class confluence::install {
 
   require confluence
+  require deploy
 
-  deploy::file { "atlassian-${confluence::product}-${confluence::version}.${confluence::format}":
-    target          => $confluence::webappdir,
-    url             => $confluence::downloadURL,
-    strip           => true,
-    notify          => Exec["chown_${confluence::webappdir}"],
-    owner           => $confluence::user,
-    group           => $confluence::group,
-    download_timout => 1800,
-  } ->
   group { $confluence::user: ensure => present, gid => $confluence::gid } ->
   user { $confluence::user:
     comment          => 'Confluence daemon account',
@@ -60,6 +52,16 @@ class confluence::install {
     system           => true,
     uid              => $confluence::uid,
     gid              => $confluence::gid,
+  } ->
+
+  deploy::file { "atlassian-${confluence::product}-${confluence::version}.${confluence::format}":
+    target          => $confluence::webappdir,
+    url             => $confluence::downloadURL,
+    strip           => true,
+    notify          => Exec["chown_${confluence::webappdir}"],
+    owner           => $confluence::user,
+    group           => $confluence::group,
+    download_timout => 1800,
   } ->
 
   file { $confluence::homedir:
