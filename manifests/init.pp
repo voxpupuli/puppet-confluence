@@ -51,8 +51,8 @@ class confluence (
   $homedir      = '/home/confluence',
   $user         = 'confluence',
   $group        = 'confluence',
-  $uid          = '500',
-  $gid          = '500',
+  $uid          = undef,
+  $gid          = undef,
 
   # Misc Settings
   $downloadURL  = 'http://www.atlassian.com/software/confluence/downloads/binary/',

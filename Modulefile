@@ -8,4 +8,4 @@ description 'Atlassian confluence'
 project_page 'https://github.com/mkrakowitzer/puppet-confluence'
 
 ## Add dependencies, if any:
-dependency 'mkrakowitzer/deploy', '>= 0.0.1'
+dependency 'mkrakowitzer/deploy', '>= 0.0.2'

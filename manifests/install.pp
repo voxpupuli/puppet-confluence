@@ -40,10 +40,13 @@ class confluence::install {
   require confluence
 
   deploy::file { "atlassian-${confluence::product}-${confluence::version}.${confluence::format}":
-    target  => $confluence::webappdir,
-    url     => $confluence::downloadURL,
-    strip   => true,
-    notify  => Exec["chown_${confluence::webappdir}"],
+    target          => $confluence::webappdir,
+    url             => $confluence::downloadURL,
+    strip           => true,
+    notify          => Exec["chown_${confluence::webappdir}"],
+    owner           => $confluence::user,
+    group           => $confluence::group,
+    download_timout => 1800,
   } ->
   group { $confluence::user: ensure => present, gid => $confluence::gid } ->
   user { $confluence::user:
