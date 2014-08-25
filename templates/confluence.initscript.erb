@@ -9,6 +9,8 @@
 APP=<%= scope.lookupvar('confluence::product') %>
 # Name of the user to run as
 USER=<%= scope.lookupvar('confluence::user') %>
+# Shell to run sudo as
+SHELL="/bin/bash"
 # Location of application's bin directory
 CATALINA_HOME=<%= scope.lookupvar('confluence::webappdir') %>
 # Location of Java JDK
@@ -18,12 +20,12 @@ case "$1" in
   # Start command
   start)
       echo "Starting $APP"
-      /bin/su -m $USER -c "$CATALINA_HOME/bin/startup.sh"
+      /bin/su -s $SHELL -m $USER -c "$CATALINA_HOME/bin/startup.sh"
       ;;
   # Stop command
   stop)
       echo "Stopping $APP"
-      /bin/su -m $USER -c "$CATALINA_HOME/bin/shutdown.sh -force"
+      /bin/su -s $SHELL -m $USER -c "$CATALINA_HOME/bin/shutdown.sh -force"
       echo "$?: $APP stopped successfully"
       ;;
    # Restart command
