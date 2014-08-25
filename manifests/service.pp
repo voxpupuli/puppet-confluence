@@ -39,7 +39,7 @@ class confluence::service {
   if $confluence::manage_service {
     service { 'confluence':
       ensure    => 'running',
-      provider  => base,
+      enable    => true,
       start     => "/etc/init.d/confluence start",
       restart   => "/etc/init.d/confluence restart",
       stop      => "/etc/init.d/confluence stop",
