@@ -4,7 +4,6 @@
 #
 class confluence::install {
 
-  require confluence
   require deploy
 
   group { $confluence::user: ensure => present, gid => $confluence::gid } ->

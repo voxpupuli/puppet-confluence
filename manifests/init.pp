@@ -33,10 +33,15 @@ class confluence (
 ) {
 
   $webappdir    = "${installdir}/atlassian-${product}-${version}"
-#  $dburl        = "jdbc:${db}://${dbserver}:${dbport}/${dbname}"
 
-  include confluence::install
-  include confluence::config
-  include confluence::service
+  anchor { 'confluence::start':
+  } ->
+  class { 'confluence::install':
+  } ->
+  class { 'confluence::config':
+  } ~>
+  class { 'confluence::service':
+  } ->
+  anchor { 'confluence::end': }
 
 }
