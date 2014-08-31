@@ -6,7 +6,7 @@ class confluence::install {
 
   require deploy
 
-  group { $confluence::user: ensure => present, gid => $confluence::gid } ->
+  group { $confluence::group: ensure => present, gid => $confluence::gid } ->
   user { $confluence::user:
     comment          => 'Confluence daemon account',
     shell            => '/bin/true',

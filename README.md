@@ -76,6 +76,23 @@ Should puppet manage this service? Default: true
 ####`proxy`
 Reverse https proxy configuration. See customization section for more detail. Default: {}
 
+Testing
+-------
+Using [puppetlabs_spec_helper](https://github.com/puppetlabs/puppetlabs_spec_helper). Simply run:
+
+```
+bundle install && bundle exec rake spec
+```
+
+to get results.
+
+```
+ruby-1.9.3-p484/bin/ruby -S rspec spec/classes/stash_install_spec.rb --color
+.
+
+Finished in 0.38159 seconds
+1 example, 0 failures
+```
 License
 -------
 The MIT License (MIT)
