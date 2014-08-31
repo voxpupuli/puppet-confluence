@@ -19,7 +19,15 @@ class confluence::install {
     system           => true,
     uid              => $confluence::uid,
     gid              => $confluence::gid,
-  } ->
+  }
+
+  if ! defined(File[$confluence::installdir]) {
+    file { $confluence::installdir:
+      ensure => 'directory',
+      owner  => $confluence::user,
+      group  => $confluence::group,
+    }
+  }
 
   deploy::file { "atlassian-${confluence::product}-${confluence::version}.${confluence::format}":
     target          => $confluence::webappdir,
@@ -29,6 +37,7 @@ class confluence::install {
     owner           => $confluence::user,
     group           => $confluence::group,
     download_timout => 1800,
+    require         => [ File[$confluence::installdir], User[$confluence::user] ],
   } ->
 
   file { $confluence::homedir:
