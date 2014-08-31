@@ -1,5 +1,5 @@
 name    'mkrakowitzer-confluence'
-version '0.0.1'
+version '1.0.0'
 source 'https://github.com/mkrakowitzer/puppet-confluence.git'
 author 'mkrakowitzer'
 license 'The MIT License (MIT)'
