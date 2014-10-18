@@ -51,6 +51,8 @@ Specify the java home directory. No assumptions are made re the location of java
 The initial memory allocation pool for a Java Virtual Machine. Default: '256m'
 ####`jvm_xmx`
 Maximum memory allocation pool for a Java Virtual Machine. Default: '1024m'
+####`jvm_permgen`
+Increase max permgen size for a Java Virtual Machine. Default: '256m'
 ####`java_opts`
 Additional java options can be specified here. Default: ''
 ####`version`

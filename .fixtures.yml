@@ -2,5 +2,5 @@ fixtures:
   symlinks:
     confluence: "#{source_dir}"
   repositories:
-    deploy: "git://github.com/mkrakowitzer/puppet-deploy"
-    stdlib: "git://github.com/puppetlabs/puppetlabs-stdlib.git"
+    deploy: "http://github.com/mkrakowitzer/puppet-deploy"
+    stdlib: "http://github.com/puppetlabs/puppetlabs-stdlib.git"

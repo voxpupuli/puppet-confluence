@@ -8,6 +8,7 @@ class confluence (
   $javahome,
   $jvm_xms      = '256m',
   $jvm_xmx      = '1024m',
+  $jvm_permgen  = '256m',
   $java_opts    = '',
 
   # Confluence Settings
