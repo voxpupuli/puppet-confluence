@@ -8,7 +8,7 @@ begin
     require 'puppet-lint/tasks/puppet-lint'
     PuppetLint.configuration.send('disable_80chars')
     PuppetLint.configuration.ignore_paths = ["spec/**/*.pp", "vendor/**/*.pp"]
-    task :default => [:rspec, :lint]
+    task :default => [:spec,:syntax,:validate,:lint]
   end
 rescue Gem::LoadError
 end
