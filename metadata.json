@@ -3,7 +3,7 @@
   "version": "1.0.1",
   "author": "mkrakowitzer",
   "summary": "Install atlassian confluence",
-  "license": "The MIT License (MIT)",
+  "license": "MIT",
   "source": "https://github.com/mkrakowitzer/puppet-confluence.git",
   "project_page": "https://github.com/mkrakowitzer/puppet-confluence",
   "issues_url": "https://github.com/mkrakowitzer/puppet-confluence/issues",
