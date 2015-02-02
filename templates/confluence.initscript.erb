@@ -1,63 +1,77 @@
-#!/bin/sh -e
-# Confluence startup script
-#chkconfig: 2345 80 05
-#description: Confluence
- 
-# Define some variables
-# Name of app ( JIRA, Confluence, etc )
+#!/bin/sh
+# Confluence startup script - adapted from: https://github.com/bflad/chef-confluence/blob/master/templates/default/confluence.init.erb
+#description: Atlassian Confluence
 
+### BEGIN INIT INFO
+# Provides:          Confluence
+# Required-Start:    $local_fs $remote_fs $network $syslog $named
+# Required-Stop:     $local_fs $remote_fs $network $syslog $named
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# X-Interactive:     true
+# Short-Description: Start/stop Atlassian Confluence standalone server
+### END INIT INFO
+
+# Source function library.
+<%- if @osfamily == "RedHat" -%>
+. /etc/rc.d/init.d/functions
+<%- elsif @osfamily == "Debian" -%>
+. /lib/lsb/init-functions
+<%- end -%>
+
+# Define some variables
 APP=<%= scope.lookupvar('confluence::product') %>
 # Name of the user to run as
 USER=<%= scope.lookupvar('confluence::user') %>
+# Location of application's base directory
+BASE=<%= scope.lookupvar('confluence::webappdir') %>
 # Shell to run sudo as
 SHELL="/bin/bash"
-# Location of application's bin directory
-CATALINA_HOME=<%= scope.lookupvar('confluence::webappdir') %>
 # Location of Java JDK
 export JAVA_HOME=<%= scope.lookupvar('confluence::javahome') %>
- 
+
+start() {
+  echo "Starting $APP"
+  /bin/su -s $SHELL -m $USER -c "$BASE/bin/startup.sh"
+  return $?
+}
+
+stop() {
+  echo "Stopping $APP"
+  /bin/su -s $SHELL -m $USER -c "$BASE/bin/shutdown.sh -force"
+  return $?
+}
+
 case "$1" in
   # Start command
   start)
-      echo "Starting $APP"
-      /bin/su -s $SHELL -m $USER -c "$CATALINA_HOME/bin/startup.sh"
-      ;;
+    start
+    RETVAL=$?
+    ;;
   # Stop command
   stop)
-      echo "Stopping $APP"
-      /bin/su -s $SHELL -m $USER -c "$CATALINA_HOME/bin/shutdown.sh -force"
-      echo "$?: $APP stopped successfully"
-      ;;
-   # Restart command
-   restart)
-        sleep 5
-        $0 stop
-        sleep 5
-        $0 start
-        ;;
-   # Status command
-   status)
-        STATUS=$( ps aux | grep "[c]atalina.base=$CATALINA_HOME" | wc -l )
-        if [ $STATUS -gt 0 ];then
-            ps -ef |grep $APP |grep -v grep |awk '{ print $2 }' | <%= scope.lookupvar('confluence::javahome') %>/bin/jps |grep -v Jps |grep -v grep > /dev/null
-            RETVAL=$?
-            if [ $RETVAL -eq 0 ];then
-                echo "$APP is running"
-                exit $RETVAL
-            else
-                echo "$APP is stopped"
-                exit $RETVAL
-            fi
-            exit $RETVAL
-        else
-            echo "$APP is stopped"
-            exit 1
-        fi
-        ;;
-   *)
-        echo "Usage: /etc/init.d/$APP {start|restart|stop}"
-        exit 1
-        ;;
+    stop
+    RETVAL=$?
+    ;;
+  # Restart command
+  restart)
+    stop
+    start
+    RETVAL=$?
+    ;;
+  # Status command
+  status)
+  <%- if @osfamily == "RedHat" -%> 
+    status -p $BASE/work/catalina.pid $APP
+  <%- else -%>
+    status_of_proc -p $BASE/work/catalina.pid $JAVA_HOME/bin/java $APP
+  <%- end -%>
+    RETVAL=$?
+    ;;
+  *)
+    echo "Usage: $APP {start|restart|stop|status}"
+    RETVAL=2
+    ;;
 esac
  
-exit 0
+exit $RETVAL
