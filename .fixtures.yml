@@ -3,4 +3,5 @@ fixtures:
     confluence: "#{source_dir}"
   repositories:
     deploy: "http://github.com/mkrakowitzer/puppet-deploy"
+    staging: "https://github.com/nanliu/puppet-staging"
     stdlib: "http://github.com/puppetlabs/puppetlabs-stdlib.git"

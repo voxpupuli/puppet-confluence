@@ -4,15 +4,16 @@ describe 'confluence' do
   describe 'confluence::install' do
     context 'default params' do
       let(:params) {{
-        :javahome    => '/opt/java',
-        :version     => '5.5.6',
-        :user        => 'confluence',
-        :group       => 'confluence',
-        :installdir  => '/opt/confluence',
-        :homedir     => '/home/confluence',
-        :format      => 'tar.gz',
-        :product     => 'confluence',
-        :downloadURL => 'http://www.atlassian.com/software/confluence/downloads/binary/',
+        :javahome          => '/opt/java',
+        :version           => '5.5.6',
+        :user              => 'confluence',
+        :group             => 'confluence',
+        :installdir        => '/opt/confluence',
+        :homedir           => '/home/confluence',
+        :format            => 'tar.gz',
+        :product           => 'confluence',
+        :downloadURL       => 'http://www.atlassian.com/software/confluence/downloads/binary/',
+	:staging_or_deploy => 'deploy',
         }}
       it { should contain_group('confluence') }
       it { should contain_user('confluence').with_shell('/bin/true') }
@@ -30,17 +31,18 @@ describe 'confluence' do
   
     context 'overwriting params' do
       let(:params) {{
-        :javahome    => '/opt/java',
-        :version     => '5.5.5',
-        :product     => 'confluence',
-        :format      => 'tar.gz',
-        :installdir  => '/opt/confluence',
-        :homedir     => '/random/homedir',
-        :user        => 'foo',
-        :group       => 'bar',
-        :uid         => 333,
-        :gid         => 444,
-        :downloadURL => 'http://downloads.atlassian.com/',
+        :javahome          => '/opt/java',
+        :version           => '5.5.5',
+        :product           => 'confluence',
+        :format            => 'tar.gz',
+        :installdir        => '/opt/confluence',
+        :homedir           => '/random/homedir',
+        :user              => 'foo',
+        :group             => 'bar',
+        :uid               => 333,
+        :gid               => 444,
+        :downloadURL       => 'http://downloads.atlassian.com/',
+	:staging_or_deploy => 'deploy',
         }}
         it { should contain_user('foo').with({
           'home'  => '/random/homedir',

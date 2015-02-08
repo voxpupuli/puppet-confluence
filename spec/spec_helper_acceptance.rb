@@ -1,8 +1,6 @@
 require 'beaker-rspec/spec_helper'
 require 'beaker-rspec/helpers/serverspec'
 
-proxyurl = ENV['http_proxy'] if ENV['http_proxy']
-
 unless ENV['RS_PROVISION'] == 'no' or ENV['BEAKER_provision'] == 'no'
   hosts.each do |host|
     foss_opts = { :default_action => 'gem_install' }
@@ -39,7 +37,6 @@ RSpec.configure do |c|
       end
       on host, puppet('module','install','puppetlabs-stdlib'), { :acceptable_exit_codes => [0,1] }
       on host, puppet('module','install','puppetlabs-postgresql'), { :acceptable_exit_codes => [0,1] }
-      on host, puppet('module','install','yguenane-repoforge'), { :acceptable_exit_codes => [0,1] }
       on host, puppet('module','install','mkrakowitzer-deploy'), { :acceptable_exit_codes => [0,1] }
       on host, puppet('module','install','puppetlabs-java'), { :acceptable_exit_codes => [0,1] }
       on host, puppet('module','install','nanliu-staging'), { :acceptable_exit_codes => [0,1] }

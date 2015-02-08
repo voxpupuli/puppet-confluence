@@ -4,9 +4,8 @@
 #
 class confluence::install {
 
-  require deploy
-
   group { $confluence::group: ensure => present, gid => $confluence::gid } ->
+
   user { $confluence::user:
     comment          => 'Confluence daemon account',
     shell            => '/bin/true',
@@ -28,16 +27,58 @@ class confluence::install {
     }
   }
 
-  deploy::file { "atlassian-${confluence::product}-${confluence::version}.${confluence::format}":
-    target          => $confluence::webappdir,
-    url             => $confluence::downloadURL,
-    strip           => true,
-    notify          => Exec["chown_${confluence::webappdir}"],
-    owner           => $confluence::user,
-    group           => $confluence::group,
-    download_timout => 1800,
-    require         => [ File[$confluence::installdir], User[$confluence::user] ],
-  } ->
+  $file = "atlassian-${confluence::product}-${confluence::version}.${confluence::format}"
+
+  if $confluence::staging_or_deploy == 'staging' {
+
+    require staging
+
+    if ! defined(File[$confluence::webappdir]) {
+      file { $confluence::webappdir:
+        ensure => 'directory',
+        owner  => $confluence::user,
+        group  => $confluence::group,
+      }
+    }
+
+    staging::file { $file:
+      source  => "${confluence::downloadURL}/${file}",
+      timeout => 1800,
+    } ->
+
+    staging::extract { $file:
+      target  => $confluence::webappdir,
+      creates => "${confluence::webappdir}/conf",
+      strip   => 1,
+      user    => $confluence::user,
+      group   => $confluence::group,
+      notify  => Exec["chown_${confluence::webappdir}"],
+      before  => File[$confluence::homedir],
+      require => [
+        File[$confluence::installdir],
+        User[$confluence::user],
+        File[$confluence::webappdir] ],
+    }
+
+  } elsif $confluence::staging_or_deploy == 'deploy' {
+
+    require deploy
+
+    deploy::file { $file:
+      target          => $confluence::webappdir,
+      url             => $confluence::downloadURL,
+      strip           => true,
+      download_timout => 1800,
+      owner           => $confluence::user,
+      group           => $confluence::group,
+      notify          => Exec["chown_${confluence::webappdir}"],
+      before          => File[$confluence::homedir],
+      require         => [ File[$confluence::installdir], User[$confluence::user] ],
+    }
+
+  } else {
+    fail('staging_or_deploy must equal "staging" or "deploy"')
+  }
 
   file { $confluence::homedir:
     ensure => 'directory',
