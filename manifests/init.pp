@@ -23,7 +23,11 @@ class confluence (
   $gid          = undef,
 
   # Misc Settings
-  $downloadURL  = 'http://www.atlassian.com/software/confluence/downloads/binary/',
+  $downloadURL  = 'http://www.atlassian.com/software/confluence/downloads/binary',
+
+  # Choose whether to use nanliu-staging, or mkrakowitzer-deploy
+  # Defaults to nanliu-staging as it is puppetlabs approved.
+  $staging_or_deploy = 'staging',
 
   # Manage confluence server
   $manage_service = true,
