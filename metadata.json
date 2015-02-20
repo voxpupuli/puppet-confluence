@@ -1,6 +1,6 @@
 {
   "name": "mkrakowitzer-confluence",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "author": "mkrakowitzer",
   "summary": "Install atlassian confluence",
   "license": "MIT",
@@ -16,10 +16,6 @@
     {
       "name": "mkrakowitzer/deploy",
       "version_requirement": ">= 0.0.3"
-    },
-    {
-      "name": "yguenane/repoforge",
-      "version_requirement": ">= 0.2.0"
     },
     {
       "name": "nanliu/staging",
@@ -40,19 +36,22 @@
     {
       "operatingsystem": "RedHat",
       "operatingsystemrelease": [
-        "6"
+        "6",
+        "7"
       ]
     },
     {
       "operatingsystem": "CentOS",
       "operatingsystemrelease": [
-        "6"
+        "6",
+        "7"
       ]
     },
     {
       "operatingsystem": "Ubuntu",
       "operatingsystemrelease": [
-        "12.04"
+        "12.04",
+        "14.04"
       ]
     },
     {
