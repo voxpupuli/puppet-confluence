@@ -1,7 +1,7 @@
 <Server port="8000" shutdown="SHUTDOWN" debug="0">
     <Service name="Tomcat-Standalone">
         <Connector className="org.apache.coyote.tomcat4.CoyoteConnector"
-                   port="8090"
+		   port="<%= @tomcat_port %>"
                    minProcessors="5"
                    maxProcessors="75"
                    enableLookups="false"
@@ -11,9 +11,11 @@
                    connectionTimeout="20000"
                    useURIValidationHack="false"
                    URIEncoding="UTF-8"
-<% if @proxy -%>
-<%   @proxy.sort.each do |key,value| -%>
-                   <%= key %> = <%= "\'#{value}\'" %>
+		   maxThreads="<%= @tomcat_max_threads %>"
+		   acceptCount="<%= @tomcat_accept_count %>"
+<% if @tomcat_proxy -%>
+<%   @tomcat_proxy.sort.each do |key,value| -%>
+                   <%= key %>=<%= "\"#{value}\"" %>
 <%   end -%>
 <% end -%> 
 />
