@@ -7,6 +7,7 @@ unless ENV['RS_PROVISION'] == 'no' or ENV['BEAKER_provision'] == 'no'
     install_puppet( foss_opts )
     on host, "mkdir -p #{host['distmoduledir']}"
     on host, "sed -i '/templatedir/d' #{host['puppetpath']}/puppet.conf"
+#    install_package host, 'augeas'
   end
 end
 

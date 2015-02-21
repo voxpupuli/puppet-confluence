@@ -32,10 +32,26 @@ class confluence (
   # Manage confluence server
   $manage_service = true,
 
-  # Reverse https proxy
-  $proxy = {},
+  # Tomcat Tunables
+  # Should we use augeas to manage server.xml or a template file
+  $manage_server_xml   = 'augeas',
+  $tomcat_port         = 8080,
+  $tomcat_max_threads  = 150,
+  $tomcat_accept_count = 100,
+  # Reverse https proxy setting for tomcat
+  $tomcat_proxy = {},
+  # Any additional tomcat params for server.xml
+  $tomcat_extras = {},
 
 ) {
+  validate_re($version, '^(?:(\d+)\.)?(?:(\d+)\.)?(\*|\d+)(|[a-z])$')
+  validate_absolute_path($installdir)
+  validate_absolute_path($homedir)
+
+  validate_re($manage_server_xml, ['^augeas$', '^template$' ],
+    'manage_server_xml must be "augeas" or "template"')
+  validate_hash($tomcat_proxy)
+  validate_hash($tomcat_extras)
 
   $webappdir    = "${installdir}/atlassian-${product}-${version}"
 
