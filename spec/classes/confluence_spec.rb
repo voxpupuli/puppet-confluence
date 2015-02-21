@@ -3,7 +3,7 @@ require 'spec_helper.rb'
 describe 'confluence' do
   context 'with javahome not set' do
     it('should fail') {
-      expect { should }.to raise_error(Puppet::Error, /Must pass javahome to Class\[Confluence\]/)
+      should raise_error(Puppet::Error, /Must pass javahome to Class\[Confluence\]/)
     }
   end
 
