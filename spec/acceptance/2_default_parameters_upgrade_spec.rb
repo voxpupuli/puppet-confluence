@@ -17,7 +17,7 @@ end
 
 describe 'confluence', :unless => UNSUPPORTED_PLATFORMS.include?(fact('osfamily')) do
 
-  it 'installs with defaults' do
+  it 'upgrades with defaults' do
     pp = <<-EOS
       $jh = $osfamily ? {
         default   => '/opt/java',
@@ -28,27 +28,17 @@ describe 'confluence', :unless => UNSUPPORTED_PLATFORMS.include?(fact('osfamily'
           allow_virtual => $allow_virtual_packages,
         }
       }
-      deploy::file { 'jdk-7u71-linux-x64.tar.gz':
-        target          => $jh,
-        fetch_options   => '-q -c --header "Cookie: oraclelicense=accept-securebackup-cookie"',
-        url             => #{java_url},
-        download_timout => 1800,
-        strip           => true,
-      } ->
       class { 'confluence':
-        version             => '5.5.6',
+        version             => '5.7',
         downloadURL         => #{download_url},
         javahome            => $jh,
-	tomcat_port         => '8091',
-        tomcat_max_threads  => 999,
-        tomcat_accept_count => 999,
       }
     EOS
     apply_manifest(pp, :catch_failures => true)
-    shell 'wget -q --tries=240 --retry-connrefused --read-timeout=10 localhost:8091', :acceptable_exit_codes => [0]
-    sleep 120
-    shell 'wget -q --tries=240 --retry-connrefused --read-timeout=10 localhost:8091', :acceptable_exit_codes => [0]
+    shell 'wget -q --tries=240 --retry-connrefused --read-timeout=10 localhost:8090', :acceptable_exit_codes => [0]
     sleep 60
+    shell 'wget -q --tries=240 --retry-connrefused --read-timeout=10 localhost:8090', :acceptable_exit_codes => [0]
+    sleep 30
     apply_manifest(pp, :catch_changes => true)
   end
 
@@ -56,7 +46,7 @@ describe 'confluence', :unless => UNSUPPORTED_PLATFORMS.include?(fact('osfamily'
     it { should be_running }
   end
 
-  describe port(8091) do
+  describe port(8090) do
     it { is_expected.to be_listening }
   end
 
@@ -76,16 +66,8 @@ describe 'confluence', :unless => UNSUPPORTED_PLATFORMS.include?(fact('osfamily'
     it { should have_login_shell '/bin/true' }
   end
 
-  describe command('wget -q --tries=240 --retry-connrefused --read-timeout=10 -O- localhost:8091') do
+  describe command('wget -q --tries=240 --retry-connrefused --read-timeout=10 -O- localhost:8090') do
     its(:stdout) { should match (/http\:\/\/www\.atlassian\.com\//) }
-  end
-
-  describe file('/opt/confluence/atlassian-confluence-5.5.6/conf/server.xml') do
-    it { should contain "proxyName=\"locahost\"" }
-    it { should contain "proxyPort=\"9999\"" }
-    it { should contain "scheme=\"http\"" }
-    it { should contain "maxThreads=\"999\"" }
-    it { should contain "acceptCount=\"999\"" }
   end
 
 end
