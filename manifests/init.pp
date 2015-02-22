@@ -35,7 +35,7 @@ class confluence (
   # Tomcat Tunables
   # Should we use augeas to manage server.xml or a template file
   $manage_server_xml   = 'augeas',
-  $tomcat_port         = 8080,
+  $tomcat_port         = 8090,
   $tomcat_max_threads  = 150,
   $tomcat_accept_count = 100,
   # Reverse https proxy setting for tomcat
@@ -43,6 +43,14 @@ class confluence (
   # Any additional tomcat params for server.xml
   $tomcat_extras = {},
 
+  # Command to stop confluence in preparation to updgrade. This is configurable
+  # incase the confluence service is managed outside of puppet. eg: using the
+  # puppetlabs-corosync module: 'crm resource stop confluence && sleep 15'
+  $stop_confluence = 'service confluence stop && sleep 15',
+
+  # Enable confluence version fact for running instance
+  # This required for upgrades
+  $facts_ensure = 'present',
 ) {
   validate_re($version, '^(?:(\d+)\.)?(?:(\d+)\.)?(\*|\d+)(|[a-z])$')
   validate_absolute_path($installdir)
@@ -53,9 +61,22 @@ class confluence (
   validate_hash($tomcat_proxy)
   validate_hash($tomcat_extras)
 
+  Exec { path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ] }
+
   $webappdir    = "${installdir}/atlassian-${product}-${version}"
 
+  if $::confluence_version {
+    # If the running version of CONFLUENCE is less than the expected version of CONFLUENCE
+    # Shut it down in preparation for upgrade.
+    if versioncmp($version, $::confluence_version) > 0 {
+      notify { 'Attempting to upgrade CONFLUENCE': }
+      exec { $stop_confluence: before => Anchor['confluence::start'] }
+    }
+  }
+
   anchor { 'confluence::start':
+  } ->
+  class { 'confluence::facts':
   } ->
   class { 'confluence::install':
   } ->
