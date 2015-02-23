@@ -6,13 +6,12 @@
                    maxProcessors="75"
                    enableLookups="false"
                    redirectPort="8443"
-                   acceptCount="10"
                    debug="0"
                    connectionTimeout="20000"
                    useURIValidationHack="false"
                    URIEncoding="UTF-8"
-		   maxThreads="<%= @tomcat_max_threads %>"
-		   acceptCount="<%= @tomcat_accept_count %>"
+              	   maxThreads="<%= @tomcat_max_threads %>"
+                   acceptCount="<%= @tomcat_accept_count %>"
 <% if @tomcat_proxy -%>
 <%   @tomcat_proxy.sort.each do |key,value| -%>
                    <%= key %>=<%= "\"#{value}\"" %>
