@@ -1,3 +1,7 @@
+##2014-01-23 - Release 2.0.1
+  - Resolve issue #22 - confluence_version fact detects wrong version
+  - Resolve issue #20 - param manage_server_xml acceptCount option is duplicated
+
 ##2014-01-21 - Release 2.0.0
 - Replace mkrakowitzer-deploy with nanlui-staging as default for dropping files.
   - Add tests
