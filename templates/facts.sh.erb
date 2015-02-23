@@ -9,5 +9,5 @@
 #   - confluence_version
 #
 #VERSION=`ps -ef|grep Dcatalina.home=| egrep -o 'Dcatalina.home=.*([0-9.]{1,}) '|grep -o '......$'|tr -d '[[:space:]]'|grep -Po '(?<=divider-bin-)[^;]+'`
-VERSION=`ps -ef|grep Dcatalina.home=| egrep -o 'Dcatalina.home=.*([0-9.]{1,}) '| perl -pe '($_)=/([0-9]+([.][0-9]+)+)/'`
+VERSION=`ps -ef|grep Dcatalina.home=| egrep -o 'Dcatalina.home=.*atlassian-confluence-([0-9.]{1,}) '| perl -pe '($_)=/([0-9]+([.][0-9]+)+)/'`
 echo "confluence_version=${VERSION}"
