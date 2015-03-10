@@ -24,7 +24,7 @@ Customization
 This module also allows for direct customization of the JVM, following [atlassians recommendations](https://confluence.atlassian.com/display/JIRA/Setting+Properties+and+Options+on+Startup)
 
 This is especially useful for setting properties such as http/https proxy settings.
-Support has also been added for reverse proxying stash via apache or nginx.
+Support has also been added for reverse proxying confluence via apache or nginx.
 
 ```puppet
   class { 'confluence':
@@ -68,9 +68,11 @@ The user that confluence should run as, as well as the ownership of confluence r
 ####`group`
 The group that confluence files should be owned by. Default: 'confluence'
 ####`uid`
-Specify a uid of the stash user. Default: undef
+Specify a uid of the confluence user. Default: undef
 ####`gid`
-Specify a gid of the stash user. Default: undef
+Specify a gid of the confluence user. Default: undef
+####`shell`
+Specify the shell of the confluence user. Default: undef
 ####`downloadURL`
 Default: 'http://www.atlassian.com/software/confluence/downloads/binary/'
 ####`manage_service`
@@ -89,7 +91,7 @@ bundle install && bundle exec rake spec
 to get results.
 
 ```
-ruby-1.9.3-p484/bin/ruby -S rspec spec/classes/stash_install_spec.rb --color
+ruby-1.9.3-p484/bin/ruby -S rspec spec/classes/confluence_install_spec.rb --color
 .
 
 Finished in 0.38159 seconds
