@@ -8,7 +8,7 @@ class confluence::install {
 
   user { $confluence::user:
     comment          => 'Confluence daemon account',
-    shell            => '/bin/true',
+    shell            => $confluence::shell,
     home             => $confluence::homedir,
     password         => '*',
     password_min_age => '0',

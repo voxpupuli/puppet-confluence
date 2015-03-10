@@ -52,12 +52,13 @@ describe 'confluence' do
         :group             => 'bar',
         :uid               => 333,
         :gid               => 444,
+        :shell             => '/bin/bash',
         :downloadURL       => 'http://downloads.atlassian.com',
       }}
 
       it { should contain_user('foo').with({
         'home'  => '/random/homedir',
-        'shell' => '/bin/true',
+        'shell' => '/bin/bash',
         'uid'   => 333,
         'gid'   => 444
       })}

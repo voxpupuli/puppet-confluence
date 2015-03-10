@@ -21,6 +21,7 @@ class confluence (
   $group        = 'confluence',
   $uid          = undef,
   $gid          = undef,
+  $shell        = '/bin/true',
 
   # Misc Settings
   $downloadURL  = 'http://www.atlassian.com/software/confluence/downloads/binary',
