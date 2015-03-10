@@ -41,32 +41,34 @@ describe 'confluence' do
         :group             => 'bar',
         :uid               => 333,
         :gid               => 444,
+        :shell             => '/bin/bash',
         :downloadURL       => 'http://downloads.atlassian.com/',
-	:staging_or_deploy => 'deploy',
-        }}
-        it { should contain_user('foo').with({
-          'home'  => '/random/homedir',
-          'shell' => '/bin/true',
-          'uid'   => 333,
-          'gid'   => 444
-        }) }
-        it { should contain_group('bar') }
+        :staging_or_deploy => 'deploy',
+      }}
+      it { should contain_user('foo').with({
+        'home'  => '/random/homedir',
+        'shell' => '/bin/bash',
+        'uid'   => 333,
+        'gid'   => 444
+      }) }
+      it { should contain_group('bar') }
   
-        it 'should deploy confluence 5.5.5 from tar.gz' do
-          should contain_deploy__file("atlassian-confluence-5.5.5.tar.gz").with({
-            'url' => 'http://downloads.atlassian.com/',
-            'owner' => 'foo',
-            'group' => 'bar'
-          })
-        end
+      it 'should deploy confluence 5.5.5 from tar.gz' do
+        should contain_deploy__file("atlassian-confluence-5.5.5.tar.gz").with({
+          'url' => 'http://downloads.atlassian.com/',
+          'owner' => 'foo',
+          'group' => 'bar'
+        })
+      end
   
-        it 'should manage the confluence home directory' do
-          should contain_file('/random/homedir').with({
-            'ensure' => 'directory',
-            'owner' => 'foo',
-            'group' => 'bar'
-          })
-        end
+      it 'should manage the confluence home directory' do
+        should contain_file('/random/homedir').with({
+          'ensure' => 'directory',
+          'owner' => 'foo',
+          'group' => 'bar'
+        })
+      end
+
     end
   end
 end
