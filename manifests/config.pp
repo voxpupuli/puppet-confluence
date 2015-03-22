@@ -28,7 +28,7 @@ class confluence::config(
     require => Class['confluence::install'],
     notify  => Class['confluence::service'],
   }
- 
+
   if $manage_server_xml == 'augeas' {
     $_tomcat_max_threads  = { maxThreads  => $tomcat_max_threads }
     $_tomcat_accept_count = { acceptCount => $tomcat_accept_count }
