@@ -13,10 +13,10 @@ group :development do
 	gem "vagrant-wrapper"
 	gem "puppet-blacksmith"
 	gem "guard-rake"
-        gem 'puppet-lint'
+  gem 'puppet-lint'
 end
 group :system_tests do
 	gem "beaker"
 	gem "beaker-rspec"
-        gem 'serverspec'
+  gem 'serverspec'
 end
