@@ -1,7 +1,7 @@
 {
-  "name": "mkrakowitzer-confluence",
+  "name": "puppet-confluence",
   "version": "2.1.1",
-  "author": "mkrakowitzer",
+  "author": "puppetcommunity",
   "summary": "Install atlassian confluence",
   "license": "MIT",
   "source": "https://github.com/puppet-community/puppet-confluence.git",
