@@ -1,4 +1,11 @@
-##2014-02-22 - Release 2.1.0
+##2014-03-22 - Release 2.1.1
+
+  - Rewrite README file
+  - Bump confluence version to 5.7.1
+  - Update metadata, CHANGELOG to point to new namespace.
+  - Add .pmtignore file
+
+##2014-03-22 - Release 2.1.0
 
 Note: This is the final release of this module before it is deprecated with a 999.999.999 version. This module will be moving the the puppet-community namespace on github and the puppet namespace on puppetforge soon.
 
