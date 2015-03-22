@@ -12,7 +12,7 @@ class confluence (
   $java_opts    = '',
 
   # Confluence Settings
-  $version      = '5.5.6',
+  $version      = '5.7.1',
   $product      = 'confluence',
   $format       = 'tar.gz',
   $installdir   = '/opt/confluence',
