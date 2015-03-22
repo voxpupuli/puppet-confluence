@@ -1,3 +1,11 @@
+##2014-02-22 - Release 2.1.0
+
+Note: This is the final release of this module before it is deprecated with a 999.999.999 version. This module will be moving the the puppet-community namespace on github and the puppet namespace on puppetforge soon.
+
+  - Make confluence users shell configurable.
+  - update README, metadata, .travis.yml
+  - Add CONTRIBUTING.md and test coverage spec.
+
 ##2014-01-23 - Release 2.0.1
   - Resolve issue #22 - confluence_version fact detects wrong version
   - Resolve issue #20 - param manage_server_xml acceptCount option is duplicated

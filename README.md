@@ -3,6 +3,8 @@ puppet-confluence
 [![Build
 Status](https://travis-ci.org/mkrakowitzer/puppet-confluence.svg)](https://travis-ci.org/mkrakowitzer/puppet-confluence)
 
+:warning: This is the final release of this module before it is deprecated with a 999.999.999 version. This module will be moving the the puppet-community namespace on github and the puppet namespace on puppetforge soon.
+
 This is a puppet module to install Atlassian Confluence
 
 Requirements
