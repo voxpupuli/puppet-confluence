@@ -19,14 +19,14 @@ notifications:
   email:
     - merritt@krakowitzer.com
 script: bundle exec rake test
-#deploy:
-#  provider: puppetforge
-#  user: puppet
-#  password:
-#    secure: ""
-#  on:
-#    tags: true
-#    # all_branches is required to use tags
-#    all_branches: true
-#    # Only publish if our main Ruby target builds
-#    rvm: 1.9.3
+deploy:
+  provider: puppetforge
+  user: puppet
+  password:
+    secure: ""
+  on:
+    tags: true
+    # all_branches is required to use tags
+    all_branches: true
+    # Only publish if our main Ruby target builds
+    rvm: 1.9.3
