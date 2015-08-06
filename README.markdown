@@ -143,6 +143,8 @@ Specify a uid of the confluence user. Default: undef
 Specify a gid of the confluence user. Default: undef
 #####`shell`
 Specify the shell of the confluence user. Default: undef
+#####`manage_user`
+Weather or not to manage the confluence user. Default: true
 
 ####JVM Java parameters####
 

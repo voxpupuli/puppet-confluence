@@ -21,6 +21,7 @@ class confluence (
   $group        = 'confluence',
   $uid          = undef,
   $gid          = undef,
+  $manage_user  = true,
   $shell        = '/bin/true',
 
   # Misc Settings
@@ -56,6 +57,7 @@ class confluence (
   validate_re($version, '^(?:(\d+)\.)?(?:(\d+)\.)?(\*|\d+)(|[a-z])$')
   validate_absolute_path($installdir)
   validate_absolute_path($homedir)
+  validate_bool($manage_user)
 
   validate_re($manage_server_xml, ['^augeas$', '^template$' ],
     'manage_server_xml must be "augeas" or "template"')
