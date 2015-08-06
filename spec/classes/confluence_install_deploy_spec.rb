@@ -70,5 +70,17 @@ describe 'confluence' do
       end
 
     end
+    context 'not managing user' do
+        let(:params) {{
+            :manage_user => false,
+            :javahome    => '/foo/bar',
+        }}
+        it {
+            should_not contain_user('confluence')
+        }
+        it {
+            should_not contain_group('confluence')
+        }
+    end
   end
 end
