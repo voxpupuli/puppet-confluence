@@ -23,7 +23,7 @@
 
             <Host name="localhost" debug="0" appBase="webapps" unpackWARs="true" autoDeploy="false">
 
-                <Context path="" docBase="../confluence" debug="0" reloadable="false" useHttpOnly="true">
+                <Context path="<%= @context_path %>" docBase="../confluence" debug="0" reloadable="false" useHttpOnly="true">
                     <!-- Logger is deprecated in Tomcat 5.5. Logging configuration for Confluence is specified in confluence/WEB-INF/classes/log4j.properties -->
                     <Manager pathname="" />
                 </Context>
