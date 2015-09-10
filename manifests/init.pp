@@ -44,6 +44,7 @@ class confluence (
   $tomcat_proxy = {},
   # Any additional tomcat params for server.xml
   $tomcat_extras = {},
+  $context_path  = '',
 
   # Command to stop confluence in preparation to updgrade. This is configurable
   # incase the confluence service is managed outside of puppet. eg: using the

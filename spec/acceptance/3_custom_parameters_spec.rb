@@ -35,12 +35,13 @@ describe 'confluence', :unless => UNSUPPORTED_PLATFORMS.include?(fact('osfamily'
         tomcat_port         => '8091',
         tomcat_max_threads  => 999,
         tomcat_accept_count => 999,
+        context_path        => '/confluence1',
       }
     EOS
     apply_manifest(pp, :catch_failures => true)
-    shell 'wget -q --tries=240 --retry-connrefused --read-timeout=10 localhost:8091', :acceptable_exit_codes => [0]
+    shell 'wget -q --tries=240 --retry-connrefused --read-timeout=10 localhost:8091/confluence1', :acceptable_exit_codes => [0]
     sleep 60
-    shell 'wget -q --tries=240 --retry-connrefused --read-timeout=10 localhost:8091', :acceptable_exit_codes => [0]
+    shell 'wget -q --tries=240 --retry-connrefused --read-timeout=10 localhost:8091/confluence1', :acceptable_exit_codes => [0]
     sleep 30
     apply_manifest(pp, :catch_changes => true)
   end
@@ -69,13 +70,14 @@ describe 'confluence', :unless => UNSUPPORTED_PLATFORMS.include?(fact('osfamily'
     it { should have_login_shell '/bin/true' }
   end
 
-  describe command('wget -q --tries=240 --retry-connrefused --read-timeout=10 -O- localhost:8091') do
+  describe command('wget -q --tries=240 --retry-connrefused --read-timeout=10 -O- localhost:8091/confluence1') do
     its(:stdout) { should match (/http\:\/\/www\.atlassian\.com\//) }
   end
 
   describe file('/opt/confluence/atlassian-confluence-5.7/conf/server.xml') do
     it { should contain "maxThreads=\"999\"" }
     it { should contain "acceptCount=\"999\"" }
+    it { should contain "Context path=\"/confluence\"" }
   end
 
 end
