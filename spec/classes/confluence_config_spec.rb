@@ -15,7 +15,7 @@ describe 'confluence' do
       let(:params) {{
         :javahome          => '/opt/java',
         :version           => '5.5.6',
-	      :manage_server_xml => 'template',
+        :manage_server_xml => 'template',
       }}
       it { should contain_file('/opt/confluence/atlassian-confluence-5.5.6/bin/setenv.sh')}
       it { should contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/confluence-init.properties')}
@@ -25,7 +25,7 @@ describe 'confluence' do
       let(:params) {{
         :javahome          => '/opt/java',
         :version           => '5.5.6',
-	      :manage_server_xml => 'ERROR',
+        :manage_server_xml => 'ERROR',
       }}
       it('should fail') {
         should raise_error(Puppet::Error, /manage_server_xml must be "augeas" or "template"/)
@@ -35,7 +35,7 @@ describe 'confluence' do
       let(:params) {{
         :javahome            => '/opt/java',
         :version             => '5.5.6',
-	      :manage_server_xml   => 'template',
+        :manage_server_xml   => 'template',
         :context_path        => '/confluence1',
         :tomcat_port         => 8089,
         :tomcat_max_threads  => 999,
@@ -43,8 +43,8 @@ describe 'confluence' do
         :tomcat_proxy        => {
           'scheme'      => 'https',
           'proxyName'   => 'EXAMPLE',
-	        'proxyPort'   => '443',
-	      },
+          'proxyPort'   => '443',
+        },
       }}
       it { should contain_file('/opt/confluence/atlassian-confluence-5.5.6/bin/setenv.sh')}
       it { should contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/confluence-init.properties')}
