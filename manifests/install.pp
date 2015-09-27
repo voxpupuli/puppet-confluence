@@ -92,11 +92,6 @@ class confluence::install {
     command     => "/bin/chown -R ${confluence::user}:${confluence::group} ${confluence::webappdir}",
     refreshonly => true,
     subscribe   => User[$confluence::user]
-  } ->
-
-  file { '/etc/init.d/confluence':
-    content => template('confluence/confluence.initscript.erb'),
-    mode    => '0755',
   }
 
 }
