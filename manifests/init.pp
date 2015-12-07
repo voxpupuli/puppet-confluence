@@ -5,7 +5,7 @@
 class confluence (
 
   # JVM Settings
-  $javahome,
+  $javahome     = undef,
   $jvm_xms      = '256m',
   $jvm_xmx      = '1024m',
   $jvm_permgen  = '256m',
@@ -64,6 +64,10 @@ class confluence (
     'manage_server_xml must be "augeas" or "template"')
   validate_hash($tomcat_proxy)
   validate_hash($tomcat_extras)
+
+  if $javahome == undef {
+    fail('Must pass javahome to Class[Confluence]')
+  }
 
   Exec { path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ] }
 
