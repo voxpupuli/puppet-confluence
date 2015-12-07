@@ -5,7 +5,7 @@
 class confluence (
 
   # JVM Settings
-  $javahome,
+  $javahomei    = undef,
   $jvm_xms      = '256m',
   $jvm_xmx      = '1024m',
   $jvm_permgen  = '256m',
