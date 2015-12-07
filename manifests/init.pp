@@ -5,24 +5,24 @@
 class confluence (
 
   # JVM Settings
-  $javahome     = undef,
-  $jvm_xms      = '256m',
-  $jvm_xmx      = '1024m',
-  $jvm_permgen  = '256m',
-  $java_opts    = '',
+  $javahome    = undef,
+  $jvm_xms     = '256m',
+  $jvm_xmx     = '1024m',
+  $jvm_permgen = '256m',
+  $java_opts   = '',
 
   # Confluence Settings
-  $version      = '5.7.1',
-  $product      = 'confluence',
-  $format       = 'tar.gz',
-  $installdir   = '/opt/confluence',
-  $homedir      = '/home/confluence',
-  $user         = 'confluence',
-  $group        = 'confluence',
-  $uid          = undef,
-  $gid          = undef,
-  $manage_user  = true,
-  $shell        = '/bin/true',
+  $version     = '5.7.1',
+  $product     = 'confluence',
+  $format      = 'tar.gz',
+  $installdir  = '/opt/confluence',
+  $homedir     = '/home/confluence',
+  $user        = 'confluence',
+  $group       = 'confluence',
+  $uid         = undef,
+  $gid         = undef,
+  $manage_user = true,
+  $shell       = '/bin/true',
 
   # Misc Settings
   $downloadURL  = 'http://www.atlassian.com/software/confluence/downloads/binary',
