@@ -143,6 +143,12 @@ Specify a uid of the confluence user. Default: undef
 Specify a gid of the confluence user. Default: undef
 #####`shell`
 Specify the shell of the confluence user. Default: undef
+#####`manage_user`
+Whether or not to manage the confluence user. Default: true
+#####`context_path`
+Specify context path, defaults to ''. If modified, Once Confluence has started,
+go to the administration area and click General Configuration.
+Append the new context path to your base URL.
 
 ####JVM Java parameters####
 

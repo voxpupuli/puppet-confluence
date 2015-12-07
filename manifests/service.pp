@@ -3,10 +3,16 @@
 # Install confluence, See README.md for more.
 #
 class confluence::service(
-  $service_file_location = $params::service_file_location,
-  $service_file_template = $params::service_file_template,
-  $service_lockfile      = $params::service_lockfile,
+  $service_file_location = $confluence::params::service_file_location,
+  $service_file_template = $confluence::params::service_file_template,
+  $service_lockfile      = $confluence::params::service_lockfile,
 )  {
+
+  file { $service_file_location:
+    content => template($service_file_template),
+    mode    => '0755',
+  }
+
   if $confluence::manage_service {
     service { 'confluence':
       ensure  => 'running',

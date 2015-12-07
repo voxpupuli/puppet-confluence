@@ -5,26 +5,27 @@
 class confluence (
 
   # JVM Settings
-  $javahome,
-  $jvm_xms      = '256m',
-  $jvm_xmx      = '1024m',
-  $jvm_permgen  = '256m',
-  $java_opts    = '',
+  $javahome    = undef,
+  $jvm_xms     = '256m',
+  $jvm_xmx     = '1024m',
+  $jvm_permgen = '256m',
+  $java_opts   = '',
 
   # Confluence Settings
-  $version      = '5.7.1',
-  $product      = 'confluence',
-  $format       = 'tar.gz',
-  $installdir   = '/opt/confluence',
-  $homedir      = '/home/confluence',
-  $user         = 'confluence',
-  $group        = 'confluence',
-  $uid          = undef,
-  $gid          = undef,
-  $shell        = '/bin/true',
+  $version     = '5.7.1',
+  $product     = 'confluence',
+  $format      = 'tar.gz',
+  $installdir  = '/opt/confluence',
+  $homedir     = '/home/confluence',
+  $user        = 'confluence',
+  $group       = 'confluence',
+  $uid         = undef,
+  $gid         = undef,
+  $manage_user = true,
+  $shell       = '/bin/true',
 
   # Misc Settings
-  $downloadURL  = 'http://www.atlassian.com/software/confluence/downloads/binary',
+  $downloadURL = 'http://www.atlassian.com/software/confluence/downloads/binary',
 
   # Choose whether to use nanliu-staging, or mkrakowitzer-deploy
   # Defaults to nanliu-staging as it is puppetlabs approved.
@@ -43,6 +44,7 @@ class confluence (
   $tomcat_proxy = {},
   # Any additional tomcat params for server.xml
   $tomcat_extras = {},
+  $context_path  = '',
 
   # Command to stop confluence in preparation to updgrade. This is configurable
   # incase the confluence service is managed outside of puppet. eg: using the
@@ -56,11 +58,16 @@ class confluence (
   validate_re($version, '^(?:(\d+)\.)?(?:(\d+)\.)?(\*|\d+)(|[a-z])$')
   validate_absolute_path($installdir)
   validate_absolute_path($homedir)
+  validate_bool($manage_user)
 
   validate_re($manage_server_xml, ['^augeas$', '^template$' ],
     'manage_server_xml must be "augeas" or "template"')
   validate_hash($tomcat_proxy)
   validate_hash($tomcat_extras)
+
+  if $javahome == undef {
+    fail('Must pass javahome to Class[Confluence]')
+  }
 
   Exec { path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ] }
 

@@ -4,19 +4,21 @@
 #
 class confluence::install {
 
-  group { $confluence::group: ensure => present, gid => $confluence::gid } ->
+  if $::confluence::manage_user {
+    group { $confluence::group: ensure => present, gid => $confluence::gid } ->
 
-  user { $confluence::user:
-    comment          => 'Confluence daemon account',
-    shell            => $confluence::shell,
-    home             => $confluence::homedir,
-    password         => '*',
-    password_min_age => '0',
-    password_max_age => '99999',
-    managehome       => true,
-    system           => true,
-    uid              => $confluence::uid,
-    gid              => $confluence::gid,
+    user { $confluence::user:
+      comment          => 'Confluence daemon account',
+      shell            => $confluence::shell,
+      home             => $confluence::homedir,
+      password         => '*',
+      password_min_age => '0',
+      password_max_age => '99999',
+      managehome       => true,
+      system           => true,
+      uid              => $confluence::uid,
+      gid              => $confluence::gid,
+    }
   }
 
   if ! defined(File[$confluence::installdir]) {
@@ -90,11 +92,6 @@ class confluence::install {
     command     => "/bin/chown -R ${confluence::user}:${confluence::group} ${confluence::webappdir}",
     refreshonly => true,
     subscribe   => User[$confluence::user]
-  } ->
-
-  file { '/etc/init.d/confluence':
-    content => template('confluence/confluence.initscript.erb'),
-    mode    => '0755',
   }
 
 }
