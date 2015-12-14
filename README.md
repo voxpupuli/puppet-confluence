@@ -51,7 +51,7 @@ This puppet module will automatically download the Confluence tar.gz from Atlass
 
 ```puppet
   class { 'confluence':
-    javahome => '/opt/java', 
+    javahome => '/opt/java',
   }
 ```
 
@@ -129,7 +129,7 @@ Specify the java home directory. No assumptions are made re the location of java
 The version of confluence to install. Default: '5.5.6'
 #####`format`
 The format of the file confluence will be installed from. Default: 'tar.gz'
-#####`installdir` 
+#####`installdir`
 The installation directory of the confluence binaries. Default: '/opt/confluence'
 #####`homedir`
 The home directory of confluence. Configuration files are stored here. Default: '/home/confluence'
@@ -158,7 +158,7 @@ The initial memory allocation pool for a Java Virtual Machine. Default: '256m'
 Maximum memory allocation pool for a Java Virtual Machine. Default: '1024m'
 #####`jvm_permgen`
 Increase max permgen size for a Java Virtual Machine. Default: '256m'
-#####`java_opts` 
+#####`java_opts`
 Additional java options can be specified here. Default: ''
 
 ####Tomcat parameters####
@@ -172,6 +172,28 @@ Defaults to '150'
 Defaults to  '100'
 #####`tomcat_extras`
 Any additional tomcat params for server.xml. Takes same format as `tomcat_proxy`. Default: {}
+
+####Crowd single sign on parameters####
+####`enable_sso`
+Enable crowd single sign on configuration as described in https://confluence.atlassian.com/display/CROWD/Integrating+Crowd+with+Atlassian+Confluence#IntegratingCrowdwithAtlassianConfluence-2.2EnableSSOintegrationwithCrowd(Optional)
+####`application_name`
+Set crowd application name
+####`application_password`
+Set crowd application password
+####`application_login_url`
+Set crowd application login url, where to login into crowd (e.g. https://crowd.example.com/console/)
+####`crowd_server_url`
+Set crowd application services url, e.g. https://crowd.example.com/services/
+####`crowd_base_url`
+Set crowd base url, e.g. https://crowd.example.com/
+####`session_isauthenticated`
+Some more crowd.properties for SSO, see atlassian documentation for details
+####`session_tokenkey`
+Some more crowd.properties for SSO, see atlassian documentation for details
+####`session_validationinterval`
+Some more crowd.properties for SSO, see atlassian documentation for details
+####`session_lastvalidation`
+Some more crowd.properties for SSO, see atlassian documentation for details
 
 ####Miscellaneous  parameters####
 
@@ -217,4 +239,3 @@ See CONTRIBUTING.md
 ## Contributors
 
 See CONTRIBUTORS
-
