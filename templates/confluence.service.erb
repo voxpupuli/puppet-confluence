@@ -5,7 +5,6 @@ After=network.target
 [Service]
 Type=forking
 User=confluence
-PIDFile=<%= scope.lookupvar('confluence::webappdir') %>/work/catalina.pid
 ExecStart=<%= scope.lookupvar('confluence::webappdir') %>/bin/start-confluence.sh
 ExecStop=<%= scope.lookupvar('confluence::webappdir') %>/bin/stop-confluence.sh
 
