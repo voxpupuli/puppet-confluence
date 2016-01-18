@@ -11,6 +11,7 @@ class confluence::service(
   file { $service_file_location:
     content => template($service_file_template),
     mode    => '0755',
+    before  => Service[confluence],
   }
 
   if $confluence::manage_service {
