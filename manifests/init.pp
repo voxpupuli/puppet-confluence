@@ -25,7 +25,8 @@ class confluence (
   $shell        = '/bin/true',
 
   # Misc Settings
-  $downloadURL  = 'http://www.atlassian.com/software/confluence/downloads/binary',
+  $download_url  = 'http://www.atlassian.com/software/confluence/downloads/binary',
+  $downloadURL   = undef,
 
   # Choose whether to use nanliu-staging, or mkrakowitzer-deploy
   # Defaults to nanliu-staging as it is puppetlabs approved.
@@ -55,6 +56,18 @@ class confluence (
   # This required for upgrades
   $facts_ensure = 'present',
 ) {
+
+  if $downloadURL {
+    warning("${module_name}: The use of downloadURL is deprecated. Use download_url instead.")
+    $real_download_url = $downloadURL
+  } else {
+    $real_download_url = $download_url
+  }
+
+  if $downloadURL and $download_url {
+    fail ("${module_name}: You have specified both downloadURL and download_url. Use download_url only.")
+  }
+
   validate_re($version, '^(?:(\d+)\.)?(?:(\d+)\.)?(\*|\d+)(|[a-z])$')
   validate_absolute_path($installdir)
   validate_absolute_path($homedir)

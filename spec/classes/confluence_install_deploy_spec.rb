@@ -12,7 +12,7 @@ describe 'confluence' do
         :homedir           => '/home/confluence',
         :format            => 'tar.gz',
         :product           => 'confluence',
-        :downloadURL       => 'http://www.atlassian.com/software/confluence/downloads/binary/',
+        :download_url      => 'http://www.atlassian.com/software/confluence/downloads/binary/',
 	:staging_or_deploy => 'deploy',
         }}
       it { should contain_group('confluence') }
@@ -42,7 +42,7 @@ describe 'confluence' do
         :uid               => 333,
         :gid               => 444,
         :shell             => '/bin/bash',
-        :downloadURL       => 'http://downloads.atlassian.com/',
+        :download_url      => 'http://downloads.atlassian.com/',
         :staging_or_deploy => 'deploy',
       }}
       it { should contain_user('foo').with({

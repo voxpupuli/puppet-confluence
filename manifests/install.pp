@@ -44,7 +44,7 @@ class confluence::install {
     }
 
     staging::file { $file:
-      source  => "${confluence::downloadURL}/${file}",
+      source  => "${confluence::real_download_url}/${file}",
       timeout => 1800,
     } ->
 
@@ -68,7 +68,7 @@ class confluence::install {
 
     deploy::file { $file:
       target          => $confluence::webappdir,
-      url             => $confluence::downloadURL,
+      url             => $confluence::real_download_url,
       strip           => true,
       download_timout => 1800,
       owner           => $confluence::user,

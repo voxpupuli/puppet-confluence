@@ -30,7 +30,7 @@ describe 'confluence', :unless => UNSUPPORTED_PLATFORMS.include?(fact('osfamily'
       }
       class { 'confluence':
         version             => '5.7',
-        downloadURL         => #{download_url},
+        download_url        => #{download_url},
         javahome            => $jh,
         tomcat_port         => '8091',
         tomcat_max_threads  => 999,
