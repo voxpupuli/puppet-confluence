@@ -7,7 +7,7 @@ describe 'confluence' do
         :javahome => '/opt/java',
         :version  => '5.5.6',
       }}
-      it { should contain_service('confluence')}
+      it { should contain_service('confluence') }
     end
   end
 end

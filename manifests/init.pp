@@ -93,13 +93,13 @@ class confluence (
 
   anchor { 'confluence::start':
   } ->
-  class { 'confluence::facts':
+  class { '::confluence::facts':
   } ->
-  class { 'confluence::install':
+  class { '::confluence::install':
   } ->
-  class { 'confluence::config':
+  class { '::confluence::config':
   } ~>
-  class { 'confluence::service':
+  class { '::confluence::service':
   } ->
   anchor { 'confluence::end': }
 

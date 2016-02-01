@@ -1,17 +1,17 @@
 require 'beaker-rspec/spec_helper'
 require 'beaker-rspec/helpers/serverspec'
 
-unless ENV['RS_PROVISION'] == 'no' or ENV['BEAKER_provision'] == 'no'
+unless ENV['RS_PROVISION'] == 'no' || ENV['BEAKER_provision'] == 'no'
   hosts.each do |host|
     foss_opts = { :default_action => 'gem_install' }
-    install_puppet( foss_opts )
+    install_puppet(foss_opts)
     on host, "mkdir -p #{host['distmoduledir']}"
     on host, "sed -i '/templatedir/d' #{host['puppetpath']}/puppet.conf"
-#    install_package host, 'augeas'
+    # install_package host, 'augeas'
   end
 end
 
-UNSUPPORTED_PLATFORMS = ['AIX','windows','Solaris']
+UNSUPPORTED_PLATFORMS = %w(AIX windows Solaris)
 
 RSpec.configure do |c|
   # Project root
@@ -26,7 +26,7 @@ RSpec.configure do |c|
     puppet_module_install(
       :source => proj_root,
       :module_name => 'confluence',
-      :ignore_list => [ 'spec/fixtures/*', '.git/*', '.vagrant/*' ],
+      :ignore_list => %w(spec/fixtures/* .git/* .vagrant/*),
     )
     hosts.each do |host|
       on host, "/bin/touch #{default['puppetpath']}/hiera.yaml"
@@ -36,11 +36,11 @@ RSpec.configure do |c|
         on host, '/usr/sbin/locale-gen'
         on host, '/usr/sbin/update-locale'
       end
-      on host, puppet('module','install','puppetlabs-stdlib'), { :acceptable_exit_codes => [0,1] }
-      on host, puppet('module','install','puppetlabs-postgresql'), { :acceptable_exit_codes => [0,1] }
-      on host, puppet('module','install','mkrakowitzer-deploy'), { :acceptable_exit_codes => [0,1] }
-      on host, puppet('module','install','puppetlabs-java'), { :acceptable_exit_codes => [0,1] }
-      on host, puppet('module','install','nanliu-staging'), { :acceptable_exit_codes => [0,1] }
+      on host, puppet('module', 'install', 'puppetlabs-stdlib'), :acceptable_exit_codes => [0, 1]
+      on host, puppet('module', 'install', 'puppetlabs-postgresql'), :acceptable_exit_codes => [0, 1]
+      on host, puppet('module', 'install', 'mkrakowitzer-deploy'), :acceptable_exit_codes => [0, 1]
+      on host, puppet('module', 'install', 'puppetlabs-java'), :acceptable_exit_codes => [0, 1]
+      on host, puppet('module', 'install', 'nanliu-staging'), :acceptable_exit_codes => [0, 1]
     end
   end
 end

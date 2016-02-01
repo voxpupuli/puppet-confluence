@@ -1,3 +1,11 @@
+##2016-02-01 - Release 3.0.0
+  - Update version of puppetlabs/stdlib from 3.0.0 to 4.0.0. Fixes #35
+  - Add parameter manage_user. Fixes #37
+  - Add parameter context_path. Fixes #40
+  - Moved Init script to class service.pp. Fixes #41
+  - Add systemd unit file. Fixes #46
+  - Deploy system unit file, before starting service. Fixes #48
+
 ##2014-03-22 - Release 2.1.1
 
   - Rewrite README file

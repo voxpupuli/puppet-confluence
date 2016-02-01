@@ -1,6 +1,10 @@
 #puppet-confluence
 [![Puppet Forge](http://img.shields.io/puppetforge/v/puppet/confluence.svg)](https://forge.puppetlabs.com/puppet/confluence)
-[![Build Status](https://travis-ci.org/puppet-community/puppet-confluence.svg?branch=master)](https://travis-ci.org/puppet-community/puppet-confluence)
+[![Build Status](https://travis-ci.org/voxpupuli/puppet-confluence.svg?branch=master)](https://travis-ci.org/voxpupuli/puppet-confluence)
+
+:warning: Starting with version 3.0.0, we have renamed the parameter
+```downloadURL``` to ```download_url```. This was necessary, because of the
+puppet-lint check ```puppet-lint-variable_contains_upcase```.
 
 #### Table of Contents
 
@@ -97,7 +101,7 @@ confluence::tomcat_port:    '8090'
 confluence::jvm_xms:        '4G'
 confluence::jvm_xmx:        '8G'
 confluence::jvm_permgen:    '512m'
-confluence::download_url:    'http://webserver.example.co.za/pub/software/development-tools/atlassian'
+confluence::download_url:   'http://webserver.example.co.za/pub/software/development-tools/atlassian'
 confluence::tomcat_proxy:
   scheme:    'https'
   proxyName: 'webvip.example.co.za'

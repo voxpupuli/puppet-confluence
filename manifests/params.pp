@@ -3,7 +3,6 @@
 # Defines default values for confluence module
 #
 class confluence::params {
-
   case $::osfamily {
     /RedHat/: {
       if $::operatingsystemmajrelease == '7' {
@@ -15,14 +14,15 @@ class confluence::params {
         $service_file_template = 'confluence/confluence.initscript.erb'
         $service_lockfile      = '/var/lock/subsys/confluence'
       } else {
-        fail("Only osfamily ${::osfamily} 6 and 7 and supported")
+        fail("${::operatingsystem} ${::operatingsystemmajrelease} not supported")
       }
     }
     /Debian/: {
       $service_file_location   = '/etc/init.d/confluence'
       $service_file_template   = 'confluence/confluence.initscript.erb'
       $service_lockfile        = '/var/lock/confluence'
+    } default: {
+      fail("${::operatingsystem} ${::operatingsystemmajrelease} not supported")
     }
-    default: { fail('Only osfamily Debian and Redhat are supported') }
   }
 }

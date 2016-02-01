@@ -8,7 +8,9 @@ describe 'confluence' do
   end
 
   context 'with javahome set' do
-    let(:params) { {:javahome => '/foo/bar'} }
+    let(:params) do
+      { :javahome => '/foo/bar' }
+    end
     it { should contain_class('confluence') }
     it { should contain_class('confluence::install') }
     it { should contain_class('confluence::config') }
