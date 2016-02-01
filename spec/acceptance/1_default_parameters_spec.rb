@@ -37,7 +37,7 @@ describe 'confluence', :unless => UNSUPPORTED_PLATFORMS.include?(fact('osfamily'
       } ->
       class { 'confluence':
         version             => '5.5.6',
-        downloadURL         => #{download_url},
+        download_url        => #{download_url},
         javahome            => $jh,
       }
     EOS

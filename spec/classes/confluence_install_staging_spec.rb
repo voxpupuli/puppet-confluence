@@ -53,7 +53,7 @@ describe 'confluence' do
         :uid               => 333,
         :gid               => 444,
         :shell             => '/bin/bash',
-        :downloadURL       => 'http://downloads.atlassian.com',
+        :download_url      => 'http://downloads.atlassian.com',
       }}
 
       it { should contain_user('foo').with({
