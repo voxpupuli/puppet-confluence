@@ -1,3 +1,13 @@
+##2016-02-04 - Release 2.2.0
+
+  - Deprecate the downloadURL parameter
+  - Add a systemd unit file for the RHEL 7 family
+  - Use a service_file_template variable to reference init scripts
+  - Add a context_path parameter to manage situations where Confluence is
+    served from a sub-path to the base URL
+  - Add manage_user parameter
+  - Fix minimum required stdlib version
+
 ##2014-03-22 - Release 2.1.1
 
   - Rewrite README file
