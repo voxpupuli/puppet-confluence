@@ -1,12 +1,12 @@
 {
   "name": "puppet-confluence",
-  "version": "2.1.1",
-  "author": "puppetcommunity",
+  "version": "2.2.0",
+  "author": "voxpupuli",
   "summary": "Install atlassian confluence",
   "license": "MIT",
-  "source": "https://github.com/puppet-community/puppet-confluence.git",
-  "project_page": "https://github.com/puppet-community/puppet-confluence",
-  "issues_url": "https://github.com/puppet-community/puppet-confluence/issues",
+  "source": "https://github.com/voxpupuli/puppet-confluence.git",
+  "project_page": "https://github.com/voxpupuli/puppet-confluence",
+  "issues_url": "https://github.com/voxpupuli/puppet-confluence/issues",
   "description": "Atlassian confluence",
   "dependencies": [
     {
