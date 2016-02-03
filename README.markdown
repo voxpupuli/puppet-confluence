@@ -1,6 +1,6 @@
 #puppet-confluence
 [![Puppet Forge](http://img.shields.io/puppetforge/v/puppet/confluence.svg)](https://forge.puppetlabs.com/puppet/confluence)
-[![Build Status](https://travis-ci.org/puppet-community/puppet-confluence.svg?branch=master)](https://travis-ci.org/puppet-community/puppet-confluence)
+[![Build Status](https://travis-ci.org/voxpupuli/puppet-confluence.svg?branch=master)](https://travis-ci.org/voxpupuli/puppet-confluence)
 
 #### Table of Contents
 
