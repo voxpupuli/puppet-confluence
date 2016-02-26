@@ -4,7 +4,8 @@ After=network.target
 
 [Service]
 Type=forking
-User=confluence
+User=<%= scope.lookupvar('confluence::user') %>
+Environment="JAVA_HOME=<%= scope.lookupvar('confluence::javahome') %>"
 ExecStart=<%= scope.lookupvar('confluence::webappdir') %>/bin/start-confluence.sh
 ExecStop=<%= scope.lookupvar('confluence::webappdir') %>/bin/stop-confluence.sh
 
