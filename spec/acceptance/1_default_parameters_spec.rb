@@ -4,19 +4,18 @@ require 'spec_helper_acceptance'
 # Set environment variable download_url to use local webserver
 # export download_url = 'http://10.0.0.XXX/'
 download_url = ENV['download_url'] if ENV['download_url']
-if ENV['download_url'] then
-  download_url = ENV['download_url']
-else 
-  download_url = 'undef'
-end
-if download_url == 'undef' then
-  java_url = "'http://download.oracle.com/otn-pub/java/jdk/7u71-b14/'"
-else 
-  java_url = download_url
-end
+download_url = if ENV['download_url']
+                 ENV['download_url']
+               else
+                 'undef'
+               end
+java_url = if download_url == 'undef'
+             'http://download.oracle.com/otn-pub/java/jdk/7u71-b14/'
+           else
+             download_url
+           end
 
 describe 'confluence', :unless => UNSUPPORTED_PLATFORMS.include?(fact('osfamily')) do
-
   it 'installs with defaults' do
     pp = <<-EOS
       $jh = $osfamily ? {
@@ -49,7 +48,7 @@ describe 'confluence', :unless => UNSUPPORTED_PLATFORMS.include?(fact('osfamily'
     apply_manifest(pp, :catch_changes => true)
   end
 
-  describe process("java") do
+  describe process('java') do
     it { should be_running }
   end
 
@@ -74,7 +73,6 @@ describe 'confluence', :unless => UNSUPPORTED_PLATFORMS.include?(fact('osfamily'
   end
 
   describe command('wget -q --tries=240 --retry-connrefused --read-timeout=10 -O- localhost:8090') do
-    its(:stdout) { should match (/http\:\/\/www\.atlassian\.com\//) }
+    its(:stdout) { should match %r{http://www.atlassian.com/} }
   end
-
 end

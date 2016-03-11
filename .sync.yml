@@ -1,0 +1,13 @@
+---
+.travis.yml:
+  secure: "bca3Ebj/IE9a1X/BpLPVpMYw/zx9VkFRp1WjQZ437jYnpjyl2M/bC1cyW/A7TnzPX7WOpemT5+CVlVF/WE6f0Hrn6EqSzNwrVF8HOkGD8LqVLopXkaEn1zjcrhF4uMaleDpnNxQUx9nMAnqksiw2xphF1yxABqMt3l42SV7ajVw="
+Rakefile:
+  default_disabled_lint_checks:
+  - 'relative'
+  - 'disable_80chars'
+  - 'disable_class_inherits_from_params_class'
+  - 'disable_documentation'
+  - 'disable_single_quote_string_with_variables'
+  - 'disable_variable_contains_upcase'
+spec/spec_helper.rb:
+  unmanaged: true

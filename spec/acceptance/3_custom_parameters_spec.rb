@@ -4,19 +4,13 @@ require 'spec_helper_acceptance'
 # Set environment variable download_url to use local webserver
 # export download_url = 'http://10.0.0.XXX/'
 download_url = ENV['download_url'] if ENV['download_url']
-if ENV['download_url'] then
-  download_url = ENV['download_url']
-else 
-  download_url = 'undef'
-end
-if download_url == 'undef' then
-  java_url = "'http://download.oracle.com/otn-pub/java/jdk/7u71-b14/'"
-else 
-  java_url = download_url
-end
+download_url = if ENV['download_url']
+                 ENV['download_url']
+               else
+                 'undef'
+               end
 
 describe 'confluence', :unless => UNSUPPORTED_PLATFORMS.include?(fact('osfamily')) do
-
   it 'change params of server.xml' do
     pp = <<-EOS
       $jh = $osfamily ? {
@@ -46,7 +40,7 @@ describe 'confluence', :unless => UNSUPPORTED_PLATFORMS.include?(fact('osfamily'
     apply_manifest(pp, :catch_changes => true)
   end
 
-  describe process("java") do
+  describe process('java') do
     it { should be_running }
   end
 
@@ -71,13 +65,12 @@ describe 'confluence', :unless => UNSUPPORTED_PLATFORMS.include?(fact('osfamily'
   end
 
   describe command('wget -q --tries=240 --retry-connrefused --read-timeout=10 -O- localhost:8091/confluence1') do
-    its(:stdout) { should match (/http\:\/\/www\.atlassian\.com\//) }
+    its(:stdout) { should match %r{http://www.atlassian.com/} }
   end
 
   describe file('/opt/confluence/atlassian-confluence-5.7/conf/server.xml') do
-    it { should contain "maxThreads=\"999\"" }
-    it { should contain "acceptCount=\"999\"" }
-    it { should contain "Context path=\"/confluence\"" }
+    it { should contain 'maxThreads="999"' }
+    it { should contain 'acceptCount="999"' }
+    it { should contain 'Context path="/confluence"' }
   end
-
 end
