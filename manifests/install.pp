@@ -91,7 +91,7 @@ class confluence::install {
   exec { "chown_${confluence::webappdir}":
     command     => "/bin/chown -R ${confluence::user}:${confluence::group} ${confluence::webappdir}",
     refreshonly => true,
-    subscribe   => User[$confluence::user]
+    subscribe   => User[$confluence::user],
   }
 
 }

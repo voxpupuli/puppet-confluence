@@ -1,9 +1,0 @@
-HOSTS:
-  centos-70-x64:
-    roles:
-      - agent
-    platform: centos7-v20141108
-    hypervisor : google
-CONFIG:
-  log_level   : debug
-  type: foss
