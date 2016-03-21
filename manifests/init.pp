@@ -5,7 +5,7 @@
 class confluence (
 
   # JVM Settings
-  $javahome,
+  $javahome     = undef,
   $jvm_xms      = '256m',
   $jvm_xmx      = '1024m',
   $jvm_permgen  = '256m',
@@ -91,16 +91,14 @@ class confluence (
     }
   }
 
-  anchor { 'confluence::start':
-  } ->
-  class { '::confluence::facts':
-  } ->
-  class { '::confluence::install':
-  } ->
-  class { '::confluence::config':
-  } ~>
-  class { '::confluence::service':
-  } ->
-  anchor { 'confluence::end': }
+  if $javahome == undef {
+    fail('You need to specify a value for javahome')
+  }
 
+  anchor { 'confluence::start': } ->
+  class { '::confluence::facts': } ->
+  class { '::confluence::install': } ->
+  class { '::confluence::config': } ~>
+  class { '::confluence::service': } ->
+  anchor { 'confluence::end': }
 }
