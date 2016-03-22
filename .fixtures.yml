@@ -2,6 +2,6 @@ fixtures:
   symlinks:
     confluence: "#{source_dir}"
   repositories:
-    deploy: "http://github.com/mkrakowitzer/puppet-deploy"
-    staging: "http://github.com/nanliu/puppet-staging"
-    stdlib: "http://github.com/puppetlabs/puppetlabs-stdlib.git"
+    archive: "https://github.com/voxpupuli/puppet-archive.git"
+    staging: "https://github.com/voxpupuli/puppet-staging.git"
+    stdlib:  "https://github.com/puppetlabs/puppetlabs-stdlib.git"

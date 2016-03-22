@@ -25,11 +25,11 @@ class confluence (
   $shell        = '/bin/true',
 
   # Misc Settings
-  $download_url  = 'http://www.atlassian.com/software/confluence/downloads/binary',
+  $download_url = 'http://www.atlassian.com/software/confluence/downloads/binary',
+  $checksum     = undef,
 
-  # Choose whether to use nanliu-staging, or mkrakowitzer-deploy
-  # Defaults to nanliu-staging as it is puppetlabs approved.
-  $staging_or_deploy = 'staging',
+  # Choose whether to use puppet-staging, or puppet-archive
+  $deploy_module = 'archive',
 
   # Manage confluence server
   $manage_service = true,
