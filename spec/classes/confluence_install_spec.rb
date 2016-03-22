@@ -21,12 +21,13 @@ describe 'confluence' do
       it { should contain_user('confluence').with_shell('/bin/true') }
 
       it 'should deploy confluence 5.5.6 from tar.gz' do
-        should contain_staging__file('atlassian-confluence-5.5.6.tar.gz').with('source' => 'http://www.atlassian.com/software/confluence/downloads/binary/atlassian-confluence-5.5.6.tar.gz')
-        should contain_staging__extract('atlassian-confluence-5.5.6.tar.gz').with('target' => '/opt/confluence/atlassian-confluence-5.5.6',
-                                                                                  'creates' => '/opt/confluence/atlassian-confluence-5.5.6/conf',
-                                                                                  'strip'   => '1',
-                                                                                  'user'    => 'confluence',
-                                                                                  'group'   => 'confluence')
+        should contain_archive('/tmp/atlassian-confluence-5.5.6.tar.gz')
+          .with('extract_path'  => '/opt/confluence/atlassian-confluence-5.5.6',
+                'source'        => 'http://www.atlassian.com/software/confluence/downloads/binary/atlassian-confluence-5.5.6.tar.gz',
+                'creates'       => '/opt/confluence/atlassian-confluence-5.5.6/conf',
+                'user'          => 'confluence',
+                'group'         => 'confluence',
+                'checksum_type' => 'md5',)
       end
 
       it 'should manage the confluence home directory' do
@@ -63,12 +64,13 @@ describe 'confluence' do
       it { should contain_group('bar') }
 
       it 'should deploy confluence 5.5.5 from tar.gz' do
-        should contain_staging__file('atlassian-confluence-5.5.5.tar.gz').with('source' => 'http://downloads.atlassian.com/atlassian-confluence-5.5.5.tar.gz')
-        should contain_staging__extract('atlassian-confluence-5.5.5.tar.gz').with('target' => '/opt/foo/confluence/atlassian-confluence-5.5.5',
-                                                                                  'creates' => '/opt/foo/confluence/atlassian-confluence-5.5.5/conf',
-                                                                                  'strip'   => '1',
-                                                                                  'user'    => 'foo',
-                                                                                  'group'   => 'bar')
+        should contain_archive('/tmp/atlassian-confluence-5.5.5.tar.gz')
+          .with('extract_path'  => '/opt/foo/confluence/atlassian-confluence-5.5.5',
+                'source'        => 'http://downloads.atlassian.com/atlassian-confluence-5.5.5.tar.gz',
+                'creates'       => '/opt/foo/confluence/atlassian-confluence-5.5.5/conf',
+                'user'          => 'foo',
+                'group'         => 'bar',
+                'checksum_type' => 'md5',)
       end
       it 'should manage the confluence home directory' do
         should contain_file('/random/homedir').with('ensure' => 'directory',

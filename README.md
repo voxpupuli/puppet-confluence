@@ -179,10 +179,14 @@ Any additional tomcat params for server.xml. Takes same format as `tomcat_proxy`
 Should we use augeas to manage server.xml or a template file. Defaults to 'augues'. Operating systems that do not have a support version of Augeas such as Ubuntu 12.04 can use 'template'.
 #####`download_url`
 Default: 'http://www.atlassian.com/software/confluence/downloads/binary/'
+
+#####`checksum`
+The md5 checksum of the archive file. Only supported with `deploy_module => archive`. Defaults to 'undef'
+
 #####`manage_service`
 Should puppet manage this service? Default: true
-#####`staging_or_deploy`
-Choose whether to use nanliu-staging, or mkrakowitzer-deploy. Defaults to 'staging' to use nanliu-staging as it is puppetlabs approved. Alternative option is 'deploy' to use mkrakowitzer-deploy.
+#####`deploy_module`
+Module to use for downloading and extracting archive file. Supports puppet-archive and puppet-staging. Defaults to 'archive'. Archive supports md5 hash checking and Staging supports S3 buckets.
 #####`stop_confluence`
 If the Confluence service is managed outside of puppet the stop_confluence paramater can be used to shut down confluence for upgrades. Defaults to 'service confluence stop && sleep 15'
 #####`facts_ensure`
