@@ -54,6 +54,19 @@ class confluence (
   # Enable confluence version fact for running instance
   # This required for upgrades
   $facts_ensure = 'present',
+
+  # Enable SingleSignOn via Crowd
+
+  $enable_sso = false,
+  $application_name = 'crowd',
+  $application_password = '1234',
+  $application_login_url = 'https://crowd.example.com/console/',
+  $crowd_server_url = 'https://crowd.example.com/services/',
+  $crowd_base_url = 'https://crowd.example.com/',
+  $session_isauthenticated = 'session.isauthenticated',
+  $session_tokenkey = 'session.tokenkey',
+  $session_validationinterval = 5,
+  $session_lastvalidation = 'session.lastvalidation',
 ) {
 
   validate_re($version, '^(?:(\d+)\.)?(?:(\d+)\.)?(\*|\d+)(|[a-z])$')
@@ -89,4 +102,9 @@ class confluence (
   class { '::confluence::config': } ~>
   class { '::confluence::service': } ->
   anchor { 'confluence::end': }
+
+  if ($enable_sso) {
+    class { '::confluence::sso':
+    }
+  }
 }
