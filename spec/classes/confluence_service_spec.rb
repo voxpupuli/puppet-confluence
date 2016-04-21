@@ -5,8 +5,8 @@ describe 'confluence' do
     context 'default params' do
       let(:params) do
         {
-          :javahome => '/opt/java',
-          :version  => '5.5.6',
+          javahome: '/opt/java',
+          version: '5.5.6',
         }
       end
       it { should contain_service('confluence') }

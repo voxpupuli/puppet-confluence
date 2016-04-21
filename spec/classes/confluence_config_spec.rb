@@ -5,8 +5,8 @@ describe 'confluence' do
     context 'default params' do
       let(:params) do
         {
-          :javahome => '/opt/java',
-          :version  => '5.5.6',
+          javahome: '/opt/java',
+          version: '5.5.6',
         }
       end
       it { should contain_file('/opt/confluence/atlassian-confluence-5.5.6/bin/setenv.sh') }
@@ -16,9 +16,9 @@ describe 'confluence' do
     context 'with param manage_server_xml set to template' do
       let(:params) do
         {
-          :javahome          => '/opt/java',
-          :version           => '5.5.6',
-          :manage_server_xml => 'template',
+          javahome: '/opt/java',
+          version: '5.5.6',
+          manage_server_xml: 'template',
         }
       end
       it { should contain_file('/opt/confluence/atlassian-confluence-5.5.6/bin/setenv.sh') }
@@ -28,9 +28,9 @@ describe 'confluence' do
     context 'with param manage_server_xml set to ERROR' do
       let(:params) do
         {
-          :javahome          => '/opt/java',
-          :version           => '5.5.6',
-          :manage_server_xml => 'ERROR',
+          javahome: '/opt/java',
+          version: '5.5.6',
+          manage_server_xml: 'ERROR',
         }
       end
       it('should fail') {
@@ -40,14 +40,14 @@ describe 'confluence' do
     context 'with param manage_server_xml set to template and non default params' do
       let(:params) do
         {
-          :javahome            => '/opt/java',
-          :version             => '5.5.6',
-          :manage_server_xml   => 'template',
-          :context_path        => '/confluence1',
-          :tomcat_port         => 8089,
-          :tomcat_max_threads  => 999,
-          :tomcat_accept_count => 999,
-          :tomcat_proxy        => {
+          javahome: '/opt/java',
+          version: '5.5.6',
+          manage_server_xml: 'template',
+          context_path: '/confluence1',
+          tomcat_port: 8089,
+          tomcat_max_threads: 999,
+          tomcat_accept_count: 999,
+          tomcat_proxy: {
             'scheme'      => 'https',
             'proxyName'   => 'EXAMPLE',
             'proxyPort'   => '443',

@@ -5,14 +5,14 @@ describe 'confluence' do
     context 'default params' do
       let(:params) do
         {
-          :javahome  => '/opt/java',
-          :version   => '5.5.6',
-          :user      => 'confluence',
-          :group     => 'confluence',
-          :installdir => '/opt/confluence',
-          :homedir   => '/home/confluence',
-          :format    => 'tar.gz',
-          :product   => 'confluence',
+          javahome: '/opt/java',
+          version: '5.5.6',
+          user: 'confluence',
+          group: 'confluence',
+          installdir: '/opt/confluence',
+          homedir: '/home/confluence',
+          format: 'tar.gz',
+          product: 'confluence',
         }
       end
 
@@ -40,18 +40,18 @@ describe 'confluence' do
     context 'overwriting params' do
       let(:params) do
         {
-          :javahome     => '/opt/java',
-          :version      => '5.5.5',
-          :product      => 'confluence',
-          :format       => 'tar.gz',
-          :installdir   => '/opt/foo/confluence',
-          :homedir      => '/random/homedir',
-          :user         => 'foo',
-          :group        => 'bar',
-          :uid          => 333,
-          :gid          => 444,
-          :shell        => '/bin/bash',
-          :download_url => 'http://downloads.atlassian.com',
+          javahome: '/opt/java',
+          version: '5.5.5',
+          product: 'confluence',
+          format: 'tar.gz',
+          installdir: '/opt/foo/confluence',
+          homedir: '/random/homedir',
+          user: 'foo',
+          group: 'bar',
+          uid: 333,
+          gid: 444,
+          shell: '/bin/bash',
+          download_url: 'http://downloads.atlassian.com',
         }
       end
 
