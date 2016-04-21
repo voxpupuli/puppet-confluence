@@ -10,7 +10,7 @@ download_url = if ENV['download_url']
                  'undef'
                end
 
-describe 'confluence', :unless => UNSUPPORTED_PLATFORMS.include?(fact('osfamily')) do
+describe 'confluence', unless: UNSUPPORTED_PLATFORMS.include?(fact('osfamily')) do
   it 'upgrades with defaults' do
     pp = <<-EOS
       $jh = $osfamily ? {
@@ -28,12 +28,12 @@ describe 'confluence', :unless => UNSUPPORTED_PLATFORMS.include?(fact('osfamily'
         javahome            => $jh,
       }
     EOS
-    apply_manifest(pp, :catch_failures => true)
-    shell 'wget -q --tries=240 --retry-connrefused --read-timeout=10 localhost:8090', :acceptable_exit_codes => [0]
+    apply_manifest(pp, catch_failures: true)
+    shell 'wget -q --tries=240 --retry-connrefused --read-timeout=10 localhost:8090', acceptable_exit_codes: [0]
     sleep 60
-    shell 'wget -q --tries=240 --retry-connrefused --read-timeout=10 localhost:8090', :acceptable_exit_codes => [0]
+    shell 'wget -q --tries=240 --retry-connrefused --read-timeout=10 localhost:8090', acceptable_exit_codes: [0]
     sleep 30
-    apply_manifest(pp, :catch_changes => true)
+    apply_manifest(pp, catch_changes: true)
   end
 
   describe process('java') do
