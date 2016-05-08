@@ -11,6 +11,7 @@
 
 ## 2014-03-22 Release 2.1.1
 
+(this is the first release made under the voxpupuli namespace. Older version were from mkrakowitzer)
 * Rewrite README file
 * Bump confluence version to 5.7.1
 * Update metadata, CHANGELOG to point to new namespace.
