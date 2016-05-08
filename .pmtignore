@@ -1,5 +1,0 @@
-pkg/
-.vagrant
-spec/fixtures
-.fixtures.yml
-Guardfile
