@@ -1,3 +1,8 @@
+## 2016-05-08 Release 2.2.1
+
+* delete the .pmtignore (is redundant with our .gitignore)
+
+
 ## 2016-05-08 Release 2.2.0
 
 * Deprecate the downloadURL parameter
