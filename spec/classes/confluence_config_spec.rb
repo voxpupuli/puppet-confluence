@@ -33,7 +33,7 @@ describe 'confluence' do
           manage_server_xml: 'ERROR',
         }
       end
-      it('should fail') {
+      it('fails') {
         should raise_error(Puppet::Error, /manage_server_xml must be "augeas" or "template"/)
       }
     end

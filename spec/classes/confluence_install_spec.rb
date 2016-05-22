@@ -20,7 +20,7 @@ describe 'confluence' do
 
       it { should contain_user('confluence').with_shell('/bin/true') }
 
-      it 'should deploy confluence 5.5.6 from tar.gz' do
+      it 'deploys confluence 5.5.6 from tar.gz' do
         should contain_archive('/tmp/atlassian-confluence-5.5.6.tar.gz')
           .with('extract_path'  => '/opt/confluence/atlassian-confluence-5.5.6',
                 'source'        => 'http://www.atlassian.com/software/confluence/downloads/binary/atlassian-confluence-5.5.6.tar.gz',
@@ -30,7 +30,7 @@ describe 'confluence' do
                 'checksum_type' => 'md5',)
       end
 
-      it 'should manage the confluence home directory' do
+      it 'manages the confluence home directory' do
         should contain_file('/home/confluence').with('ensure' => 'directory',
                                                      'owner' => 'confluence',
                                                      'group' => 'confluence')
@@ -63,7 +63,7 @@ describe 'confluence' do
 
       it { should contain_group('bar') }
 
-      it 'should deploy confluence 5.5.5 from tar.gz' do
+      it 'deploys confluence 5.5.5 from tar.gz' do
         should contain_archive('/tmp/atlassian-confluence-5.5.5.tar.gz')
           .with('extract_path'  => '/opt/foo/confluence/atlassian-confluence-5.5.5',
                 'source'        => 'http://downloads.atlassian.com/atlassian-confluence-5.5.5.tar.gz',
@@ -72,7 +72,7 @@ describe 'confluence' do
                 'group'         => 'bar',
                 'checksum_type' => 'md5',)
       end
-      it 'should manage the confluence home directory' do
+      it 'manages the confluence home directory' do
         should contain_file('/random/homedir').with('ensure' => 'directory',
                                                     'owner' => 'foo',
                                                     'group' => 'bar')

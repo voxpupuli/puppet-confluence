@@ -29,7 +29,7 @@ describe 'confluence' do
         enable_sso: true,
         application_login_url: 'ERROR',
       }}
-      it('should fail') {
+      it('fails') {
         should raise_error(Puppet::Error, /does not match/)
       }
     end
