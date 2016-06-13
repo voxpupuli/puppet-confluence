@@ -2,9 +2,9 @@ require 'spec_helper.rb'
 
 describe 'confluence' do
   context 'with javahome not set' do
-    it('fails') {
+    it('fails') do
       should raise_error(Puppet::Error, %r{You need to specify a value for javahome})
-    }
+    end
   end
 
   context 'with javahome set' do

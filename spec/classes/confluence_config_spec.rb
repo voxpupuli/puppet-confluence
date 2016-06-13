@@ -33,9 +33,9 @@ describe 'confluence' do
           manage_server_xml: 'ERROR'
         }
       end
-      it('fails') {
+      it('fails') do
         should raise_error(Puppet::Error, %r{manage_server_xml must be "augeas" or "template"})
-      }
+      end
     end
     context 'with param manage_server_xml set to template and non default params' do
       let(:params) do
@@ -56,15 +56,16 @@ describe 'confluence' do
       end
       it { should contain_file('/opt/confluence/atlassian-confluence-5.5.6/bin/setenv.sh') }
       it { should contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/confluence-init.properties') }
-      it { should contain_file('/opt/confluence/atlassian-confluence-5.5.6/conf/server.xml').
-        with_content(%r{port="8089"}).
-        with_content(%r{maxThreads="999"}).
-        with_content(%r{acceptCount="999"}).
-        with_content(%r{scheme="https"}).
-        with_content(%r{proxyName="EXAMPLE"}).
-        with_content(%r{proxyPort="443"}).
-        with_content(%r{Context path="/confluence1"})
-      }
+      it do
+        should contain_file('/opt/confluence/atlassian-confluence-5.5.6/conf/server.xml').
+          with_content(%r{port="8089"}).
+          with_content(%r{maxThreads="999"}).
+          with_content(%r{acceptCount="999"}).
+          with_content(%r{scheme="https"}).
+          with_content(%r{proxyName="EXAMPLE"}).
+          with_content(%r{proxyPort="443"}).
+          with_content(%r{Context path="/confluence1"})
+      end
     end
   end
 end
