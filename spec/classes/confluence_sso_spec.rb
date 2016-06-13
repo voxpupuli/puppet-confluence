@@ -18,8 +18,8 @@ describe 'confluence' do
         enable_sso: true,
         application_name: 'appname'
       }}
-      it { should contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/crowd.properties')
-        .with_content(%r{application.name                        appname})
+      it { should contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/crowd.properties').
+        with_content(%r{application.name                        appname})
       }
     end
     context 'with param application_login_url set to ERROR' do
@@ -45,12 +45,12 @@ describe 'confluence' do
         crowd_base_url: 'http://crowdbase.url'
       }}
       it { should contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/seraph-config.xml') }
-      it { should contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/crowd.properties')
-        .with_content(%r{application.name                        app})
-        .with_content(%r{application.password                    password})
-        .with_content(%r{application.login.url                   https:\/\/login.url\/})
-        .with_content(%r{crowd.server.url                        https:\/\/crowd.url\/})
-        .with_content(%r{crowd.base.url                          http:\/\/crowdbase.url})
+      it { should contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/crowd.properties').
+        with_content(%r{application.name                        app}).
+        with_content(%r{application.password                    password}).
+        with_content(%r{application.login.url                   https:\/\/login.url\/}).
+        with_content(%r{crowd.server.url                        https:\/\/crowd.url\/}).
+        with_content(%r{crowd.base.url                          http:\/\/crowdbase.url})
       }
     end
   end
