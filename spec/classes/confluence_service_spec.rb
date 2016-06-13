@@ -6,7 +6,7 @@ describe 'confluence' do
       let(:params) do
         {
           javahome: '/opt/java',
-          version: '5.5.6',
+          version: '5.5.6'
         }
       end
       it { should contain_service('confluence') }

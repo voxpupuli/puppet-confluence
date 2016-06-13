@@ -12,7 +12,7 @@ describe 'confluence' do
           installdir: '/opt/confluence',
           homedir: '/home/confluence',
           format: 'tar.gz',
-          product: 'confluence',
+          product: 'confluence'
         }
       end
 
@@ -51,7 +51,7 @@ describe 'confluence' do
           uid: 333,
           gid: 444,
           shell: '/bin/bash',
-          download_url: 'http://downloads.atlassian.com',
+          download_url: 'http://downloads.atlassian.com'
         }
       end
 

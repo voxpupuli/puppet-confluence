@@ -6,7 +6,7 @@ describe 'confluence' do
       let(:params) do
         {
           javahome: '/opt/java',
-          version: '5.5.6',
+          version: '5.5.6'
         }
       end
       it { should contain_file('/opt/confluence/atlassian-confluence-5.5.6/bin/setenv.sh') }
@@ -18,7 +18,7 @@ describe 'confluence' do
         {
           javahome: '/opt/java',
           version: '5.5.6',
-          manage_server_xml: 'template',
+          manage_server_xml: 'template'
         }
       end
       it { should contain_file('/opt/confluence/atlassian-confluence-5.5.6/bin/setenv.sh') }
@@ -30,7 +30,7 @@ describe 'confluence' do
         {
           javahome: '/opt/java',
           version: '5.5.6',
-          manage_server_xml: 'ERROR',
+          manage_server_xml: 'ERROR'
         }
       end
       it('fails') {
@@ -50,8 +50,8 @@ describe 'confluence' do
           tomcat_proxy: {
             'scheme'      => 'https',
             'proxyName'   => 'EXAMPLE',
-            'proxyPort'   => '443',
-          },
+            'proxyPort'   => '443'
+          }
         }
       end
       it { should contain_file('/opt/confluence/atlassian-confluence-5.5.6/bin/setenv.sh') }

@@ -6,7 +6,7 @@ describe 'confluence' do
       let(:params) {{
         javahome: '/opt/java',
         version: '5.5.6',
-        enable_sso: true,
+        enable_sso: true
       }}
       it { should contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/seraph-config.xml') }
       it { should contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/crowd.properties') }
@@ -16,7 +16,7 @@ describe 'confluence' do
         javahome: '/opt/java',
         version: '5.5.6',
         enable_sso: true,
-        application_name: 'appname',
+        application_name: 'appname'
       }}
       it { should contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/crowd.properties')
         .with_content(/application.name                        appname/)
@@ -27,7 +27,7 @@ describe 'confluence' do
         javahome: '/opt/java',
         version: '5.5.6',
         enable_sso: true,
-        application_login_url: 'ERROR',
+        application_login_url: 'ERROR'
       }}
       it('fails') {
         should raise_error(Puppet::Error, /does not match/)
@@ -42,7 +42,7 @@ describe 'confluence' do
         application_password: 'password',
         application_login_url: 'https://login.url/',
         crowd_server_url: 'https://crowd.url/',
-        crowd_base_url: 'http://crowdbase.url',
+        crowd_base_url: 'http://crowdbase.url'
       }}
       it { should contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/seraph-config.xml') }
       it { should contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/crowd.properties')
