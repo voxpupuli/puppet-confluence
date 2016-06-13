@@ -27,7 +27,7 @@ describe 'confluence' do
                 'creates'       => '/opt/confluence/atlassian-confluence-5.5.6/conf',
                 'user'          => 'confluence',
                 'group'         => 'confluence',
-                'checksum_type' => 'md5',)
+                'checksum_type' => 'md5')
       end
 
       it 'manages the confluence home directory' do
@@ -70,7 +70,7 @@ describe 'confluence' do
                 'creates'       => '/opt/foo/confluence/atlassian-confluence-5.5.5/conf',
                 'user'          => 'foo',
                 'group'         => 'bar',
-                'checksum_type' => 'md5',)
+                'checksum_type' => 'md5')
       end
       it 'manages the confluence home directory' do
         should contain_file('/random/homedir').with('ensure' => 'directory',
