@@ -6,7 +6,7 @@ describe 'confluence' do
       let(:params) do
         {
           javahome: '/opt/java',
-          version: '5.5.6',
+          version: '5.5.6'
         }
       end
       it { should contain_file('/opt/confluence/atlassian-confluence-5.5.6/bin/setenv.sh') }
@@ -18,7 +18,7 @@ describe 'confluence' do
         {
           javahome: '/opt/java',
           version: '5.5.6',
-          manage_server_xml: 'template',
+          manage_server_xml: 'template'
         }
       end
       it { should contain_file('/opt/confluence/atlassian-confluence-5.5.6/bin/setenv.sh') }
@@ -30,12 +30,12 @@ describe 'confluence' do
         {
           javahome: '/opt/java',
           version: '5.5.6',
-          manage_server_xml: 'ERROR',
+          manage_server_xml: 'ERROR'
         }
       end
-      it('fails') {
-        should raise_error(Puppet::Error, /manage_server_xml must be "augeas" or "template"/)
-      }
+      it('fails') do
+        should raise_error(Puppet::Error, %r{manage_server_xml must be "augeas" or "template"})
+      end
     end
     context 'with param manage_server_xml set to template and non default params' do
       let(:params) do
@@ -50,21 +50,22 @@ describe 'confluence' do
           tomcat_proxy: {
             'scheme'      => 'https',
             'proxyName'   => 'EXAMPLE',
-            'proxyPort'   => '443',
-          },
+            'proxyPort'   => '443'
+          }
         }
       end
       it { should contain_file('/opt/confluence/atlassian-confluence-5.5.6/bin/setenv.sh') }
       it { should contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/confluence-init.properties') }
-      it { should contain_file('/opt/confluence/atlassian-confluence-5.5.6/conf/server.xml')
-        .with_content(/port="8089"/)
-        .with_content(/maxThreads="999"/)
-        .with_content(/acceptCount="999"/)
-        .with_content(/scheme="https"/)
-        .with_content(/proxyName="EXAMPLE"/)
-        .with_content(/proxyPort="443"/)
-        .with_content(%r{Context path="/confluence1"})
-      }
+      it do
+        should contain_file('/opt/confluence/atlassian-confluence-5.5.6/conf/server.xml').
+          with_content(%r{port="8089"}).
+          with_content(%r{maxThreads="999"}).
+          with_content(%r{acceptCount="999"}).
+          with_content(%r{scheme="https"}).
+          with_content(%r{proxyName="EXAMPLE"}).
+          with_content(%r{proxyPort="443"}).
+          with_content(%r{Context path="/confluence1"})
+      end
     end
   end
 end

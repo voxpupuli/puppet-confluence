@@ -10,6 +10,6 @@ RSpec.configure do |c|
     staging_http_get: 'curl',
     path: '/usr/local/bin:/usr/bin:/bin',
     confluence_version: '5.5.6',
-    puppetversion: '3.7.4',
+    puppetversion: '3.7.4'
   }
 end
