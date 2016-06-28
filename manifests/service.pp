@@ -15,9 +15,10 @@ class confluence::service(
 
   if $confluence::manage_service {
     service { 'confluence':
-      ensure  => 'running',
-      enable  => true,
-      require => [ Class['confluence::config'], File[$service_file_location], ],
+      ensure    => 'running',
+      enable    => true,
+      require   => Class['confluence::config'],
+      subscribe => File[$service_file_location],
     }
   }
 }
