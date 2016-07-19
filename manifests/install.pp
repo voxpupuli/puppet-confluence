@@ -45,7 +45,7 @@ class confluence::install {
 
   case $confluence::deploy_module {
     'staging': {
-      require staging
+      require ::staging
       staging::file { $file:
         source  => "${confluence::download_url}/${file}",
         timeout => 1800,
