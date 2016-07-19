@@ -1,3 +1,7 @@
+## To be released
+
+* Fixed issue with a clean puppet 4 based install failure.
+
 ## 2016-05-08 Release 2.2.1
 
 * delete the .pmtignore (is redundant with our .gitignore)
