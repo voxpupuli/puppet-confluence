@@ -71,7 +71,7 @@ Support has also been added for reverse proxying confluence via apache or nginx.
     homedir        => '/opt/atlassian/application-data/confluence-home',
     javahome       => '/opt/java',
     java_opts      => '-Dhttp.proxyHost=proxy.example.com -Dhttp.proxyPort=3128 -Dhttps.proxyHost=secure-proxy.example.com -Dhttps.proxyPort=3128'
-    proxy          => {
+    tomcat_proxy   => {
       scheme       => 'https',
       proxyName    => 'confluence.example.co.za',
       proxyPort    => '443',
