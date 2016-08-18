@@ -1,6 +1,8 @@
-## To be released
+## 2016-08-18 Release 2.2.2
 
-* Fixed issue with a clean puppet 4 based install failure.
+* Fix: Issue with a clean puppet 4 based install failure.
+* Modulesync with latest Vox Pupuli defaults
+
 
 ## 2016-05-08 Release 2.2.1
 

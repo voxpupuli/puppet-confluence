@@ -1,7 +1,7 @@
 {
   "name": "puppet-confluence",
-  "version": "2.2.2-rc0",
-  "author": "voxpupuli",
+  "version": "2.2.2",
+  "author": "Vox Ppuli",
   "summary": "Install atlassian confluence",
   "license": "MIT",
   "source": "https://github.com/voxpupuli/puppet-confluence.git",
