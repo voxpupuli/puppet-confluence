@@ -1,6 +1,6 @@
 {
   "name": "puppet-confluence",
-  "version": "2.2.2",
+  "version": "2.2.3-rc0",
   "author": "Vox Pupuli",
   "summary": "Install atlassian confluence",
   "license": "MIT",
