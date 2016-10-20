@@ -2,6 +2,11 @@ require 'puppetlabs_spec_helper/module_spec_helper'
 require 'rspec-puppet-facts'
 include RspecPuppetFacts
 
+unless RUBY_VERSION =~ %r{^1.9}
+  require 'coveralls'
+  Coveralls.wear!
+end
+
 require 'puppetlabs_spec_helper/module_spec_helper'
 RSpec.configure do |c|
   c.default_facts = {
