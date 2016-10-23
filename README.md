@@ -1,7 +1,11 @@
 # puppet-confluence
 
-[![Puppet Forge](http://img.shields.io/puppetforge/v/puppet/confluence.svg)](https://forge.puppetlabs.com/puppet/confluence)
-[![Build Status](https://travis-ci.org/voxpupuli/puppet-confluence.svg?branch=master)](https://travis-ci.org/voxpupuli/puppet-confluence)
+[![Build Status](https://travis-ci.org/voxpupuli/puppet-confluence.png?branch=master)](https://travis-ci.org/voxpupuli/puppet-confluence)
+[![Code Coverage](https://coveralls.io/repos/github/voxpupuli/puppet-confluence/badge.svg?branch=master)](https://coveralls.io/github/voxpupuli/puppet-confluence)
+[![Puppet Forge](https://img.shields.io/puppetforge/v/puppet/confluence.svg)](https://forge.puppetlabs.com/puppet/confluence)
+[![Puppet Forge - downloads](https://img.shields.io/puppetforge/dt/puppet/confluence.svg)](https://forge.puppetlabs.com/puppet/confluence)
+[![Puppet Forge - endorsement](https://img.shields.io/puppetforge/e/puppet/confluence.svg)](https://forge.puppetlabs.com/puppet/confluence)
+[![Puppet Forge - scores](https://img.shields.io/puppetforge/f/puppet/confluence.svg)](https://forge.puppetlabs.com/puppet/confluence)
 
 #### Table of Contents
 
