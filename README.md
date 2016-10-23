@@ -1,4 +1,5 @@
-#puppet-confluence
+# puppet-confluence
+
 [![Puppet Forge](http://img.shields.io/puppetforge/v/puppet/confluence.svg)](https://forge.puppetlabs.com/puppet/confluence)
 [![Build Status](https://travis-ci.org/voxpupuli/puppet-confluence.svg?branch=master)](https://travis-ci.org/voxpupuli/puppet-confluence)
 
@@ -17,29 +18,48 @@
 
 ## Overview
 
-This is a puppet module to install and handle upgrades of Atlassian Confluence. Confluence is team collaboration software.
+This is a puppet module to install and handle upgrades of Atlassian Confluence.
+Confluence is team collaboration software.
 
 ## Module Description
 
-This module installs/upgrades Atlassian Confluence. The Confluence module also manages the Confluence configuration files with Puppet.
+This module installs/upgrades Atlassian Confluence. The Confluence module also
+manages the Confluence configuration files with Puppet.
 
 ## Setup
 
 ### Confluence Prerequisites
-* Confluence require a Java Developers Kit (JDK) or Java Run-time Environment (JRE) platform to be installed on your server's operating system. Oracle JDK / JRE (formerly Sun JDK / JRE) versions 1.7 and 1.8 are currently supported by Atlassian.
 
-:warning: There's a known issue with Java 1.8.0_25 and 1.8.0_31, and another known issue with 1.7.0_25 and 1.7.0_45. Atlassian don't recommend running Confluence on these versions.
+* Confluence require a Java Developers Kit (JDK) or Java Run-time Environment
+  (JRE) platform to be installed on your server's operating system. Oracle JDK
+  / JRE (formerly Sun JDK / JRE) versions 1.7 and 1.8 are currently supported by
+  Atlassian.
 
-* Confluence requires a relational database to store its configuration data. Unfortunatly it is not possible to do the initial configuration (Database setup) of confluence with puppet (See issue #3 - No database support). The configuration needs to be done via the web GUI.
+:warning: There's a known issue with Java 1.8.0_25 and 1.8.0_31, and another
+known issue with 1.7.0_25 and 1.7.0_45. Atlassian don't recommend running
+Confluence on these versions.
+
+* Confluence requires a relational database to store its configuration data.
+  Unfortunatly it is not possible to do the initial configuration
+  (Database setup) of confluence with puppet (See issue #3 - No database support
+  ). The configuration needs to be done via the web GUI.
 
 ### What Confluence affects
-If installing to an existing Confluence instance, it is your responsibility to backup your database. We also recommend that you backup your Confluence home directory and that you align your current Confluence version with the version you intend to use with puppet Confluence module.
 
-You must have your database setup with the account user that Confluence will use. This can be done using the puppetlabs-postgresql and puppetlabs-mysql modules.
+If installing to an existing Confluence instance, it is your responsibility to
+backup your database. We also recommend that you backup your Confluence home
+directory and that you align your current Confluence version with the version
+you intend to use with puppet Confluence module.
 
-When using this module to upgrade Confluence, please make sure you have a database/Confluence home backup.
+You must have your database setup with the account user that Confluence will
+use. This can be done using the puppetlabs-postgresql and puppetlabs-mysql
+modules.
+
+When using this module to upgrade Confluence, please make sure you have a
+database/Confluence home backup.
 
 The following resources are potentially effected by this module:
+
 * confluence user
 * confluence init script
 * setenv.sh
@@ -47,7 +67,10 @@ The following resources are potentially effected by this module:
 * server.xml
 
 ### Beginning with Confluence
-This puppet module will automatically download the Confluence tar.gz from Atlassian and extracts it into /opt/confluence/atlassian-confluence-$version. The default Confluence home is /home/confluence.
+
+This puppet module will automatically download the Confluence tar.gz from
+Atlassian and extracts it into /opt/confluence/atlassian-confluence-$version.
+The default Confluence home is /home/confluence.
 
 ```puppet
   class { 'confluence':
@@ -57,12 +80,13 @@ This puppet module will automatically download the Confluence tar.gz from Atlass
 
 ## Usage
 
-This module also allows for direct customization of the JVM, following [atlassians recommendations](https://confluence.atlassian.com/display/JIRA/Setting+Properties+and+Options+on+Startup)
+This module also allows for direct customization of the JVM, following
+[atlassians recommendations](https://confluence.atlassian.com/display/JIRA/Setting+Properties+and+Options+on+Startup)
 
 This is especially useful for setting properties such as http/https proxy settings.
 Support has also been added for reverse proxying confluence via apache or nginx.
 
-####A more complex example
+### A more complex example
 
 ```puppet
   class { 'confluence':
@@ -78,9 +102,11 @@ Support has also been added for reverse proxying confluence via apache or nginx.
     },
   }
 ```
-####Hiera example
 
-This example is used in production for 2000+ users in an traditional enterprise environment. Your mileage may vary.
+#### Hiera example
+
+This example is used in production for 2000+ users in an traditional enterprise
+environment. Your mileage may vary.
 
 ```yaml
 confluence::user:           'confluence'
@@ -106,12 +132,13 @@ confluence::tomcat_proxy:
 
 ## Reference
 
-###Classes
+### Classes
 
-####Public Classes
+#### Public Classes
+
 * `confluence`: Main class, manages the installation and configuration of Confluence.
 
-####Private Classes
+#### Private Classes
 
 * `confluence::install`: Installs Confluence binaries
 * `confluence::config`: Modifies Confluence/tomcat configuration files
@@ -119,113 +146,198 @@ confluence::tomcat_proxy:
 * `confluence::facts`: Class to get the running version of confluence
 * `confluence::params`: Default params
 
-###Parameters
+### Parameters
 
-####Confluence parameters####
+#### Confluence parameters
 
-#####`javahome`
-Specify the java home directory. No assumptions are made re the location of java and therefor this option is required. Default: undef
-#####`version`
+##### `javahome`
+
+Specify the java home directory. No assumptions are made re the location of java
+and therefor this option is required. Default: undef
+
+##### `version`
+
 The version of confluence to install. Default: '5.5.6'
-#####`format`
+
+##### `format`
+
 The format of the file confluence will be installed from. Default: 'tar.gz'
-#####`installdir`
+
+##### `installdir`
+
 The installation directory of the confluence binaries. Default: '/opt/confluence'
-#####`homedir`
+
+##### `homedir`
+
 The home directory of confluence. Configuration files are stored here. Default: '/home/confluence'
-#####`user`
-The user that confluence should run as, as well as the ownership of confluence related files. Default: 'confluence'
-#####`group`
+
+##### `user`
+
+The user that confluence should run as, as well as the ownership of confluence
+related files. Default: 'confluence'
+
+##### `group`
+
 The group that confluence files should be owned by. Default: 'confluence'
-#####`uid`
+
+##### `uid`
+
 Specify a uid of the confluence user. Default: undef
-#####`gid`
+
+##### `gid`
+
 Specify a gid of the confluence user. Default: undef
-#####`shell`
+
+##### `shell`
+
 Specify the shell of the confluence user. Default: undef
-#####`manage_user`
+
+##### `manage_user`
+
 Whether or not to manage the confluence user. Default: true
-#####`context_path`
+
+##### `context_path`
+
 Specify context path, defaults to ''. If modified, Once Confluence has started,
 go to the administration area and click General Configuration.
 Append the new context path to your base URL.
 
-####JVM Java parameters####
+#### JVM Java parameters
 
-#####`jvm_xms`
+##### `jvm_xms`
+
 The initial memory allocation pool for a Java Virtual Machine. Default: '256m'
-#####`jvm_xmx`
+
+##### `jvm_xmx`
+
 Maximum memory allocation pool for a Java Virtual Machine. Default: '1024m'
-#####`jvm_permgen`
+
+##### `jvm_permgen`
+
 Increase max permgen size for a Java Virtual Machine. Default: '256m'
-#####`java_opts`
+
+##### `java_opts`
+
 Additional java options can be specified here. Default: ''
 
-####Tomcat parameters####
-####`tomcat_proxy`
-Reverse https proxy configuration. See customization section for more detail. Default: {}
-#####`tomcat_port`
+#### Tomcat parameters
+
+#### `tomcat_proxy`
+
+Reverse https proxy configuration. See customization section for more detail.
+Default: {}
+
+##### `tomcat_port`
+
 Port to listen on, defaults to '8090'
-#####`tomcat_max_threads`
+
+##### `tomcat_max_threads`
+
 Defaults to '150'
-#####`tomcat_accept_count`
+
+##### `tomcat_accept_count`
+
 Defaults to  '100'
-#####`tomcat_extras`
-Any additional tomcat params for server.xml. Takes same format as `tomcat_proxy`. Default: {}
 
-####Crowd single sign on parameters####
-####`enable_sso`
-Enable crowd single sign on configuration as described in https://confluence.atlassian.com/display/CROWD/Integrating+Crowd+with+Atlassian+Confluence#IntegratingCrowdwithAtlassianConfluence-2.2EnableSSOintegrationwithCrowd(Optional)
-####`application_name`
+##### `tomcat_extras`
+
+Any additional tomcat params for server.xml. Takes same format as
+`tomcat_proxy`. Default: {}
+
+#### Crowd single sign on parameters
+
+#### `enable_sso`
+
+Enable crowd single sign on configuration as described in <https://confluence.atlassian.com/display/CROWD/Integrating+Crowd+with+Atlassian+Confluence#IntegratingCrowdwithAtlassianConfluence-2.2EnableSSOintegrationwithCrowd(Optional)>
+
+#### `application_name`
+
 Set crowd application name
-####`application_password`
+
+#### `application_password`
+
 Set crowd application password
-####`application_login_url`
-Set crowd application login url, where to login into crowd (e.g. https://crowd.example.com/console/)
-####`crowd_server_url`
-Set crowd application services url, e.g. https://crowd.example.com/services/
-####`crowd_base_url`
-Set crowd base url, e.g. https://crowd.example.com/
-####`session_isauthenticated`
-Some more crowd.properties for SSO, see atlassian documentation for details
-####`session_tokenkey`
-Some more crowd.properties for SSO, see atlassian documentation for details
-####`session_validationinterval`
-Some more crowd.properties for SSO, see atlassian documentation for details
-####`session_lastvalidation`
+
+#### `application_login_url`
+
+Set crowd application login url, where to login into crowd (e.g. <https://crowd.example.com/console/>)
+
+#### `crowd_server_url`
+
+Set crowd application services url, e.g. <https://crowd.example.com/services/>
+
+#### `crowd_base_url`
+
+Set crowd base url, e.g. <https://crowd.example.com/>
+
+#### `session_isauthenticated`
+
 Some more crowd.properties for SSO, see atlassian documentation for details
 
-####Miscellaneous  parameters####
+#### `session_tokenkey`
 
-#####`manage_server_xml`
-Should we use augeas to manage server.xml or a template file. Defaults to 'augues'. Operating systems that do not have a support version of Augeas such as Ubuntu 12.04 can use 'template'.
-#####`download_url`
-Default: 'http://www.atlassian.com/software/confluence/downloads/binary/'
+Some more crowd.properties for SSO, see atlassian documentation for details
 
-#####`checksum`
-The md5 checksum of the archive file. Only supported with `deploy_module => archive`. Defaults to 'undef'
+#### `session_validationinterval`
 
-#####`manage_service`
+Some more crowd.properties for SSO, see atlassian documentation for details
+
+#### `session_lastvalidation`
+
+Some more crowd.properties for SSO, see atlassian documentation for details
+
+#### Miscellaneous parameters
+
+##### `manage_server_xml`
+
+Should we use augeas to manage server.xml or a template file. Defaults to
+'augeas'. Operating systems that do not have a support version of Augeas such
+as Ubuntu 12.04 can use 'template'.
+
+##### `download_url`
+
+Default: '<http://www.atlassian.com/software/confluence/downloads/binary/>'
+
+##### `checksum`
+
+iThe md5 checksum of the archive file. Only supported with
+`deploy_module => archive`. Defaults to 'undef'
+
+##### `manage_service`
+
 Should puppet manage this service? Default: true
-#####`deploy_module`
-Module to use for downloading and extracting archive file. Supports puppet-archive and puppet-staging. Defaults to 'archive'. Archive supports md5 hash checking and Staging supports S3 buckets.
-#####`stop_confluence`
-If the Confluence service is managed outside of puppet the stop_confluence paramater can be used to shut down confluence for upgrades. Defaults to 'service confluence stop && sleep 15'
-#####`facts_ensure`
+
+##### `deploy_module`
+
+Module to use for downloading and extracting archive file. Supports
+puppet-archive and puppet-staging. Defaults to 'archive'. Archive supports md5
+hash checking and Staging supports S3 buckets.
+
+##### `stop_confluence`
+
+If the Confluence service is managed outside of puppet the stop_confluence
+paramater can be used to shut down confluence for upgrades. Defaults to
+'service confluence stop && sleep 15'
+
+##### `facts_ensure`
+
 Enable external facts for confluence version. Defaults to present.
 
 ## Limitations
+
 * Puppet 3.4+
 * Puppet Enterprise
 
 The puppetlabs repositories can be found at:
-http://yum.puppetlabs.com/ and http://apt.puppetlabs.com/
+<http://yum.puppetlabs.com/> and <http://apt.puppetlabs.com/>
 
 * RedHat / CentOS 5/6/7
 * Ubuntu 12.04 / 14.04
 * Debian 7
 
-Operating Systems without an Augueas version >= 1 such as Ubuntu 12.04 must use the paramater:
+Operating Systems without an Augueas version >= 1 such as Ubuntu 12.04 must use
+the paramater:
+
 ```puppet
 manage_server_xml => 'template',
 ```
