@@ -32,4 +32,8 @@
 # specify your directory below (don't forget to remove the '#' in front)
 
 # confluence.home=c:/confluence/data
-confluence.home=<%= scope.lookupvar('confluence::homedir') %>
+<% if scope.lookupvar('confluence::data_dir') -%>
+  confluence.home=<%= scope.lookupvar('confluence::data_dir') %>
+<% else %>
+  confluence.home=<%= scope.lookupvar('confluence::homedir') %>
+<% end %>
