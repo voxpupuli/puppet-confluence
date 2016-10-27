@@ -15,7 +15,7 @@ class confluence (
   $version      = '5.7.1',
   $product      = 'confluence',
   $format       = 'tar.gz',
-  $installdir   = '/opt/atlassian/confluence/application',
+  $installdir   = '/opt/confluence',
   $homedir      = '/home/confluence',
   $data_dir     = '',
   $user         = 'confluence',
