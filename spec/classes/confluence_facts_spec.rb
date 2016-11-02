@@ -7,7 +7,7 @@ describe 'confluence' do
     pe_external_fact_file = '/etc/puppetlabs/facter/facts.d/confluence_facts.sh'
     external_fact_file = '/etc/facter/facts.d/confluence_facts.sh'
 
-    it { should contain_file(external_fact_file) }
+    it { is_expected.to contain_file(external_fact_file) }
 
     # Test puppet enterprise shebang generated correctly
     context 'with puppet enterprise' do
@@ -15,7 +15,7 @@ describe 'confluence' do
         { puppetversion: '3.4.3 (Puppet Enterprise 3.2.1)' }
       end
       it do
-        should contain_file(pe_external_fact_file) \
+        is_expected.to contain_file(pe_external_fact_file) \
       end
     end
   end

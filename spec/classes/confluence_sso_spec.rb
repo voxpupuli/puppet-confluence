@@ -10,8 +10,8 @@ describe 'confluence' do
           enable_sso: true
         }
       end
-      it { should contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/seraph-config.xml') }
-      it { should contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/crowd.properties') }
+      it { is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/seraph-config.xml') }
+      it { is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/crowd.properties') }
     end
     context 'with param application_name set to appname' do
       let(:params) do
@@ -23,7 +23,7 @@ describe 'confluence' do
         }
       end
       it do
-        should contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/crowd.properties').
+        is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/crowd.properties').
           with_content(%r{application.name                        appname})
       end
     end
@@ -37,7 +37,7 @@ describe 'confluence' do
         }
       end
       it('fails') do
-        should raise_error(Puppet::Error, %r{does not match})
+        is_expected.to raise_error(Puppet::Error, %r{does not match})
       end
     end
     context 'with non default params' do
@@ -53,9 +53,9 @@ describe 'confluence' do
           crowd_base_url: 'http://crowdbase.url'
         }
       end
-      it { should contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/seraph-config.xml') }
+      it { is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/seraph-config.xml') }
       it do
-        should contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/crowd.properties').
+        is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/crowd.properties').
           with_content(%r{application.name                        app}).
           with_content(%r{application.password                    password}).
           with_content(%r{application.login.url                   https:\/\/login.url\/}).
