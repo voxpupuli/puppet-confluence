@@ -41,7 +41,7 @@ describe 'confluence', unless: UNSUPPORTED_PLATFORMS.include?(fact('osfamily')) 
   end
 
   describe process('java') do
-    it { should be_running }
+    it { is_expected.to be_running }
   end
 
   describe port(8091) do
@@ -49,28 +49,28 @@ describe 'confluence', unless: UNSUPPORTED_PLATFORMS.include?(fact('osfamily')) 
   end
 
   describe service('confluence') do
-    it { should be_enabled }
+    it { is_expected.to be_enabled }
   end
 
   describe user('confluence') do
-    it { should exist }
+    it { is_expected.to exist }
   end
 
   describe user('confluence') do
-    it { should belong_to_group 'confluence' }
+    it { is_expected.to belong_to_group 'confluence' }
   end
 
   describe user('confluence') do
-    it { should have_login_shell '/bin/true' }
+    it { is_expected.to have_login_shell '/bin/true' }
   end
 
   describe command('wget -q --tries=240 --retry-connrefused --read-timeout=10 -O- localhost:8091/confluence1') do
-    its(:stdout) { should match %r{http://www.atlassian.com/} }
+    its(:stdout) { is_expected.to match %r{http://www.atlassian.com/} }
   end
 
   describe file('/opt/confluence/atlassian-confluence-5.7/conf/server.xml') do
-    it { should contain 'maxThreads="999"' }
-    it { should contain 'acceptCount="999"' }
-    it { should contain 'Context path="/confluence"' }
+    it { is_expected.to contain 'maxThreads="999"' }
+    it { is_expected.to contain 'acceptCount="999"' }
+    it { is_expected.to contain 'Context path="/confluence"' }
   end
 end

@@ -9,9 +9,9 @@ describe 'confluence' do
           version: '5.5.6'
         }
       end
-      it { should contain_file('/opt/confluence/atlassian-confluence-5.5.6/bin/setenv.sh') }
-      it { should contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/confluence-init.properties') }
-      it { should contain_augeas('/opt/confluence/atlassian-confluence-5.5.6/conf/server.xml') }
+      it { is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/bin/setenv.sh') }
+      it { is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/confluence-init.properties') }
+      it { is_expected.to contain_augeas('/opt/confluence/atlassian-confluence-5.5.6/conf/server.xml') }
     end
     context 'with param manage_server_xml set to template' do
       let(:params) do
@@ -21,9 +21,9 @@ describe 'confluence' do
           manage_server_xml: 'template'
         }
       end
-      it { should contain_file('/opt/confluence/atlassian-confluence-5.5.6/bin/setenv.sh') }
-      it { should contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/confluence-init.properties') }
-      it { should contain_file('/opt/confluence/atlassian-confluence-5.5.6/conf/server.xml') }
+      it { is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/bin/setenv.sh') }
+      it { is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/confluence-init.properties') }
+      it { is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/conf/server.xml') }
     end
     context 'with param manage_server_xml set to ERROR' do
       let(:params) do
@@ -34,7 +34,7 @@ describe 'confluence' do
         }
       end
       it('fails') do
-        should raise_error(Puppet::Error, %r{manage_server_xml must be "augeas" or "template"})
+        is_expected.to raise_error(Puppet::Error, %r{manage_server_xml must be "augeas" or "template"})
       end
     end
     context 'with param manage_server_xml set to template and non default params' do
@@ -54,10 +54,10 @@ describe 'confluence' do
           }
         }
       end
-      it { should contain_file('/opt/confluence/atlassian-confluence-5.5.6/bin/setenv.sh') }
-      it { should contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/confluence-init.properties') }
+      it { is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/bin/setenv.sh') }
+      it { is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/confluence-init.properties') }
       it do
-        should contain_file('/opt/confluence/atlassian-confluence-5.5.6/conf/server.xml').
+        is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/conf/server.xml').
           with_content(%r{port="8089"}).
           with_content(%r{maxThreads="999"}).
           with_content(%r{acceptCount="999"}).

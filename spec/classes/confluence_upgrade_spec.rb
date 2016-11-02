@@ -9,7 +9,7 @@ describe 'confluence' do
       let(:facts) do
         { confluence_version: '1.5.4' }
       end
-      it { should contain_exec('service confluence stop && sleep 15') }
+      it { is_expected.to contain_exec('service confluence stop && sleep 15') }
     end
     context 'custom params' do
       let(:params) do
@@ -21,7 +21,7 @@ describe 'confluence' do
       let(:facts) do
         { confluence_version: '2.3.4a' }
       end
-      it { should contain_exec('stop service please') }
+      it { is_expected.to contain_exec('stop service please') }
     end
   end
 end
