@@ -9,6 +9,7 @@ class confluence::install {
   if $::confluence::manage_user {
     group { $confluence::group:
       ensure => present,
+      system => true,
       gid    => $confluence::gid,
     } ->
     user { $confluence::user:
