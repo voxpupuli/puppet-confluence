@@ -16,9 +16,14 @@ describe 'confluence' do
         }
       end
 
-      it { is_expected.to contain_group('confluence') }
+      it 'creates a system group' do
+        is_expected.to contain_group('confluence').with_system(true)
+      end
 
-      it { is_expected.to contain_user('confluence').with_shell('/bin/true') }
+      it 'creates a system user with no shell' do
+        is_expected.to contain_user('confluence').with('shell' => '/bin/true',
+                                                       'system' => true)
+      end
 
       it 'deploys confluence 5.5.6 from tar.gz' do
         is_expected.to contain_archive('/tmp/atlassian-confluence-5.5.6.tar.gz').
