@@ -51,10 +51,6 @@ class confluence (
   # puppetlabs-corosync module: 'crm resource stop confluence && sleep 15'
   $stop_confluence = 'service confluence stop && sleep 15',
 
-  # Enable confluence version fact for running instance
-  # This required for upgrades
-  $facts_ensure = 'present',
-
   # Enable SingleSignOn via Crowd
 
   $enable_sso = false,
@@ -97,7 +93,6 @@ class confluence (
   }
 
   anchor { 'confluence::start': } ->
-  class { '::confluence::facts': } ->
   class { '::confluence::install': } ->
   class { '::confluence::config': } ~>
   class { '::confluence::service': } ->
