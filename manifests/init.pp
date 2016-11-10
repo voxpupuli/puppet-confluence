@@ -51,10 +51,6 @@ class confluence (
   # puppetlabs-corosync module: 'crm resource stop confluence && sleep 15'
   $stop_confluence = 'service confluence stop && sleep 15',
 
-  # Enable confluence version fact for running instance
-  # This required for upgrades
-  $facts_ensure = 'present',
-
   # Enable SingleSignOn via Crowd
 
   $enable_sso = false,
@@ -67,7 +63,7 @@ class confluence (
   $session_tokenkey = 'session.tokenkey',
   $session_validationinterval = 5,
   $session_lastvalidation = 'session.lastvalidation',
-) {
+) inherits confluence::params {
 
   validate_re($version, '^(?:(\d+)\.)?(?:(\d+)\.)?(\*|\d+)(|[a-z])$')
   validate_absolute_path($installdir)
