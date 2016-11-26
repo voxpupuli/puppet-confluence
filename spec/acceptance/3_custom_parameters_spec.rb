@@ -24,6 +24,7 @@ describe 'confluence', unless: UNSUPPORTED_PLATFORMS.include?(fact('osfamily')) 
       }
       class { 'confluence':
         version             => '5.7',
+        checksum            => '03db922bc4e3880d187be76908c5b1dc',
         download_url        => #{download_url},
         javahome            => $jh,
         tomcat_port         => '8091',

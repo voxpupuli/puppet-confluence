@@ -10,7 +10,7 @@ download_url = if ENV['download_url']
                  'undef'
                end
 java_url = if download_url == 'undef'
-             'http://download.oracle.com/otn-pub/java/jdk/7u71-b14/'
+             'http://download.oracle.com/otn-pub/java/jdk/7u71-b14/jdk-7u71-linux-x64.tar.gz'
            else
              download_url
            end
@@ -19,7 +19,7 @@ describe 'confluence', unless: UNSUPPORTED_PLATFORMS.include?(fact('osfamily')) 
   it 'installs with defaults' do
     pp = <<-EOS
       $jh = $osfamily ? {
-        default   => '/opt/java',
+        default => '/opt/java',
       }
       if versioncmp($::puppetversion,'3.6.1') >= 0 {
         $allow_virtual_packages = hiera('allow_virtual_packages',false)
@@ -27,17 +27,24 @@ describe 'confluence', unless: UNSUPPORTED_PLATFORMS.include?(fact('osfamily')) 
           allow_virtual => $allow_virtual_packages,
         }
       }
-      deploy::file { 'jdk-7u71-linux-x64.tar.gz':
-        target          => $jh,
-        fetch_options   => '-q -c --header "Cookie: oraclelicense=accept-securebackup-cookie"',
-        url             => #{java_url},
-        download_timout => 1800,
-        strip           => true,
+      file { $jh:
+        ensure => 'directory',
+      } ->
+      archive { '/tmp/jdk-7u71-linux-x64.tar.gz':
+        ensure          => present,
+        extract         => true,
+        extract_command => 'tar xfz %s --strip-components=1',
+        extract_path    => $jh,
+        source          => "#{java_url}",
+        creates         => "${jh}/bin",
+        cleanup         => true,
+        cookie          => 'oraclelicense=accept-securebackup-cookie',
       } ->
       class { 'confluence':
-        version             => '5.5.6',
-        download_url        => #{download_url},
-        javahome            => $jh,
+        version      => '5.5.6',
+        checksum     => 'a9f3f7ae42cce92e1f4a55cb6484bb5f',
+        download_url => #{download_url},
+        javahome     => $jh,
       }
     EOS
     apply_manifest(pp, catch_failures: true)
