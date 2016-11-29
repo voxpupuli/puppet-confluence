@@ -67,5 +67,22 @@ describe 'confluence' do
           with_content(%r{Context path="/confluence1"})
       end
     end
+    context 'ajp proxy' do
+      let(:params) do
+        {
+          version: '5.5.6',
+          javahome: '/opt/java',
+          manage_server_xml: 'template',
+          ajp: {
+            'port'     => '8009',
+            'protocol' => 'AJP/1.3'
+          }
+        }
+      end
+      it do
+        is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/conf/server.xml').
+          with_content(%r{<Connector enableLookups="false" URIEncoding="UTF-8"\s+port = "8009"\s+protocol = "AJP/1.3"\s+/>})
+      end
+    end
   end
 end

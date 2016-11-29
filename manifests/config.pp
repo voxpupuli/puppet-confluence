@@ -10,6 +10,7 @@ class confluence::config(
   $tomcat_extras       = $confluence::tomcat_extras,
   $manage_server_xml   = $confluence::manage_server_xml,
   $context_path        = $confluence::context_path,
+  $ajp                 = $confluence::ajp,
 ) {
 
   File {

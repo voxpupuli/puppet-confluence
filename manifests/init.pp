@@ -47,6 +47,9 @@ class confluence (
   $tomcat_extras = {},
   $context_path  = '',
 
+  # Options for the AJP connector
+  $ajp   = {},
+
   # Command to stop confluence in preparation to updgrade. This is configurable
   # incase the confluence service is managed outside of puppet. eg: using the
   # puppetlabs-corosync module: 'crm resource stop confluence && sleep 15'
@@ -75,6 +78,7 @@ class confluence (
     'manage_server_xml must be "augeas" or "template"')
   validate_hash($tomcat_proxy)
   validate_hash($tomcat_extras)
+  validate_hash($ajp)
 
   Exec { path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ] }
 
@@ -98,6 +102,22 @@ class confluence (
     $checksum_verify = false
   } else {
     $checksum_verify = true
+  }
+
+  if ! empty($ajp) {
+    if $manage_server_xml != 'template' {
+      fail('An AJP connector can only be configured with manage_server_xml = template.')
+    }
+    if ! has_key($ajp, 'port') {
+      fail('You need to specify a valid port for the AJP connector.')
+    } else {
+      validate_re($ajp['port'], '^\d+$')
+    }
+    if ! has_key($ajp, 'protocol') {
+      fail('You need to specify a valid protocol for the AJP connector.')
+    } else {
+      validate_re($ajp['protocol'], ['^AJP/1.3$', '^org.apache.coyote.ajp'])
+    }
   }
 
   anchor { 'confluence::start': } ->
