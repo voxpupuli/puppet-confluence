@@ -304,8 +304,8 @@ Default: '<http://www.atlassian.com/software/confluence/downloads/binary/>'
 
 ##### `checksum`
 
-iThe md5 checksum of the archive file. Only supported with
-`deploy_module => archive`. Defaults to 'undef'
+The md5 checksum of the archive file. Only supported with
+`deploy_module => archive`. Defaults to '8c97aa3f157f954977839de6a6b47d48'
 
 ##### `manage_service`
 
