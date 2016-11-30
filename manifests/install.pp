@@ -102,4 +102,17 @@ class confluence::install {
     refreshonly => true,
     subscribe   => User[$confluence::user],
   }
+
+  if $confluence::db == 'mysql' and $confluence::mysql_connector_manage {
+    if $confluence::deploy_module == 'archive' {
+      class { '::confluence::mysql_connector':
+        require => Archive["/tmp/${file}"],
+      }
+    } elsif $confluence::deploy_module == 'deploy' {
+      class { '::confluence::mysql_connector':
+        require => Staging::Extract[$file],
+      }
+    }
+    contain ::confluence::mysql_connector
+  }
 }
