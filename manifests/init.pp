@@ -26,7 +26,7 @@ class confluence (
   $shell        = '/bin/true',
 
   # Misc Settings
-  $download_url = 'http://www.atlassian.com/software/confluence/downloads/binary',
+  $download_url = 'https://www.atlassian.com/software/confluence/downloads/binary',
   $checksum     = undef,
 
   # Choose whether to use puppet-staging, or puppet-archive
