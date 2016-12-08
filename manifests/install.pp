@@ -74,6 +74,7 @@ class confluence::install {
         source          => "${confluence::download_url}/${file}",
         creates         => "${confluence::webappdir}/conf",
         cleanup         => true,
+        checksum_verify => $confluence::checksum_verify,
         checksum_type   => 'md5',
         checksum        => $confluence::checksum,
         user            => $confluence::user,
