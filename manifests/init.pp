@@ -17,6 +17,7 @@ class confluence (
   $format       = 'tar.gz',
   $installdir   = '/opt/confluence',
   $homedir      = '/home/confluence',
+  $data_dir     = '',
   $user         = 'confluence',
   $group        = 'confluence',
   $uid          = undef,
@@ -51,10 +52,6 @@ class confluence (
   # puppetlabs-corosync module: 'crm resource stop confluence && sleep 15'
   $stop_confluence = 'service confluence stop && sleep 15',
 
-  # Enable confluence version fact for running instance
-  # This required for upgrades
-  $facts_ensure = 'present',
-
   # Enable SingleSignOn via Crowd
 
   $enable_sso = false,
@@ -67,7 +64,7 @@ class confluence (
   $session_tokenkey = 'session.tokenkey',
   $session_validationinterval = 5,
   $session_lastvalidation = 'session.lastvalidation',
-) {
+) inherits confluence::params {
 
   validate_re($version, '^(?:(\d+)\.)?(?:(\d+)\.)?(\*|\d+)(|[a-z])$')
   validate_absolute_path($installdir)
@@ -83,7 +80,7 @@ class confluence (
 
   $webappdir    = "${installdir}/atlassian-${product}-${version}"
 
-  if $::confluence_version {
+  if $::confluence_version and $::confluence_version != 'unknown' {
     # If the running version of CONFLUENCE is less than the expected version of CONFLUENCE
     # Shut it down in preparation for upgrade.
     if versioncmp($version, $::confluence_version) > 0 {
@@ -94,6 +91,13 @@ class confluence (
 
   if $javahome == undef {
     fail('You need to specify a value for javahome')
+  }
+
+  # Archive module checksum_verify = true; this verifies checksum if provided, doesn't if not.
+  if $checksum == undef {
+    $checksum_verify = false
+  } else {
+    $checksum_verify = true
   }
 
   anchor { 'confluence::start': } ->

@@ -1,3 +1,9 @@
+## 2016-08-18 Release 2.2.2
+
+* Fix: Issue with a clean puppet 4 based install failure.
+* Modulesync with latest Vox Pupuli defaults
+
+
 ## 2016-05-08 Release 2.2.1
 
 * delete the .pmtignore (is redundant with our .gitignore)

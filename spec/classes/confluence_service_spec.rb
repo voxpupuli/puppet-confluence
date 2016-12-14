@@ -9,7 +9,7 @@ describe 'confluence' do
           version: '5.5.6'
         }
       end
-      it { should contain_service('confluence') }
+      it { is_expected.to contain_service('confluence') }
     end
   end
 end
