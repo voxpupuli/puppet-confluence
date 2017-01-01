@@ -27,8 +27,8 @@ describe 'confluence' do
 
       it 'deploys confluence 5.5.6 from tar.gz' do
         is_expected.to contain_archive('/tmp/atlassian-confluence-5.5.6.tar.gz').
-          with('extract_path' => '/opt/confluence/atlassian-confluence-5.5.6',
-               'source'        => 'http://www.atlassian.com/software/confluence/downloads/binary/atlassian-confluence-5.5.6.tar.gz',
+          with('extract_path'  => '/opt/confluence/atlassian-confluence-5.5.6',
+               'source'        => 'https://www.atlassian.com/software/confluence/downloads/binary/atlassian-confluence-5.5.6.tar.gz',
                'creates'       => '/opt/confluence/atlassian-confluence-5.5.6/conf',
                'user'          => 'confluence',
                'group'         => 'confluence',
@@ -71,7 +71,7 @@ describe 'confluence' do
 
       it 'deploys confluence 5.5.5 from tar.gz' do
         is_expected.to contain_archive('/tmp/atlassian-confluence-5.5.5.tar.gz').
-          with('extract_path' => '/opt/foo/confluence/atlassian-confluence-5.5.5',
+          with('extract_path'  => '/opt/foo/confluence/atlassian-confluence-5.5.5',
                'source'        => 'http://downloads.atlassian.com/atlassian-confluence-5.5.5.tar.gz',
                'creates'       => '/opt/foo/confluence/atlassian-confluence-5.5.5/conf',
                'user'          => 'foo',

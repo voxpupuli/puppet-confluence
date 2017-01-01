@@ -300,7 +300,8 @@ as Ubuntu 12.04 can use 'template'.
 
 ##### `download_url`
 
-Default: '<http://www.atlassian.com/software/confluence/downloads/binary/>'
+The URL used to download the JIRA installation file.
+Defaults to '<https://www.atlassian.com/software/confluence/downloads/binary>'
 
 ##### `checksum`
 
