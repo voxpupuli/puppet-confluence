@@ -19,6 +19,14 @@
 <% end -%> 
 />
 
+<% if @ajp and ! @ajp.empty? -%>
+        <Connector enableLookups="false" URIEncoding="UTF-8"
+<%   @ajp.sort.each do |key, value| -%>
+                   <%= key %> = <%= "\"#{value}\"" %>
+<%   end -%>
+        />
+<% end -%>
+
         <Engine name="Standalone" defaultHost="localhost" debug="0">
 
             <Host name="localhost" debug="0" appBase="webapps" unpackWARs="true" autoDeploy="false">
