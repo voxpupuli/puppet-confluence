@@ -1,3 +1,16 @@
+# Changelog
+
+## 2017-02-11 Release 2.3.0
+
+This is the last release with Puppet3 support!
+* Make facts.sh sh compatible
+* Add additional parameter data_dir for seperate data from home user directory
+* Make confluence_version a First Class Fact
+* Allow System Group
+* Use https instead of http for downloading confluence
+* Bump puppet minimum version_requirement to 3.8.7
+* Add support for configuring an AJP connector
+
 ## 2016-08-18 Release 2.2.2
 
 * Fix: Issue with a clean puppet 4 based install failure.
