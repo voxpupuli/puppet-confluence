@@ -17,7 +17,7 @@ class confluence (
   $format       = 'tar.gz',
   $installdir   = '/opt/confluence',
   $homedir      = '/home/confluence',
-  $data_dir     = '',
+  $data_dir     = undef,
   $user         = 'confluence',
   $group        = 'confluence',
   $uid          = undef,
