@@ -80,6 +80,10 @@ class confluence (
   validate_hash($tomcat_extras)
   validate_hash($ajp)
 
+  if $javahome == undef {
+    fail('Must pass javahome to Class[Confluence]')
+  }
+
   Exec { path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ] }
 
   $webappdir    = "${installdir}/atlassian-${product}-${version}"
