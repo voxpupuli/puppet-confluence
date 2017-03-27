@@ -12,7 +12,7 @@ describe Facter::Util::Fact do
       expect(Facter.fact(:confluence_version).value).to eq('5.7.1')
     end
   end
-  
+
   context 'confluence_version with confluence running non-standard java' do
     before do
       Facter.clear
