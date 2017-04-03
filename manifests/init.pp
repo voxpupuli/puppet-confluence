@@ -5,80 +5,60 @@
 class confluence (
 
   # JVM Settings
-  $javahome     = undef,
-  $jvm_xms      = '256m',
-  $jvm_xmx      = '1024m',
-  $jvm_permgen  = '256m',
-  $java_opts    = '',
-
+  $javahome                                                      = undef,
+  $jvm_xms                                                       = '256m',
+  $jvm_xmx                                                       = '1024m',
+  $jvm_permgen                                                   = '256m',
+  $java_opts                                                     = '',
   # Confluence Settings
-  $version      = '5.7.1',
-  $product      = 'confluence',
-  $format       = 'tar.gz',
-  $installdir   = '/opt/confluence',
-  $homedir      = '/home/confluence',
-  $data_dir     = '',
-  $user         = 'confluence',
-  $group        = 'confluence',
-  $uid          = undef,
-  $gid          = undef,
-  $manage_user  = true,
-  $shell        = '/bin/true',
-
+  Pattern[/^(?:(\d+)\.)?(?:(\d+)\.)?(\*|\d+)(|[a-z])$/] $version = '5.7.1',
+  $product                                                       = 'confluence',
+  $format                                                        = 'tar.gz',
+  Stdlib::Absolutepath $installdir                               = '/opt/confluence',
+  Stdlib::Absolutepath$homedir                                   = '/home/confluence',
+  $data_dir                                                      = '',
+  $user                                                          = 'confluence',
+  $group                                                         = 'confluence',
+  $uid                                                           = undef,
+  $gid                                                           = undef,
+  Boolean $manage_user                                           = true,
+  $shell                                                         = '/bin/true',
   # Misc Settings
-  $download_url = 'https://www.atlassian.com/software/confluence/downloads/binary',
-  $checksum     = undef,
-
+  $download_url                                                  = 'https://www.atlassian.com/software/confluence/downloads/binary',
+  $checksum                                                      = undef,
   # Choose whether to use puppet-staging, or puppet-archive
-  $deploy_module = 'archive',
-
+  $deploy_module                                                 = 'archive',
   # Manage confluence server
-  $manage_service = true,
-
+  $manage_service                                                = true,
   # Tomcat Tunables
   # Should we use augeas to manage server.xml or a template file
-  $manage_server_xml   = 'augeas',
-  $tomcat_port         = 8090,
-  $tomcat_max_threads  = 150,
-  $tomcat_accept_count = 100,
+  Enum['augeas', 'template'] $manage_server_xml                  = 'augeas',
+  $tomcat_port                                                   = 8090,
+  $tomcat_max_threads                                            = 150,
+  $tomcat_accept_count                                           = 100,
   # Reverse https proxy setting for tomcat
-  $tomcat_proxy = {},
+  Hash $tomcat_proxy                                             = {},
   # Any additional tomcat params for server.xml
-  $tomcat_extras = {},
-  $context_path  = '',
-
+  Hash $tomcat_extras                                            = {},
+  $context_path                                                  = '',
   # Options for the AJP connector
-  $ajp   = {},
-
+  Hash $ajp                                                      = {},
   # Command to stop confluence in preparation to updgrade. This is configurable
   # incase the confluence service is managed outside of puppet. eg: using the
   # puppetlabs-corosync module: 'crm resource stop confluence && sleep 15'
-  $stop_confluence = 'service confluence stop && sleep 15',
-
+  $stop_confluence                                               = 'service confluence stop && sleep 15',
   # Enable SingleSignOn via Crowd
-
-  $enable_sso = false,
-  $application_name = 'crowd',
-  $application_password = '1234',
-  $application_login_url = 'https://crowd.example.com/console/',
-  $crowd_server_url = 'https://crowd.example.com/services/',
-  $crowd_base_url = 'https://crowd.example.com/',
-  $session_isauthenticated = 'session.isauthenticated',
-  $session_tokenkey = 'session.tokenkey',
-  $session_validationinterval = 5,
-  $session_lastvalidation = 'session.lastvalidation',
+  $enable_sso                                                    = false,
+  $application_name                                              = 'crowd',
+  $application_password                                          = '1234',
+  $application_login_url                                         = 'https://crowd.example.com/console/',
+  $crowd_server_url                                              = 'https://crowd.example.com/services/',
+  $crowd_base_url                                                = 'https://crowd.example.com/',
+  $session_isauthenticated                                       = 'session.isauthenticated',
+  $session_tokenkey                                              = 'session.tokenkey',
+  $session_validationinterval                                    = 5,
+  $session_lastvalidation                                        = 'session.lastvalidation',
 ) inherits confluence::params {
-
-  validate_re($version, '^(?:(\d+)\.)?(?:(\d+)\.)?(\*|\d+)(|[a-z])$')
-  validate_absolute_path($installdir)
-  validate_absolute_path($homedir)
-  validate_bool($manage_user)
-
-  validate_re($manage_server_xml, ['^augeas$', '^template$' ],
-    'manage_server_xml must be "augeas" or "template"')
-  validate_hash($tomcat_proxy)
-  validate_hash($tomcat_extras)
-  validate_hash($ajp)
 
   Exec { path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ] }
 
