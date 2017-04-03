@@ -120,12 +120,12 @@ class confluence (
     }
   }
 
-  anchor { 'confluence::start': } ->
-  class { '::confluence::facts': } ->
-  class { '::confluence::install': } ->
-  class { '::confluence::config': } ~>
-  class { '::confluence::service': } ->
-  anchor { 'confluence::end': }
+  anchor { 'confluence::start': }
+  -> class { '::confluence::facts': }
+  -> class { '::confluence::install': }
+  -> class { '::confluence::config': }
+  ~> class { '::confluence::service': }
+  -> anchor { 'confluence::end': }
 
   if ($enable_sso) {
     class { '::confluence::sso':
