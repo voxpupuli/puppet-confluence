@@ -3,20 +3,16 @@
 # Install confluence SSO via crowd, See README.md for more.
 #
 class confluence::sso(
-  $application_name = $::confluence::application_name,
-  $application_password = $::confluence::application_password,
-  $application_login_url = $::confluence::application_login_url,
-  $crowd_server_url = $::confluence::crowd_server_url,
-  $crowd_base_url = $::confluence::crowd_base_url,
-  $session_isauthenticated = $::confluence::session_isauthenticated,
-  $session_tokenkey = $::confluence::session_tokenkey,
-  $session_validationinterval = $::confluence::session_validationinterval,
-  $session_lastvalidation = $::confluence::session_lastvalidation,
+  $application_name                                                = $::confluence::application_name,
+  $application_password                                            = $::confluence::application_password,
+  Variant[Stdlib::HTTPSUrl,Stdlib::HTTPUrl] $application_login_url = $::confluence::application_login_url,
+  Variant[Stdlib::HTTPSUrl,Stdlib::HTTPUrl] $crowd_server_url      = $::confluence::crowd_server_url,
+  Variant[Stdlib::HTTPSUrl,Stdlib::HTTPUrl] $crowd_base_url        = $::confluence::crowd_base_url,
+  $session_isauthenticated                                         = $::confluence::session_isauthenticated,
+  $session_tokenkey                                                = $::confluence::session_tokenkey,
+  $session_validationinterval                                      = $::confluence::session_validationinterval,
+  $session_lastvalidation                                          = $::confluence::session_lastvalidation,
 ) {
-
-  validate_re($application_login_url,'^https?\://[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(/\S*)?$')
-  validate_re($crowd_server_url,'^https?\://[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(/\S*)?$')
-  validate_re($crowd_base_url,'^https?\://[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(/\S*)?$')
 
   file { "${confluence::webappdir}/confluence/WEB-INF/classes/crowd.properties":
     ensure  => present,

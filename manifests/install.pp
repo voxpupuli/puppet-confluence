@@ -11,8 +11,8 @@ class confluence::install {
       ensure => present,
       system => true,
       gid    => $confluence::gid,
-    } ->
-    user { $confluence::user:
+    }
+    -> user { $confluence::user:
       comment          => 'Confluence daemon account',
       shell            => $confluence::shell,
       home             => $confluence::homedir,
@@ -50,8 +50,8 @@ class confluence::install {
       staging::file { $file:
         source  => "${confluence::download_url}/${file}",
         timeout => 1800,
-      } ->
-      staging::extract { $file:
+      }
+      -> staging::extract { $file:
         target  => $confluence::webappdir,
         creates => "${confluence::webappdir}/conf",
         strip   => 1,
@@ -96,9 +96,8 @@ class confluence::install {
     ensure => 'directory',
     owner  => $confluence::user,
     group  => $confluence::group,
-  } ->
-
-  exec { "chown_${confluence::webappdir}":
+  }
+  -> exec { "chown_${confluence::webappdir}":
     command     => "/bin/chown -R ${confluence::user}:${confluence::group} ${confluence::webappdir}",
     refreshonly => true,
     subscribe   => User[$confluence::user],

@@ -4,11 +4,19 @@ describe 'confluence' do
   describe 'confluence::install' do
     context 'default params' do
       let(:params) do
-        { javahome: '/opt/java' }
+        {
+          javahome: '/opt/java'
+        }
       end
+
       let(:facts) do
-        { confluence_version: '1.5.4' }
+        {
+          confluence_version: '1.5.4',
+          os: { family: 'RedHat' },
+          operatingsystem: 'RedHat'
+        }
       end
+      it { is_expected.to compile.with_all_deps }
       it { is_expected.to contain_exec('service confluence stop && sleep 15') }
     end
     context 'custom params' do
@@ -19,7 +27,11 @@ describe 'confluence' do
         }
       end
       let(:facts) do
-        { confluence_version: '2.3.4a' }
+        {
+          confluence_version: '2.3.4a',
+          os: { family: 'RedHat' },
+          operatingsystem: 'RedHat'
+        }
       end
       it { is_expected.to contain_exec('stop service please') }
     end
