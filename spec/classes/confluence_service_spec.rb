@@ -9,7 +9,15 @@ describe 'confluence' do
           version: '5.5.6'
         }
       end
+
+      let :facts do
+        {
+          os: { family: 'RedHat' },
+          operatingsystem: 'RedHat'
+        }
+      end
       it { is_expected.to contain_service('confluence') }
+      it { is_expected.to compile.with_all_deps }
     end
   end
 end

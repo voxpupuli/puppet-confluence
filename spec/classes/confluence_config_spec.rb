@@ -2,6 +2,13 @@ require 'spec_helper.rb'
 
 describe 'confluence' do
   describe 'confluence::config' do
+    let :facts do
+      {
+        os: { family: 'RedHat' },
+        operatingsystem: 'RedHat'
+      }
+    end
+
     context 'default params' do
       let(:params) do
         {
@@ -9,6 +16,7 @@ describe 'confluence' do
           version: '5.5.6'
         }
       end
+      it { is_expected.to compile.with_all_deps }
       it { is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/bin/setenv.sh') }
       it { is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/confluence-init.properties') }
       it { is_expected.to contain_augeas('/opt/confluence/atlassian-confluence-5.5.6/conf/server.xml') }
@@ -24,18 +32,6 @@ describe 'confluence' do
       it { is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/bin/setenv.sh') }
       it { is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/confluence-init.properties') }
       it { is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/conf/server.xml') }
-    end
-    context 'with param manage_server_xml set to ERROR' do
-      let(:params) do
-        {
-          javahome: '/opt/java',
-          version: '5.5.6',
-          manage_server_xml: 'ERROR'
-        }
-      end
-      it('fails') do
-        is_expected.to raise_error(Puppet::Error, %r{manage_server_xml must be "augeas" or "template"})
-      end
     end
     context 'with param manage_server_xml set to template and non default params' do
       let(:params) do

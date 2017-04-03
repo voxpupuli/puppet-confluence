@@ -2,6 +2,13 @@ require 'spec_helper.rb'
 
 describe 'confluence' do
   describe 'confluence::install' do
+    let :facts do
+      {
+        os: { family: 'RedHat' },
+        operatingsystem: 'RedHat'
+      }
+    end
+
     context 'default params' do
       let(:params) do
         {
@@ -15,6 +22,8 @@ describe 'confluence' do
           product: 'confluence'
         }
       end
+
+      it { is_expected.to compile.with_all_deps }
 
       it 'creates a system group' do
         is_expected.to contain_group('confluence').with_system(true)
