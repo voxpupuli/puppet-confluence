@@ -8,6 +8,6 @@ Facter.add(:confluence_version) do
       'unknown'
     else
       Regexp.last_match(1)
-   end
+    end
   end
 end
