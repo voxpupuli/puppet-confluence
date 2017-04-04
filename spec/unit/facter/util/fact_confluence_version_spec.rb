@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'facter/confluence_version'
 
 describe Facter::Util::Fact do
-  pgrep_line='pgrep --list-full --full java.*atlassian-confluence-[0-9].*org.apache.catalina.startup.Bootstrap'
+  pgrep_line = 'pgrep --list-full --full java.*atlassian-confluence-[0-9].*org.apache.catalina.startup.Bootstrap'
   context 'confluence_version with confluence running' do
     before do
       Facter.clear
