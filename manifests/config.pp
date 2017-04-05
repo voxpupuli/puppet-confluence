@@ -3,14 +3,15 @@
 # Install confluence, See README.md for more.
 #
 class confluence::config(
-  $tomcat_port         = $confluence::tomcat_port,
-  $tomcat_max_threads  = $confluence::tomcat_max_threads,
-  $tomcat_accept_count = $confluence::tomcat_accept_count,
-  $tomcat_proxy        = $confluence::tomcat_proxy,
-  $tomcat_extras       = $confluence::tomcat_extras,
-  $manage_server_xml   = $confluence::manage_server_xml,
-  $context_path        = $confluence::context_path,
-  $ajp                 = $confluence::ajp,
+  $tomcat_port                     = $confluence::tomcat_port,
+  $tomcat_max_threads              = $confluence::tomcat_max_threads,
+  $tomcat_accept_count             = $confluence::tomcat_accept_count,
+  $tomcat_proxy                    = $confluence::tomcat_proxy,
+  $tomcat_extras                   = $confluence::tomcat_extras,
+  $tomcat_jdbc_settings            = $confluence::tomcat_jdbc_settings,
+  $manage_server_xml               = $confluence::manage_server_xml,
+  $context_path                    = $confluence::context_path,
+  $ajp                             = $confluence::ajp,
 ) {
 
   File {
@@ -49,9 +50,20 @@ class confluence::config(
       $_parameters = undef
     }
 
+    ###
+    # configure external tomcat datasource. See, for example:
+    # https://confluence.atlassian.com/doc/configuring-a-mysql-datasource-in-apache-tomcat-1867.html
+    ###
+    # Step 3. Configure Tomcat: Set the JDBC Resource for external database.
+
+    $jdbc_path = "${path}/Engine/Host/Context[#attribute/path='${context_path}']/Resource/#attribute"
+
+    if ! empty($tomcat_jdbc_settings) {
+      $_jdbc = suffix(prefix(join_keys_to_values($tomcat_jdbc_settings, " '"), "set ${jdbc_path}/"), "'")
+    }
     $_context_path_changes = "set ${path}/Engine/Host/Context/#attribute/path '${context_path}'"
 
-    $changes = delete_undef_values([$_parameters, $_context_path_changes])
+    $changes = delete_undef_values([$_parameters, $_context_path_changes, $_jdbc])
 
     if ! empty($changes) {
       augeas { "${confluence::webappdir}/conf/server.xml":
@@ -61,10 +73,25 @@ class confluence::config(
       }
     }
 
+    # Step 4. Configure the Confluence web application
+    $conf_changes =
+    [
+     'set web-app/resource-ref/description/#text "Connection Pool"',
+     'set web-app/resource-ref/res-ref-name/#text "jdbc/confluence"',
+     'set web-app/resource-ref/res-type/#text "javax.sql.DataSource"',
+     'set web-app/resource-ref/res-auth/#text "Container"',
+     ]
+
+    augeas {"${confluence::webappdir}/confluence/WEB-INF/web.xml":
+      lens    => 'Xml.lns',
+      incl    => "${confluence::webappdir}/confluence/WEB-INF/web.xml",
+      changes => $conf_changes,
+    }
+
   } elsif $manage_server_xml == 'template' {
 
     file { "${confluence::webappdir}/conf/server.xml":
-      content => template('confluence/server.xml.erb'),
+      content => template('confluence/server.xml.erb'), # XXX need to fix this and add web.xml
       mode    => '0600',
       require => Class['confluence::install'],
       notify  => Class['confluence::service'],
