@@ -40,6 +40,10 @@ class confluence (
   Hash $tomcat_proxy                                             = {},
   # Any additional tomcat params for server.xml
   Hash $tomcat_extras                                            = {},
+  # External JDBC datasource hostname
+  $tomcat_jdbc_host                                              = undef,
+  # External JDBC datasource for server.xml
+  Hash $tomcat_jdbc_settings                                     = {},
   $context_path                                                  = '',
   # Options for the AJP connector
   Hash $ajp                                                      = {},
