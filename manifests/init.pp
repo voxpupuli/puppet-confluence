@@ -29,7 +29,7 @@ class confluence (
   # Choose whether to use puppet-staging, or puppet-archive
   $deploy_module                                                 = 'archive',
   # Manage confluence server
-  $manage_service                                                = true,
+  Boolean $manage_service                                        = true,
   # Tomcat Tunables
   # Should we use augeas to manage server.xml or a template file
   Enum['augeas', 'template'] $manage_server_xml                  = 'augeas',
@@ -64,6 +64,8 @@ class confluence (
   $session_lastvalidation                                        = 'session.lastvalidation',
   $proxy_server                                                  = undef,
   $proxy_type                                                    = undef,
+  String $license                                                = '',
+  String $server_id                                              = '',
 ) inherits confluence::params {
 
   Exec { path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ] }
