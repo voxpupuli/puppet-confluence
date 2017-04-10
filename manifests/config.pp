@@ -96,6 +96,16 @@ class confluence::config(
       require => Class['confluence::install'],
       notify  => Class['confluence::service'],
     }
-
+  }
+  # if JDBC was configured along with the license key and server_id, skip some server setup steps.
+  if $confluence::tomcat_jdbc_settings and $confluence::license and $confluence::server_id {
+    file { "${confluence::homedir}/confluence.cfg.xml":
+      content => template('confluence/confluence.cfg.xml.erb'),
+      mode    => '0600',
+      owner   => 'confluence',
+      group   => 'confluence',
+      require => Class['confluence::install'],
+      notify  => Class['confluence::service'],
+    }
   }
 }

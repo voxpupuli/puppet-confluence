@@ -280,6 +280,18 @@ Supply the following hash elements for your external JDBC data source:
     Example: `Select 1`
 
 
+#### Skipping startup screens
+If the following values are set, along with the `tomcat_jdbc_settings`, some of the startup screens are skipped.
+The initial startup screen will be for the "Configure Database" configuration. Enter the Datasource `java:comp/env/jdbc/confluence`.
+
+##### `license`
+
+The license key. Default: undef
+
+##### `server_id`
+
+The server ID. Default: undef
+
 #### Crowd single sign on parameters
 
 #### `enable_sso`

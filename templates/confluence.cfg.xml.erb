@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<confluence-configuration>
+  <setupStep>setupdbchoice-start</setupStep>
+  <setupType>custom</setupType>
+  <buildNumber>0</buildNumber>
+  <properties>
+    <property name="atlassian.license.message"><%= scope.lookupvar('confluence::license') -%></property>
+    <property name="confluence.setup.server.id"><%= scope.lookupvar('confluence::server_id') -%></property>
+    <property name="confluence.webapp.context.path"></property>
+    <property name="lucene.index.dir">${localHome}/index</property>
+    <property name="synchrony.btf">true</property>
+    <property name="synchrony.encryption.disabled">true</property>
+    <property name="synchrony.proxy.enabled">true</property>
+    <property name="webwork.multipart.saveDir">${localHome}/temp</property>
+  </properties>
+</confluence-configuration>
