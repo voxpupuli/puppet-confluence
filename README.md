@@ -248,19 +248,19 @@ Defaults to  '100'
 Any additional tomcat params for server.xml. Takes same format as
 `tomcat_proxy`. Default: {}
 
-#####  `tomcat_jdbc_host`
-
-JDBC hostname used (at least by mysql) for the username???. Default: undef
-XXX Should this just use ::fqdn?
-
 ##### `tomcat_jdbc_settings`
 
 Tomcat Resource attributes for server.xml for an external JDBC data source. Default: {}
+
 Note that you must have already installed the JDBC client jar in _webappdir_/WEB-INF/lib/.
 
-Supply the following hash elements for your external JDBC data source:
+Supply all the following hash elements for your external JDBC datasource Resource definition:
   - `name`
     Resource name. Example: `jdbc/confluence`
+  - `auth`
+    Must be set to `Container`
+  - `type`
+    Must be set to `javax.sql.DataSource`
   - `username`
     Database username
   - `password`
@@ -278,6 +278,22 @@ Supply the following hash elements for your external JDBC data source:
     Example: `READ_COMMITTED`
   - `validationQuery`
     Example: `Select 1`
+
+Here's a complete hiera example using mysql:
+```
+confluence::tomcat_jdbc_settings:
+  name: jdbc/confluence
+  auth: Container
+  type: javax.sql.DataSource
+  username: confluence
+  password: password
+  driverClassName: com.mysql.jdbc.Driver
+  url: jdbc:mysql://localhost:3306/confluence?useUnicode=true&amp;characterEncoding=utf8
+  maxTotal: 60
+  maxIdle: 20
+  defaultTransactionIsolation: READ_COMMITTED
+  validationQuery: Select 1
+```
 
 
 #### Skipping startup screens

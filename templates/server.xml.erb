@@ -34,6 +34,13 @@
                 <Context path="<%= @context_path %>" docBase="../confluence" debug="0" reloadable="false" useHttpOnly="true">
                     <!-- Logger is deprecated in Tomcat 5.5. Logging configuration for Confluence is specified in confluence/WEB-INF/classes/log4j.properties -->
                     <Manager pathname="" />
+<% if @tomcat_jdbc_settings -%>
+                    <Resource
+<%                  @tomcat_jdbc_settings.each do |key, value| -%>
+                        <%= key %>=<%= "\"#{value}\"" %>
+<%                  end -%>
+                    />
+<% end -%>
                 </Context>
             </Host>
 

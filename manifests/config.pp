@@ -91,11 +91,21 @@ class confluence::config(
   } elsif $manage_server_xml == 'template' {
 
     file { "${confluence::webappdir}/conf/server.xml":
-      content => template('confluence/server.xml.erb'), # XXX need to fix this and add web.xml
+      content => template('confluence/server.xml.erb'),
       mode    => '0600',
       require => Class['confluence::install'],
       notify  => Class['confluence::service'],
     }
+
+    file { "${confluence::webappdir}/confluence/WEB-INF/web.xml":
+      source  => 'puppet:///modules/confluence/web.xml',
+      mode    => '0600',
+      owner   => $::confluence::user,
+      group   => $::confluence::group,
+      require => Class['confluence::install'],
+      notify  => Class['confluence::service'],
+    }
+
   }
   # if JDBC was configured along with the license key and server_id, skip some server setup steps.
   if $confluence::tomcat_jdbc_settings and $confluence::license and $confluence::server_id {

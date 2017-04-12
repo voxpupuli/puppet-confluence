@@ -40,8 +40,6 @@ class confluence (
   Hash $tomcat_proxy                                             = {},
   # Any additional tomcat params for server.xml
   Hash $tomcat_extras                                            = {},
-  # External JDBC datasource hostname
-  $tomcat_jdbc_host                                              = undef,
   # External JDBC datasource for server.xml
   Hash $tomcat_jdbc_settings                                     = {},
   $context_path                                                  = '',
@@ -74,7 +72,7 @@ class confluence (
     # If the running version of CONFLUENCE is less than the expected version of CONFLUENCE
     # Shut it down in preparation for upgrade.
     if versioncmp($version, $::confluence_version) > 0 {
-      notify { 'Attempting to upgrade CONFLUENCE': }
+      notify { "Attempting to upgrade CONFLUENCE from ${::confluence_version} to ${version}": }
       exec { $stop_confluence: before => Anchor['confluence::start'] }
     }
   }
