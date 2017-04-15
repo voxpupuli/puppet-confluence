@@ -16,6 +16,7 @@ describe 'confluence' do
           operatingsystem: 'RedHat'
         }
       end
+
       it { is_expected.to contain_service('confluence') }
       it { is_expected.to compile.with_all_deps }
     end
