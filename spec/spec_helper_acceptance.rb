@@ -10,7 +10,7 @@ unless ENV['RS_PROVISION'] == 'no' || ENV['BEAKER_provision'] == 'no'
   end
 end
 
-UNSUPPORTED_PLATFORMS = %w(AIX windows Solaris).freeze
+UNSUPPORTED_PLATFORMS = %w[AIX windows Solaris].freeze
 
 RSpec.configure do |c|
   # Project root
@@ -25,7 +25,7 @@ RSpec.configure do |c|
     puppet_module_install(
       source: proj_root,
       module_name: 'confluence',
-      ignore_list: %w(spec/fixtures/* .git/* .vagrant/*)
+      ignore_list: %w[spec/fixtures/* .git/* .vagrant/*]
     )
     hosts.each do |host|
       on host, "/bin/touch #{default['puppetpath']}/hiera.yaml"
