@@ -15,7 +15,7 @@ class confluence (
   $product                                                       = 'confluence',
   $format                                                        = 'tar.gz',
   Stdlib::Absolutepath $installdir                               = '/opt/confluence',
-  Stdlib::Absolutepath$homedir                                   = '/home/confluence',
+  Stdlib::Absolutepath $homedir                                  = '/home/confluence',
   $data_dir                                                      = undef,
   $user                                                          = 'confluence',
   $group                                                         = 'confluence',
