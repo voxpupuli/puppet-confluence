@@ -18,6 +18,7 @@ describe 'confluence' do
     let(:params) do
       { javahome: '/foo/bar' }
     end
+
     it { is_expected.to compile.with_all_deps }
     it { is_expected.to contain_class('confluence') }
     it { is_expected.to contain_class('confluence::install') }

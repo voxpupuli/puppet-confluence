@@ -17,6 +17,7 @@ describe 'confluence' do
           enable_sso: true
         }
       end
+
       it { is_expected.to compile.with_all_deps }
       it { is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/seraph-config.xml') }
       it { is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/crowd.properties') }
@@ -30,6 +31,7 @@ describe 'confluence' do
           application_name: 'appname'
         }
       end
+
       it do
         is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/crowd.properties').
           with_content(%r{application.name                        appname})
@@ -48,6 +50,7 @@ describe 'confluence' do
           crowd_base_url: 'http://crowdbase.url'
         }
       end
+
       it { is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/seraph-config.xml') }
       it do
         is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/crowd.properties').

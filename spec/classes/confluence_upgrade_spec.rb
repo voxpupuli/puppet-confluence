@@ -16,6 +16,7 @@ describe 'confluence' do
           operatingsystem: 'RedHat'
         }
       end
+
       it { is_expected.to compile.with_all_deps }
       it { is_expected.to contain_exec('service confluence stop && sleep 15') }
     end
@@ -33,6 +34,7 @@ describe 'confluence' do
           operatingsystem: 'RedHat'
         }
       end
+
       it { is_expected.to contain_exec('stop service please') }
     end
   end

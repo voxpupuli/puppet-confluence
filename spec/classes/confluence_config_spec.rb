@@ -16,6 +16,7 @@ describe 'confluence' do
           version: '5.5.6'
         }
       end
+
       it { is_expected.to compile.with_all_deps }
       it { is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/bin/setenv.sh') }
       it { is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/confluence-init.properties') }
@@ -29,6 +30,7 @@ describe 'confluence' do
           manage_server_xml: 'template'
         }
       end
+
       it { is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/bin/setenv.sh') }
       it { is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/confluence-init.properties') }
       it { is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/conf/server.xml') }
@@ -50,6 +52,7 @@ describe 'confluence' do
           }
         }
       end
+
       it { is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/bin/setenv.sh') }
       it { is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/confluence-init.properties') }
       it do
@@ -61,6 +64,49 @@ describe 'confluence' do
           with_content(%r{proxyName="EXAMPLE"}).
           with_content(%r{proxyPort="443"}).
           with_content(%r{Context path="/confluence1"})
+      end
+    end
+    context 'with param data_dir set' do
+      let(:params) do
+        {
+          javahome: '/opt/java',
+          version: '5.5.6',
+          data_dir: '/opt/confluence/confluence-data'
+        }
+      end
+
+      it do
+        is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/confluence-init.properties').
+          with_content(%r{confluence.home=/opt/confluence/confluence-data})
+      end
+    end
+    context 'with param data_dir not set and param homdir set' do
+      let(:params) do
+        {
+          javahome: '/opt/java',
+          version: '5.5.6',
+          homedir: '/opt/confluence/confluence-home'
+        }
+      end
+
+      it do
+        is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/confluence-init.properties').
+          with_content(%r{confluence.home=/opt/confluence/confluence-home})
+      end
+    end
+    context 'with param data_dir set and param homdir set' do
+      let(:params) do
+        {
+          javahome: '/opt/java',
+          version: '5.5.6',
+          data_dir: '/opt/confluence/confluence-data',
+          homedir: '/opt/confluence/confluence-home'
+        }
+      end
+
+      it do
+        is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/confluence-init.properties').
+          with_content(%r{confluence.home=/opt/confluence/confluence-data})
       end
     end
     context 'ajp proxy' do
@@ -75,6 +121,7 @@ describe 'confluence' do
           }
         }
       end
+
       it do
         is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/conf/server.xml').
           with_content(%r{<Connector enableLookups="false" URIEncoding="UTF-8"\s+port = "8009"\s+protocol = "AJP/1.3"\s+/>})
