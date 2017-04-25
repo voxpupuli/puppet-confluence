@@ -74,13 +74,13 @@ class confluence::config(
     }
 
     # Step 4. Configure the Confluence web application
-    $conf_changes =
-    [
-     'set web-app/resource-ref/description/#text "Connection Pool"',
-     'set web-app/resource-ref/res-ref-name/#text "jdbc/confluence"',
-     'set web-app/resource-ref/res-type/#text "javax.sql.DataSource"',
-     'set web-app/resource-ref/res-auth/#text "Container"',
-     ]
+    # (this broken indentation is required to pass rake test)
+    $conf_changes = [
+  'set web-app/resource-ref/description/#text "Connection Pool"',
+  'set web-app/resource-ref/res-ref-name/#text "jdbc/confluence"',
+  'set web-app/resource-ref/res-type/#text "javax.sql.DataSource"',
+  'set web-app/resource-ref/res-auth/#text "Container"',
+  ]
 
     augeas {"${confluence::webappdir}/confluence/WEB-INF/web.xml":
       lens    => 'Xml.lns',
