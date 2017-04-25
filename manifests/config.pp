@@ -3,15 +3,15 @@
 # Install confluence, See README.md for more.
 #
 class confluence::config(
-  $tomcat_port                     = $confluence::tomcat_port,
-  $tomcat_max_threads              = $confluence::tomcat_max_threads,
-  $tomcat_accept_count             = $confluence::tomcat_accept_count,
-  $tomcat_proxy                    = $confluence::tomcat_proxy,
-  $tomcat_extras                   = $confluence::tomcat_extras,
-  $tomcat_jdbc_settings            = $confluence::tomcat_jdbc_settings,
-  $manage_server_xml               = $confluence::manage_server_xml,
-  $context_path                    = $confluence::context_path,
-  $ajp                             = $confluence::ajp,
+  $tomcat_port          = $confluence::tomcat_port,
+  $tomcat_max_threads   = $confluence::tomcat_max_threads,
+  $tomcat_accept_count  = $confluence::tomcat_accept_count,
+  $tomcat_proxy         = $confluence::tomcat_proxy,
+  $tomcat_extras        = $confluence::tomcat_extras,
+  $tomcat_jdbc_settings = $confluence::tomcat_jdbc_settings,
+  $manage_server_xml    = $confluence::manage_server_xml,
+  $context_path         = $confluence::context_path,
+  $ajp                  = $confluence::ajp,
 ) {
 
   File {
@@ -60,6 +60,8 @@ class confluence::config(
 
     if ! empty($tomcat_jdbc_settings) {
       $_jdbc = suffix(prefix(join_keys_to_values($tomcat_jdbc_settings, " '"), "set ${jdbc_path}/"), "'")
+    } else {
+      $_jdbc = undef
     }
     $_context_path_changes = "set ${path}/Engine/Host/Context/#attribute/path '${context_path}'"
 
