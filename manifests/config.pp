@@ -110,7 +110,7 @@ class confluence::config(
 
   }
   # if JDBC was configured along with the license key and server_id, skip some server setup steps.
-  if $confluence::tomcat_jdbc_settings and $confluence::license and $confluence::server_id {
+  if !empty($confluence::tomcat_jdbc_settings) and $confluence::license and $confluence::server_id {
     file { "${confluence::homedir}/confluence.cfg.xml":
       content => template('confluence/confluence.cfg.xml.erb'),
       mode    => '0600',
