@@ -1,11 +1,13 @@
 Facter.add(:confluence_version) do
   setcode do
-    ps = Facter::Util::Resolution.exec('ps ax')
-    confluence_process = ps && ps.split("\n").find { |x| x.include?('atlassian-confluence') }
-    if confluence_process.nil?
+    pgrep = Facter::Util::Resolution.exec(
+      'pgrep --list-full --full java.*atlassian-confluence-[0-9].*org.apache.catalina.startup.Bootstrap'
+    )
+    pgrep.to_s =~ %r{^.*atlassian-confluence-(\d+\.\d+\.\d+).*}
+    if Regexp.last_match(1).nil?
       'unknown'
     else
-      confluence_process.scan(%r{atlassian-confluence-(\d+\.\d+\.\d+)}).first.first
+      Regexp.last_match(1)
     end
   end
 end
