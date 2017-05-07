@@ -31,6 +31,19 @@ class confluence::config(
     notify  => Class['confluence::service'],
   }
 
+  if ! empty($tomcat_jdbc_settings) {
+    $_jdbc = suffix(prefix(join_keys_to_values($tomcat_jdbc_settings, " '"), "set ${jdbc_path}/"), "'")
+    $_jdbc_name = $tomcat_jdbc_settings['name']
+    $_jdbc_auth = $tomcat_jdbc_settings['auth']
+    $_jdbc_type = $tomcat_jdbc_settings['type']
+  }
+  else {
+    $_jdbc = undef
+    $_jdbc_name = undef
+    $_jdbc_auth = undef
+    $_jdbc_type = undef
+  }
+
   if $manage_server_xml == 'augeas' {
     $_tomcat_max_threads  = { maxThreads  => $tomcat_max_threads }
     $_tomcat_accept_count = { acceptCount => $tomcat_accept_count }
@@ -58,11 +71,6 @@ class confluence::config(
 
     $jdbc_path = "${path}/Engine/Host/Context[#attribute/path='${context_path}']/Resource/#attribute"
 
-    if ! empty($tomcat_jdbc_settings) {
-      $_jdbc = suffix(prefix(join_keys_to_values($tomcat_jdbc_settings, " '"), "set ${jdbc_path}/"), "'")
-    } else {
-      $_jdbc = undef
-    }
     $_context_path_changes = "set ${path}/Engine/Host/Context/#attribute/path '${context_path}'"
 
     $changes = delete_undef_values([$_parameters, $_context_path_changes, $_jdbc])
@@ -76,14 +84,15 @@ class confluence::config(
     }
 
     # Step 4. Configure the Confluence web application
+
     # (this broken indentation is required to pass rake test)
     $conf_changes = [
   'set web-app/resource-ref/description/#text "Connection Pool"',
-  'set web-app/resource-ref/res-ref-name/#text "jdbc/confluence"',
-  'set web-app/resource-ref/res-type/#text "javax.sql.DataSource"',
-  'set web-app/resource-ref/res-auth/#text "Container"',
+  "set web-app/resource-ref/res-ref-name/#text \"${_jdbc_name}\"",
+  "set web-app/resource-ref/res-type/#text \"${_jdbc_type}\"",
+  "set web-app/resource-ref/res-auth/#text \"${_jdbc_auth}\"",
   ]
-
+    # Make sure the necessary <resource-ref> is added to web.xml
     augeas {"${confluence::webappdir}/confluence/WEB-INF/web.xml":
       lens    => 'Xml.lns',
       incl    => "${confluence::webappdir}/confluence/WEB-INF/web.xml",
@@ -99,18 +108,33 @@ class confluence::config(
       notify  => Class['confluence::service'],
     }
 
-    file { "${confluence::webappdir}/confluence/WEB-INF/web.xml":
-      source  => 'puppet:///modules/confluence/web.xml',
-      mode    => '0600',
-      owner   => $::confluence::user,
-      group   => $::confluence::group,
-      require => Class['confluence::install'],
-      notify  => Class['confluence::service'],
-    }
+    if ! empty($tomcat_jdbc_settings) {
+      # Make sure the necessary <resource-ref> is added to web.xml.
+      # I don't know how to prevent recurring applications of this from adding the same lines again.
+      # We should deprecate this and just use augeas!
+      $res_ref = @("RES")
 
+          <!-- added by Puppet -->
+          <resource-ref>
+              <description>Connection Pool</description>
+              <res-ref-name>${_jdbc_name}</res-ref-name>
+              <res-type>${_jdbc_type}</res-type>
+              <res-auth>${_jdbc_auth}</res-auth>
+          </resource-ref>
+      | RES
+
+      file_line { 'web.xml jdbc resource-ref':
+        path     => "${confluence::webappdir}/confluence/WEB-INF/web.xml",
+        multiple => true,
+        after    =>  '</welcome-file-list>',
+        line     => $res_ref,
+        require  => Class['confluence::install'],
+        notify   => Class['confluence::service'],
+      }
+    }
   }
   # if JDBC was configured along with the license key and server_id, skip some server setup steps.
-  if !empty($confluence::tomcat_jdbc_settings) and $confluence::license and $confluence::server_id {
+  if ! empty($confluence::tomcat_jdbc_settings) and $confluence::license and $confluence::server_id {
     file { "${confluence::homedir}/confluence.cfg.xml":
       content => template('confluence/confluence.cfg.xml.erb'),
       mode    => '0600',
