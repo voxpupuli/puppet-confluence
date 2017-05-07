@@ -108,6 +108,15 @@ class confluence (
     }
   }
 
+  if ! empty($tomcat_jdbc_settings) {
+    # check for required keys: name,auth,type,...
+    ['name','auth','type','username','password','driverClassName','url','maxTotal','maxIdle','defaultTransactionIsolation','validationQuery'].each | String $k | {
+      if !has_key($tomcat_jdbc_settings,$k) {
+        fail("Required tomcat_jdbc_settings[${k}] is missing.")
+      }
+    }
+  }
+
   anchor { 'confluence::start': }
   -> class { '::confluence::facts': }
   -> class { '::confluence::install': }
