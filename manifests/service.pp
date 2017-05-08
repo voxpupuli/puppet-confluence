@@ -13,7 +13,7 @@ class confluence::service(
     mode    => '0755',
   }
 
-  if $confluence::manage_service {
+  if str2bool($confluence::manage_service) {
     service { 'confluence':
       ensure  => 'running',
       enable  => true,

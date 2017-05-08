@@ -248,6 +248,67 @@ Defaults to  '100'
 Any additional tomcat params for server.xml. Takes same format as
 `tomcat_proxy`. Default: {}
 
+##### `tomcat_jdbc_settings`
+
+Tomcat Resource attributes for server.xml for an external JDBC data source. Default: {}
+
+Note that you must have already installed the JDBC client jar in _webappdir_/WEB-INF/lib/
+and you must use `manage_server_xml = augeas`.
+
+Supply all the following hash elements for your external JDBC datasource Resource definition:
+  - `name`
+    Resource name. Example: `jdbc/confluence`
+  - `auth`
+    Must be set to `Container`
+  - `type`
+    Must be set to `javax.sql.DataSource`
+  - `username`
+    Database username
+  - `password`
+	Database password
+  - `driverClassName`
+    Example: `com.mysql.jdbc.Driver`
+  - `url`
+    Example: `jdbc:mysql://localhost:3306/confluence?useUnicode=true&characterEncoding=utf8`
+  - `maxTotal`
+     Example: `60`.
+     Per Confluence install docs: If you're using Confluence 5.7 or below; change `maxTotal` to `maxActive`.
+  - `maxIdle`
+	Example: `20`
+  - `defaultTransactionIsolation`
+    Example: `READ_COMMITTED`
+  - `validationQuery`
+    Example: `Select 1`
+
+Here's a complete hiera example using mysql:
+```
+confluence::tomcat_jdbc_settings:
+  name: jdbc/confluence
+  auth: Container
+  type: javax.sql.DataSource
+  username: confluence
+  password: password
+  driverClassName: com.mysql.jdbc.Driver
+  url: jdbc:mysql://localhost:3306/confluence?useUnicode=true&amp;characterEncoding=utf8
+  maxTotal: 60
+  maxIdle: 20
+  defaultTransactionIsolation: READ_COMMITTED
+  validationQuery: Select 1
+```
+
+
+#### Skipping startup screens
+If the following values are set, along with the `tomcat_jdbc_settings`, some of the startup screens are skipped.
+The initial startup screen will be for the "Configure Database" configuration. Enter the Datasource `java:comp/env/jdbc/confluence`.
+
+##### `license`
+
+The license key. Default: undef
+
+##### `server_id`
+
+The server ID. Default: undef
+
 #### Crowd single sign on parameters
 
 #### `enable_sso`

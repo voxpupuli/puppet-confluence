@@ -40,6 +40,8 @@ class confluence (
   Hash $tomcat_proxy                                             = {},
   # Any additional tomcat params for server.xml
   Hash $tomcat_extras                                            = {},
+  # External JDBC datasource for server.xml
+  Hash $tomcat_jdbc_settings                                     = {},
   $context_path                                                  = '',
   # Options for the AJP connector
   Hash $ajp                                                      = {},
@@ -58,6 +60,8 @@ class confluence (
   $session_tokenkey                                              = 'session.tokenkey',
   $session_validationinterval                                    = 5,
   $session_lastvalidation                                        = 'session.lastvalidation',
+  $license                                                       = undef,
+  $server_id                                                     = undef,
 ) inherits confluence::params {
 
   Exec { path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ] }
@@ -68,7 +72,7 @@ class confluence (
     # If the running version of CONFLUENCE is less than the expected version of CONFLUENCE
     # Shut it down in preparation for upgrade.
     if versioncmp($version, $::confluence_version) > 0 {
-      notify { 'Attempting to upgrade CONFLUENCE': }
+      notify { "Attempting to upgrade CONFLUENCE from ${::confluence_version} to ${version}": }
       exec { $stop_confluence: before => Anchor['confluence::start'] }
     }
   }
@@ -97,6 +101,18 @@ class confluence (
       fail('You need to specify a valid protocol for the AJP connector.')
     } else {
       validate_re($ajp['protocol'], ['^AJP/1.3$', '^org.apache.coyote.ajp'])
+    }
+  }
+
+  if ! empty($tomcat_jdbc_settings) {
+    if $manage_server_xml != 'augeas' {
+      fail('tomcat_jdbc_settings can only be configured with manage_server_xml = augeas.')
+    }
+    # check for required keys: name,auth,type,...
+    ['name','auth','type','username','password','driverClassName','url','maxTotal','maxIdle','defaultTransactionIsolation','validationQuery'].each | String $k | {
+      if !has_key($tomcat_jdbc_settings,$k) {
+        fail("Required tomcat_jdbc_settings[${k}] is missing.")
+      }
     }
   }
 

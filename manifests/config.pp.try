@@ -108,7 +108,33 @@ class confluence::config(
       notify  => Class['confluence::service'],
     }
 
-    # web.xml can only be configured with augeas. This is tested for in init.pp.
+    if ! empty($tomcat_jdbc_settings) {
+      # Make sure the necessary <resource-ref> is added to web.xml.
+      # I don't know how to prevent recurring applications of this from adding the same lines again.
+      # We should deprecate this and just use augeas! This is fragile in that it expects the end
+      # of web.xml to look like this:
+      $res_ref = @("RES")
+              <location>/fourohfour.action</location>
+          </error-page>
+
+          <!-- added by Puppet -->
+          <resource-ref>
+              <description>Connection Pool</description>
+              <res-ref-name>${_jdbc_name}</res-ref-name>
+              <res-type>${_jdbc_type}</res-type>
+              <res-auth>${_jdbc_auth}</res-auth>
+          </resource-ref>
+      </web-app>
+      | RES
+
+      file_line { 'web.xml jdbc resource-ref':
+        path     => "${confluence::webappdir}/confluence/WEB-INF/web.xml",
+        match    => '^[ \t]+<location>/fourohfour\.action</location>[[:space:].]+</web-app>',
+        line     => $res_ref,
+        require  => Class['confluence::install'],
+        notify   => Class['confluence::service'],
+      }
+    }
   }
   # if JDBC was configured along with the license key and server_id, skip some server setup steps.
   if ! empty($confluence::tomcat_jdbc_settings) and $confluence::license and $confluence::server_id {
