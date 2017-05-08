@@ -109,6 +109,9 @@ class confluence (
   }
 
   if ! empty($tomcat_jdbc_settings) {
+    if $manage_server_xml != 'augeas' {
+      fail('tomcat_jdbc_settings can only be configured with manage_server_xml = augeas.')
+    }
     # check for required keys: name,auth,type,...
     ['name','auth','type','username','password','driverClassName','url','maxTotal','maxIdle','defaultTransactionIsolation','validationQuery'].each | String $k | {
       if !has_key($tomcat_jdbc_settings,$k) {

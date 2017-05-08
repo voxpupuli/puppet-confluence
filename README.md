@@ -252,7 +252,8 @@ Any additional tomcat params for server.xml. Takes same format as
 
 Tomcat Resource attributes for server.xml for an external JDBC data source. Default: {}
 
-Note that you must have already installed the JDBC client jar in _webappdir_/WEB-INF/lib/.
+Note that you must have already installed the JDBC client jar in _webappdir_/WEB-INF/lib/
+and you must use `manage_server_xml = augeas`.
 
 Supply all the following hash elements for your external JDBC datasource Resource definition:
   - `name`
