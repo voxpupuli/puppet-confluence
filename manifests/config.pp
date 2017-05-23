@@ -49,7 +49,7 @@ class confluence::config(
       $_parameters = undef
     }
 
-    $_context_path_changes = "set ${path}/Engine/Host/Context/#attribute/path '${context_path}'"
+    $_context_path_changes = "set ${path}/Engine/Host/Context[#attribute/docBase=\"../confluence\"]/#attribute/path '${context_path}'"
 
     $changes = delete_undef_values([$_parameters, $_context_path_changes])
 
