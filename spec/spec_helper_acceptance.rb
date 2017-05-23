@@ -36,8 +36,6 @@ RSpec.configure do |c|
         on host, '/usr/sbin/update-locale'
       end
       on host, puppet('module', 'install', 'puppet-archive'), acceptable_exit_codes: [0, 1]
-      on host, puppet('module', 'install', 'puppetlabs-java'), acceptable_exit_codes: [0, 1]
-      on host, puppet('module', 'install', 'puppetlabs-postgresql'), acceptable_exit_codes: [0, 1]
       on host, puppet('module', 'install', 'puppet-staging'), acceptable_exit_codes: [0, 1]
       on host, puppet('module', 'install', 'puppetlabs-stdlib'), acceptable_exit_codes: [0, 1]
     end
