@@ -19,9 +19,27 @@ class confluence::params {
       }
     }
     /Debian/: {
-      $service_file_location   = '/etc/init.d/confluence'
-      $service_file_template   = 'confluence/confluence.initscript.erb'
-      $service_lockfile        = '/var/lock/confluence'
+      case $::operatingsystem {
+        /Ubuntu/: {
+          case $::operatingsystemmajrelease {
+            /^16.04$/: {
+              $service_file_location   = '/etc/systemd/system/confluence.service'
+              $service_file_template   = 'confluence/confluence.service.erb'
+              $service_lockfile        = '/var/lock/subsys/confluence'
+            }
+            default: {
+              $service_file_location   = '/etc/init.d/confluence'
+              $service_file_template   = 'confluence/confluence.initscript.erb'
+              $service_lockfile        = '/var/lock/confluence'
+            }
+          }
+        }
+        default: {
+          $service_file_location   = '/etc/init.d/confluence'
+          $service_file_template   = 'confluence/confluence.initscript.erb'
+          $service_lockfile        = '/var/lock/confluence'
+        }
+      }
     }
     default: { fail('Only osfamily Debian and Redhat are supported') }
   }
