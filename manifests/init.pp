@@ -58,6 +58,8 @@ class confluence (
   $session_tokenkey                                              = 'session.tokenkey',
   $session_validationinterval                                    = 5,
   $session_lastvalidation                                        = 'session.lastvalidation',
+  $proxy_server                                                  = undef,
+  $proxy_type                                                    = undef,
 ) inherits confluence::params {
 
   Exec { path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ] }
