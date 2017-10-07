@@ -79,6 +79,8 @@ class confluence::install {
         checksum        => $confluence::checksum,
         user            => $confluence::user,
         group           => $confluence::group,
+        proxy_server    => $confluence::proxy_server,
+        proxy_type      => $confluence::proxy_type,
         before          => File[$confluence::homedir],
         require         => [
           File[$confluence::installdir],
