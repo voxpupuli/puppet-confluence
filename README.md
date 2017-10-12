@@ -224,6 +224,10 @@ Increase max permgen size for a Java Virtual Machine. Default: '256m'
 
 Additional java options can be specified here. Default: ''
 
+##### `catalina_opts`
+
+Additional catalina options can be specified here. Default: ''
+
 #### Tomcat parameters
 
 #### `tomcat_proxy`
