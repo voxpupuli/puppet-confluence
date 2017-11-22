@@ -347,7 +347,7 @@ The puppetlabs repositories can be found at:
 <http://yum.puppetlabs.com/> and <http://apt.puppetlabs.com/>
 
 * RedHat / CentOS 5/6/7
-* Ubuntu 12.04 / 14.04
+* Ubuntu 12.04 / 14.04 / 16.04
 * Debian 7
 
 Operating Systems without an Augueas version >= 1 such as Ubuntu 12.04 must use
