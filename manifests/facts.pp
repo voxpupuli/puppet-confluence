@@ -4,7 +4,7 @@
 #
 class confluence::facts {
 
-  if $::puppetversion =~ /Puppet Enterprise/ {
+  if $facts['puppetversion'] =~ /Puppet Enterprise/ {
     $dir = 'puppetlabs/'
   } else {
     $dir = ''
