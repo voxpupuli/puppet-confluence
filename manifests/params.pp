@@ -4,26 +4,26 @@
 #
 class confluence::params {
 
-  case $::osfamily {
+  case $facts['os']['family'] {
     /RedHat/: {
-      if $::operatingsystemmajrelease == '7' {
+      if $facts['os']['release']['major'] == '7' {
         $service_file_location = '/usr/lib/systemd/system/confluence.service'
         $service_file_template = 'confluence/confluence.service.erb'
         $service_lockfile      = '/var/lock/subsys/confluence'
         $refresh_systemd       = true
-      } elsif $::operatingsystemmajrelease == '6' {
+      } elsif $facts['os']['release']['major'] == '6' {
         $service_file_location = '/etc/init.d/confluence'
         $service_file_template = 'confluence/confluence.initscript.erb'
         $service_lockfile      = '/var/lock/subsys/confluence'
         $refresh_systemd       = false
       } else {
-        fail("Only osfamily ${::osfamily} 6 and 7 and supported")
+        fail("Only osfamily ${facts['os']['family']} 6 and 7 and supported")
       }
     }
     /Debian/: {
-      case $::operatingsystem {
+      case $facts['os']['name'] {
         /Ubuntu/: {
-          case $::operatingsystemmajrelease {
+          case $facts['os']['release']['major'] {
             /^16.04$/: {
               $service_file_location   = '/etc/systemd/system/confluence.service'
               $service_file_template   = 'confluence/confluence.service.erb'

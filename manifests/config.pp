@@ -37,7 +37,7 @@ class confluence::config(
 
     $parameters = merge($_tomcat_max_threads, $_tomcat_accept_count, $tomcat_proxy, $tomcat_extras, $_tomcat_port )
 
-    if versioncmp($::augeasversion, '1.0.0') < 0 {
+    if versioncmp($facts['augeasversion'], '1.0.0') < 0 {
       fail('This module requires Augeas >= 1.0.0')
     }
 
