@@ -4,7 +4,21 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v3.1.0](https://github.com/voxpupuli/puppet-confluence/tree/v3.1.0) (2017-11-26)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-confluence/compare/v3.0.0...v3.1.0)
+
+**Implemented enhancements:**
+
+- Ubuntu 16.04 Support \(systemd\)  [\#142](https://github.com/voxpupuli/puppet-confluence/pull/142) ([KoenDierckx](https://github.com/KoenDierckx))
+
+**Merged pull requests:**
+
+- migrate from topscope variables to facts hash [\#143](https://github.com/voxpupuli/puppet-confluence/pull/143) ([bastelfreak](https://github.com/bastelfreak))
+- Ubuntu 16.04 Support \(systemd\) [\#133](https://github.com/voxpupuli/puppet-confluence/pull/133) ([marcofl](https://github.com/marcofl))
+
 ## [v3.0.0](https://github.com/voxpupuli/puppet-confluence/tree/v3.0.0) (2017-10-11)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-confluence/compare/v2.3.0...v3.0.0)
 
 **Implemented enhancements:**
@@ -25,12 +39,14 @@ These should not affect the functionality of the module.
 
 **Merged pull requests:**
 
+- release 3.0.0 [\#139](https://github.com/voxpupuli/puppet-confluence/pull/139) ([bastelfreak](https://github.com/bastelfreak))
 - Use 'ps' for version fact [\#137](https://github.com/voxpupuli/puppet-confluence/pull/137) ([joshbeard](https://github.com/joshbeard))
 - Fix incorrect failures with rspec-puppet-facts [\#136](https://github.com/voxpupuli/puppet-confluence/pull/136) ([op-ct](https://github.com/op-ct))
 - Issue 119: updated facter script to not report java version [\#124](https://github.com/voxpupuli/puppet-confluence/pull/124) ([senax](https://github.com/senax))
 - replace validate\_\* with puppet4 datatypes & fix archive errors [\#122](https://github.com/voxpupuli/puppet-confluence/pull/122) ([bastelfreak](https://github.com/bastelfreak))
 
 ## [v2.3.0](https://github.com/voxpupuli/puppet-confluence/tree/v2.3.0) (2017-02-11)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-confluence/compare/v2.2.2...v2.3.0)
 
 **Closed issues:**
@@ -65,6 +81,7 @@ These should not affect the functionality of the module.
 - make facts.sh sh compatible [\#83](https://github.com/voxpupuli/puppet-confluence/pull/83) ([mookie-](https://github.com/mookie-))
 
 ## [v2.2.2](https://github.com/voxpupuli/puppet-confluence/tree/v2.2.2) (2016-08-18)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-confluence/compare/v2.2.1...v2.2.2)
 
 **Closed issues:**
@@ -84,6 +101,7 @@ These should not affect the functionality of the module.
 - Update based on voxpupuli/modulesync\_config [\#72](https://github.com/voxpupuli/puppet-confluence/pull/72) ([dhoppe](https://github.com/dhoppe))
 
 ## [v2.2.1](https://github.com/voxpupuli/puppet-confluence/tree/v2.2.1) (2016-05-12)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-confluence/compare/v2.2.0...v2.2.1)
 
 **Merged pull requests:**
@@ -91,6 +109,7 @@ These should not affect the functionality of the module.
 - Release 2.2.1 [\#71](https://github.com/voxpupuli/puppet-confluence/pull/71) ([bastelfreak](https://github.com/bastelfreak))
 
 ## [v2.2.0](https://github.com/voxpupuli/puppet-confluence/tree/v2.2.0) (2016-05-08)
+
 [Full Changelog](https://github.com/voxpupuli/puppet-confluence/compare/2.1.1...v2.2.0)
 
 **Closed issues:**
@@ -129,6 +148,9 @@ These should not affect the functionality of the module.
 - Update metadata.json w/ stdlib 4 [\#35](https://github.com/voxpupuli/puppet-confluence/pull/35) ([dudemcbacon](https://github.com/dudemcbacon))
 
 ## [2.1.1](https://github.com/voxpupuli/puppet-confluence/tree/2.1.1) (2015-03-22)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-confluence/compare/48eea5b380e9b7920ceb25d14924fd879e92051f...2.1.1)
+
 **Closed issues:**
 
 - update .travis.yaml to deploy to puppet-community [\#28](https://github.com/voxpupuli/puppet-confluence/issues/28)
