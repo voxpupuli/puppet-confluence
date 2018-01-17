@@ -17,6 +17,7 @@ class confluence::service(
     service { 'confluence':
       ensure    => 'running',
       enable    => true,
+      provider  => $confluence::params::service_provider,
       require   => Class['confluence::config'],
       subscribe => File[$service_file_location],
     }

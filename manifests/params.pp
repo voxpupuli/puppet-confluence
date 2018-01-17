@@ -25,4 +25,18 @@ class confluence::params {
     }
     default: { fail('Only osfamily Debian and Redhat are supported') }
   }
+
+  case $::operatingsystem {
+    'Ubuntu': {
+      if versioncmp($::operatingsystemmajrelease, '14.10') > 0 {
+        $server_service_provider = 'systemd'
+      } else {
+        $server_service_provider = 'upstart'
+      }
+    }
+    default: {
+      $server_service_provider = undef
+    }
+  }
+
 }
