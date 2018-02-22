@@ -10,18 +10,17 @@ class confluence::service (
 ) {
 
   if($refresh_systemd) {
-    include ::systemd::systemctl::daemon_reload
+    exec { 'refresh_systemd_confluence':
+      command     => 'systemctl daemon-reload',
+      refreshonly => true,
+      subscribe   => File[$service_file_location],
+      before      => Service['confluence'],
+    }
   }
 
   file { $service_file_location:
     content => template($service_file_template),
     mode    => '0755',
-    notify  => [
-      $refresh_systemd ? {
-        true    => Class['systemd::systemctl::daemon_reload'],
-        default => undef
-      }
-    ],
   }
 
   if $confluence::manage_service {
