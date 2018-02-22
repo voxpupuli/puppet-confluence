@@ -40,7 +40,6 @@ RSpec.configure do |c|
       on host, puppet('module', 'install', 'puppetlabs-postgresql'), acceptable_exit_codes: [0, 1]
       on host, puppet('module', 'install', 'puppet-staging'), acceptable_exit_codes: [0, 1]
       on host, puppet('module', 'install', 'puppetlabs-stdlib'), acceptable_exit_codes: [0, 1]
-      on host, puppet('module', 'install', 'camptocamp-systemd'), acceptable_exit_codes: [0, 1]
     end
   end
 end
