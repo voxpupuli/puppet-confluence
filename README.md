@@ -340,8 +340,7 @@ Enable external facts for confluence version. Defaults to present.
 
 ## Limitations
 
-* Puppet 3.8.7+
-* Puppet Enterprise
+* Puppet 4.10.0
 
 The puppetlabs repositories can be found at:
 <http://yum.puppetlabs.com/> and <http://apt.puppetlabs.com/>
