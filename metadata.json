@@ -52,12 +52,6 @@
       "operatingsystemrelease": [
         "14.04"
       ]
-    },
-    {
-      "operatingsystem": "Debian",
-      "operatingsystemrelease": [
-        "7"
-      ]
     }
   ]
 }
