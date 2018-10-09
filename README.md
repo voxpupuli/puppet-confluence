@@ -128,6 +128,9 @@ confluence::jvm_xms:        '4G'
 confluence::jvm_xmx:        '8G'
 confluence::jvm_permgen:    '512m'
 confluence::download_url:    'http://webserver.example.co.za/pub/software/development-tools/atlassian'
+confluence::catalina_opts:
+  - -Dconfluence.cluster.node.name=%{hostname}
+  - -Dconfluence.upgrade.recovery.file.enabled=false
 confluence::tomcat_proxy:
   scheme:    'https'
   proxyName: 'webvip.example.co.za'
@@ -226,7 +229,7 @@ Additional java options can be specified here. Default: ''
 
 ##### `catalina_opts`
 
-Additional catalina options can be specified here. Default: ''
+Additional catalina options can be specified either as a simple string or array of strings. Default: ''
 
 #### Tomcat parameters
 

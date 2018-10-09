@@ -126,6 +126,39 @@ describe 'confluence' do
               with_content(%r{<Connector enableLookups="false" URIEncoding="UTF-8"\s+port = "8009"\s+protocol = "AJP/1.3"\s+/>})
           end
         end
+
+        context 'catalina_opts set to a string' do
+          let(:params) do
+            {
+              version: '6.12.0',
+              javahome: '/opt/java',
+              catalina_opts: '-Dconfluence.upgrade.recovery.file.enabled=false -Dconfluence.cluster.node.name=myhostname'
+            }
+          end
+
+          it do
+            is_expected.to compile.with_all_deps
+            is_expected.to contain_file('/opt/confluence/atlassian-confluence-6.12.0/bin/setenv.sh').
+              with_content(%r{CATALINA_OPTS=\"-Dconfluence.upgrade.recovery.file.enabled=false -Dconfluence.cluster.node.name=myhostname \${CATALINA_OPTS}\"})
+          end
+        end
+
+        context 'catalina_opts set to an array' do
+          let(:params) do
+            {
+              version: '6.12.0',
+              javahome: '/opt/java',
+              catalina_opts: ['-Dconfluence.upgrade.recovery.file.enabled=false', '-Dconfluence.cluster.node.name=myhostname']
+            }
+          end
+
+          it do
+            is_expected.to compile.with_all_deps
+            is_expected.to contain_file('/opt/confluence/atlassian-confluence-6.12.0/bin/setenv.sh').
+              with_content(%r{CATALINA_OPTS=\"-Dconfluence.upgrade.recovery.file.enabled=false \${CATALINA_OPTS}\"}).
+              with_content(%r{CATALINA_OPTS=\"-Dconfluence.cluster.node.name=myhostname \${CATALINA_OPTS}\"})
+          end
+        end
       end
     end
   end
