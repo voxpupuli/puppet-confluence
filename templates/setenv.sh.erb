@@ -100,8 +100,8 @@ CATALINA_OPTS="-Dconfluence.context.path=${CONFLUENCE_CONTEXT_PATH} ${CATALINA_O
 CATALINA_OPTS="-XX:ReservedCodeCacheSize=256m -XX:+UseCodeCacheFlushing ${CATALINA_OPTS}"
 <%-     end -%>
 <%-   end -%>
-<%-   if scope['confluence::version'].is_a?(String) and !scope['confluence::version'].empty? -%>
-CATALINA_OPTS="-XX:MaxPermSize=${JVM_PERMGEN_MEMORY} ${CATALINA_OPTS}"
+<%-   if version[0] == 5 and version[1] <= 7 # 5.7.x and below -%>
+CATALINA_OPTS="-XX:MaxPermSize=<%= scope['confluence::jvm_permgen'] %> ${CATALINA_OPTS}"
 <%-   end -%>
 <%- catalina_opts = scope['confluence::catalina_opts'] -%>
 <%-   if catalina_opts.is_a?(Array) # add each option as its own line -%>
