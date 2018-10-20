@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v3.2.0](https://github.com/voxpupuli/puppet-confluence/tree/v3.2.0) (2018-10-20)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-confluence/compare/v3.1.2...v3.2.0)
+
+**Implemented enhancements:**
+
+- Update setenv.sh to support CATALINA\_OPTS [\#167](https://github.com/voxpupuli/puppet-confluence/pull/167) ([TJM](https://github.com/TJM))
+
+**Fixed bugs:**
+
+- setenv.sh is being broken by the puppet-confluence module [\#155](https://github.com/voxpupuli/puppet-confluence/issues/155)
+
+**Merged pull requests:**
+
+- modulesync 2.1.0 and allow puppet 6.x [\#168](https://github.com/voxpupuli/puppet-confluence/pull/168) ([bastelfreak](https://github.com/bastelfreak))
+
 ## [v3.1.2](https://github.com/voxpupuli/puppet-confluence/tree/v3.1.2) (2018-09-07)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-confluence/compare/v3.1.1...v3.1.2)
