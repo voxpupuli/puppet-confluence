@@ -26,6 +26,8 @@ class confluence::install {
     }
   }
 
+
+
   if ! defined(File[$confluence::installdir]) {
     file { $confluence::installdir:
       ensure => 'directory',
@@ -90,14 +92,20 @@ class confluence::install {
       }
     }
     default: {
-      fail('deploy_module parameter must equal "archive" or staging""')
+      fail('deploy_module parameter must equal "archive" or "staging"')
     }
   }
 
-  file { $confluence::homedir:
+  file { [ $confluence::homedir, "${confluence::homedir}/logs" ]:
     ensure => 'directory',
+    group  => $confluence::group,
+    owner  => $confluence::user,
+  }
+  -> file { "${confluence::homedir}/confluence.cfg.xml":
+    ensure => file,
     owner  => $confluence::user,
     group  => $confluence::group,
+    mode   => '0640',
   }
   -> exec { "chown_${confluence::webappdir}":
     command     => "/bin/chown -R ${confluence::user}:${confluence::group} ${confluence::webappdir}",
