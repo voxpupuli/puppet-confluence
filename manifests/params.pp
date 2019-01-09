@@ -25,13 +25,10 @@ class confluence::params {
           $service_file_template = 'confluence/confluence.service.erb'
           $refresh_systemd       = true
         }
-        'debian': {
+        default: {
           $service_file_location = '/etc/init.d/confluence'
           $service_file_template = 'confluence/confluence.initscript.erb'
           $refresh_systemd       = false
-        }
-        default: {
-          fail("Unsupported service provider ${facts['service_provider']}")
         }
       }
     }
