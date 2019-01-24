@@ -23,19 +23,16 @@ class confluence::params {
     /Debian/: {
       case $facts['os']['name'] {
         /Ubuntu/: {
-          case $facts['os']['release']['major'] {
-            /^16.04$/: {
-              $service_file_location   = '/etc/systemd/system/confluence.service'
-              $service_file_template   = 'confluence/confluence.service.erb'
-              $service_lockfile        = '/var/lock/subsys/confluence'
-              $refresh_systemd         = true
-            }
-            default: {
-              $service_file_location   = '/etc/init.d/confluence'
-              $service_file_template   = 'confluence/confluence.initscript.erb'
-              $service_lockfile        = '/var/lock/confluence'
-              $refresh_systemd         = false
-            }
+          if $facts['service_provider'] == 'systemd' {
+            $service_file_location   = '/etc/systemd/system/confluence.service'
+            $service_file_template   = 'confluence/confluence.service.erb'
+            $service_lockfile        = '/var/lock/subsys/confluence'
+            $refresh_systemd         = true
+          } else {
+            $service_file_location   = '/etc/init.d/confluence'
+            $service_file_template   = 'confluence/confluence.initscript.erb'
+            $service_lockfile        = '/var/lock/confluence'
+            $refresh_systemd         = false
           }
         }
         default: {
