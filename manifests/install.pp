@@ -101,12 +101,6 @@ class confluence::install {
     group  => $confluence::group,
     owner  => $confluence::user,
   }
-  -> file { "${confluence::homedir}/confluence.cfg.xml":
-    ensure => file,
-    owner  => $confluence::user,
-    group  => $confluence::group,
-    mode   => '0640',
-  }
   -> exec { "chown_${confluence::webappdir}":
     command     => "/bin/chown -R ${confluence::user}:${confluence::group} ${confluence::webappdir}",
     refreshonly => true,
