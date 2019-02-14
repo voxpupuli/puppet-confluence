@@ -5,7 +5,6 @@
 class confluence::service (
   $service_file_location = $confluence::params::service_file_location,
   $service_file_template = $confluence::params::service_file_template,
-  $service_lockfile      = $confluence::params::service_lockfile,
   $refresh_systemd       = $confluence::params::refresh_systemd,
 ) {
 

@@ -9,37 +9,26 @@ class confluence::params {
       if $facts['os']['release']['major'] == '7' {
         $service_file_location = '/usr/lib/systemd/system/confluence.service'
         $service_file_template = 'confluence/confluence.service.erb'
-        $service_lockfile      = '/var/lock/subsys/confluence'
         $refresh_systemd       = true
       } elsif $facts['os']['release']['major'] == '6' {
         $service_file_location = '/etc/init.d/confluence'
         $service_file_template = 'confluence/confluence.initscript.erb'
-        $service_lockfile      = '/var/lock/subsys/confluence'
         $refresh_systemd       = false
       } else {
         fail("Only osfamily ${facts['os']['family']} 6 and 7 and supported")
       }
     }
     /Debian/: {
-      case $facts['os']['name'] {
-        /Ubuntu/: {
-          if $facts['service_provider'] == 'systemd' {
-            $service_file_location   = '/etc/systemd/system/confluence.service'
-            $service_file_template   = 'confluence/confluence.service.erb'
-            $service_lockfile        = '/var/lock/subsys/confluence'
-            $refresh_systemd         = true
-          } else {
-            $service_file_location   = '/etc/init.d/confluence'
-            $service_file_template   = 'confluence/confluence.initscript.erb'
-            $service_lockfile        = '/var/lock/confluence'
-            $refresh_systemd         = false
-          }
+      case $facts['service_provider'] {
+        'systemd': {
+          $service_file_location = '/etc/systemd/system/confluence.service'
+          $service_file_template = 'confluence/confluence.service.erb'
+          $refresh_systemd       = true
         }
         default: {
-          $service_file_location   = '/etc/init.d/confluence'
-          $service_file_template   = 'confluence/confluence.initscript.erb'
-          $service_lockfile        = '/var/lock/confluence'
-          $refresh_systemd         = false
+          $service_file_location = '/etc/init.d/confluence'
+          $service_file_template = 'confluence/confluence.initscript.erb'
+          $refresh_systemd       = false
         }
       }
     }
