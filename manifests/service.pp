@@ -9,7 +9,7 @@ class confluence::service (
 ) {
 
   if($refresh_systemd) {
-    include ::systemd::systemctl::daemon_reload
+    include systemd::systemctl::daemon_reload
   }
 
   file { $service_file_location:
