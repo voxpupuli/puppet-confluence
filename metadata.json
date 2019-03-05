@@ -54,6 +54,12 @@
         "16.04",
         "18.04"
       ]
+    },
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "9"
+      ]
     }
   ]
 }
