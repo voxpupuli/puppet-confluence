@@ -4,7 +4,7 @@
 #
 class confluence::install {
 
-  include '::archive'
+  include 'archive'
 
   if $::confluence::manage_user {
     group { $confluence::group:
@@ -48,7 +48,7 @@ class confluence::install {
 
   case $confluence::deploy_module {
     'staging': {
-      require ::staging
+      require staging
       staging::file { $file:
         source  => "${confluence::download_url}/${file}",
         timeout => 1800,
