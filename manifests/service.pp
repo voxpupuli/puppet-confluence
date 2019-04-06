@@ -44,17 +44,6 @@ class confluence::service (
       execstart   => "${confluence::webappdir}/bin/start-confluence.sh",
       execstop    => "${confluence::webappdir}/bin/stop-confluence.sh",
       env_vars    => [ "\"JAVA_HOME=${confluence::javahome}\"" ],
-      notify      => [
-        $refresh_systemd ? {
-          true    => Exec['reload_systemd_for_confluence'],
-          default => undef
-        }
-      ],
-    }
-
-    exec { 'reload_systemd_for_confluence':
-      command     => 'systemctl daemon-reload',
-      refreshonly => true,
     }
 
     if $confluence::manage_service {
