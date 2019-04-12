@@ -36,14 +36,16 @@ class confluence::service (
 
   if $confluence::systemd_module == 'eyp' {
     systemd::service { 'confluence':
-      description => 'Confluence Team Collaboration Software',
-      after       => 'network.target',
-      user        => $confluence::user,
-      group       => $confluence::group,
-      forking     => true,
-      execstart   => "${confluence::webappdir}/bin/start-confluence.sh",
-      execstop    => "${confluence::webappdir}/bin/stop-confluence.sh",
-      env_vars    => [ "\"JAVA_HOME=${confluence::javahome}\"" ],
+      description  => 'Confluence Team Collaboration Software',
+      after        => 'network.target',
+      user         => $confluence::user,
+      group        => $confluence::group,
+      forking      => true,
+      execstart    => "${confluence::webappdir}/bin/start-confluence.sh",
+      execstop     => "${confluence::webappdir}/bin/stop-confluence.sh",
+      env_vars     => [ "\"JAVA_HOME=${confluence::javahome}\"" ],
+      limit_nofile => $confluence::service_nofile,
+      limit_nproc  => $confluence::service_nproc,
     }
 
     if $confluence::manage_service {

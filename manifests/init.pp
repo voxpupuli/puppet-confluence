@@ -31,6 +31,8 @@ class confluence (
   $deploy_module                                                 = 'archive',
   # Manage confluence server
   $manage_service                                                = true,
+  $service_nofile                                                = undef,
+  $service_nproc                                                 = undef,
   # Tomcat Tunables
   # Should we use augeas to manage server.xml or a template file
   Enum['augeas', 'template'] $manage_server_xml                  = 'augeas',

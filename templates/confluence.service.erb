@@ -8,6 +8,12 @@ User=<%= scope.lookupvar('confluence::user') %>
 Environment="JAVA_HOME=<%= scope.lookupvar('confluence::javahome') %>"
 ExecStart=<%= scope.lookupvar('confluence::webappdir') %>/bin/start-confluence.sh
 ExecStop=<%= scope.lookupvar('confluence::webappdir') %>/bin/stop-confluence.sh
+<% if scope.lookupvar('confluence::service_nofile') != nil -%>
+LimitNOFILE=<%= scope.lookupvar('confluence::service_nofile') %>
+<% end %>
+<% if scope.lookupvar('confluence::service_nproc') != nil -%>
+LimitNPROC=<%= scope.lookupvar('confluence::service_nproc') %>
+<% end -%>
 
 [Install]
 WantedBy=multi-user.target

@@ -329,6 +329,14 @@ Only supported with `deploy_module => archive` (the default).  Defaults to 'unde
 
 Should puppet manage this service? Default: true
 
+##### `service_nofile`
+
+Set maximum number of files for confluence service
+
+##### `service_nproc`
+
+Set maximum number of processes for confluence service
+
 ##### `deploy_module`
 
 Module to use for downloading and extracting archive file. Supports
