@@ -365,9 +365,9 @@ Should the module deploy mysql_connector for mysql databases ? . Default to fals
 The puppetlabs repositories can be found at:
 <http://yum.puppetlabs.com/> and <http://apt.puppetlabs.com/>
 
-* RedHat / CentOS 5/6/7
-* Ubuntu 12.04 / 14.04 / 16.04 / 18.04
-* Debian 7
+* RedHat / CentOS 6/7
+* Ubuntu 16.04 / 18.04
+* Debian 9
 
 Operating Systems without an Augueas version >= 1 such as Ubuntu 12.04 must use
 the paramater:
