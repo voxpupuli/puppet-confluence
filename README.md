@@ -345,6 +345,19 @@ paramater can be used to shut down confluence for upgrades. Defaults to
 
 Enable external facts for confluence version. Defaults to present.
 
+##### `mysql_connector_version`
+
+Specify the version of mysql_connector_version you want to use. Defaults to 5.1.47.
+
+##### `mysql_connector_install`
+
+Specify where you want to install mysql connector . Defaults to /opt/MySQL-connector
+
+##### `mysql_connector`
+
+Should the module deploy mysql_connector for mysql databases ? . Default to false
+
+
 ## Limitations
 
 * Puppet 5.5.8 or newer
