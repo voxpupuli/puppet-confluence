@@ -61,6 +61,9 @@ class confluence (
   $session_lastvalidation                                        = 'session.lastvalidation',
   $proxy_server                                                  = undef,
   $proxy_type                                                    = undef,
+  String[1] $mysql_connector_version                             = '5.1.47',
+  Stdlib::Absolutepath $mysql_connector_install                  = '/opt/MySQL-connector',
+  Boolean $mysql_connector                                       = false,
 ) inherits confluence::params {
 
   Exec { path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ] }
@@ -111,6 +114,10 @@ class confluence (
   -> class { 'confluence::config': }
   ~> class { 'confluence::service': }
   -> anchor { 'confluence::end': }
+
+  if $mysql_connector {
+    class { 'confluence::mysql_connector': }
+  }
 
   if ($enable_sso) {
     class { 'confluence::sso':
