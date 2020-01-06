@@ -10,6 +10,7 @@ class confluence (
   $jvm_xmx                                                       = '1024m',
   $jvm_permgen                                                   = '256m',
   $java_opts                                                     = '',
+  Variant[String,Array[String]] $catalina_opts                   = '',
   # Confluence Settings
   Pattern[/^(?:(\d+)\.)?(?:(\d+)\.)?(\*|\d+)(|[a-z])$/] $version = '5.7.1',
   $product                                                       = 'confluence',
@@ -64,6 +65,9 @@ class confluence (
   $proxy_type                                                    = undef,
   String $license                                                = '',
   String $server_id                                              = '',
+  String[1] $mysql_connector_version                             = '5.1.47',
+  Stdlib::Absolutepath $mysql_connector_install                  = '/opt/MySQL-connector',
+  Boolean $mysql_connector                                       = false,
 ) inherits confluence::params {
 
   Exec { path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ] }
@@ -96,15 +100,15 @@ class confluence (
     if $manage_server_xml != 'template' {
       fail('An AJP connector can only be configured with manage_server_xml = template.')
     }
-    if ! has_key($ajp, 'port') {
+    if ! ('port' in $ajp) {
       fail('You need to specify a valid port for the AJP connector.')
     } else {
-      validate_re($ajp['port'], '^\d+$')
+      assert_type(Variant[Pattern[/^\d+$/], Stdlib::Port], $ajp['port'])
     }
-    if ! has_key($ajp, 'protocol') {
+    if ! ('protocol' in $ajp) {
       fail('You need to specify a valid protocol for the AJP connector.')
     } else {
-      validate_re($ajp['protocol'], ['^AJP/1.3$', '^org.apache.coyote.ajp'])
+      assert_type(Enum['AJP/1.3', 'org.apache.coyote.ajp'], $ajp['protocol'])
     }
   }
 
@@ -121,14 +125,18 @@ class confluence (
   }
 
   anchor { 'confluence::start': }
-  -> class { '::confluence::facts': }
-  -> class { '::confluence::install': }
-  -> class { '::confluence::config': }
-  ~> class { '::confluence::service': }
+  -> class { 'confluence::facts': }
+  -> class { 'confluence::install': }
+  -> class { 'confluence::config': }
+  ~> class { 'confluence::service': }
   -> anchor { 'confluence::end': }
 
+  if $mysql_connector {
+    class { 'confluence::mysql_connector': }
+  }
+
   if ($enable_sso) {
-    class { '::confluence::sso':
+    class { 'confluence::sso':
     }
   }
 }

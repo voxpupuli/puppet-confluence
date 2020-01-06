@@ -5,12 +5,11 @@
 class confluence::service (
   $service_file_location = $confluence::params::service_file_location,
   $service_file_template = $confluence::params::service_file_template,
-  $service_lockfile      = $confluence::params::service_lockfile,
   $refresh_systemd       = $confluence::params::refresh_systemd,
 ) {
 
   if($refresh_systemd) {
-    include ::systemd::systemctl::daemon_reload
+    include systemd::systemctl::daemon_reload
   }
 
   file { $service_file_location:

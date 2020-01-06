@@ -128,6 +128,9 @@ confluence::jvm_xms:        '4G'
 confluence::jvm_xmx:        '8G'
 confluence::jvm_permgen:    '512m'
 confluence::download_url:    'http://webserver.example.co.za/pub/software/development-tools/atlassian'
+confluence::catalina_opts:
+  - -Dconfluence.cluster.node.name=%{hostname}
+  - -Dconfluence.upgrade.recovery.file.enabled=false
 confluence::tomcat_proxy:
   scheme:    'https'
   proxyName: 'webvip.example.co.za'
@@ -223,6 +226,10 @@ Increase max permgen size for a Java Virtual Machine. Default: '256m'
 ##### `java_opts`
 
 Additional java options can be specified here. Default: ''
+
+##### `catalina_opts`
+
+Additional catalina options can be specified either as a simple string or array of strings. Default: ''
 
 #### Tomcat parameters
 
@@ -399,15 +406,28 @@ paramater can be used to shut down confluence for upgrades. Defaults to
 
 Enable external facts for confluence version. Defaults to present.
 
+##### `mysql_connector_version`
+
+Specify the version of mysql_connector_version you want to use. Defaults to 5.1.47.
+
+##### `mysql_connector_install`
+
+Specify where you want to install mysql connector . Defaults to /opt/MySQL-connector
+
+##### `mysql_connector`
+
+Should the module deploy mysql_connector for mysql databases ? . Default to false
+
+
 ## Limitations
 
-* Puppet 4.10.0
+* Puppet 5.5.8 or newer
 
 The puppetlabs repositories can be found at:
 <http://yum.puppetlabs.com/> and <http://apt.puppetlabs.com/>
 
 * RedHat / CentOS 5/6/7
-* Ubuntu 12.04 / 14.04 / 16.04
+* Ubuntu 12.04 / 14.04 / 16.04 / 18.04
 * Debian 7
 
 Operating Systems without an Augueas version >= 1 such as Ubuntu 12.04 must use

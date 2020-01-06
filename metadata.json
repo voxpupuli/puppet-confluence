@@ -1,6 +1,6 @@
 {
   "name": "puppet-confluence",
-  "version": "3.1.3-rc0",
+  "version": "3.2.1-rc0",
   "author": "Vox Pupuli",
   "summary": "Install atlassian confluence",
   "license": "MIT",
@@ -15,21 +15,25 @@
     },
     {
       "name": "puppet/archive",
-      "version_requirement": ">= 1.0.0 < 4.0.0"
+      "version_requirement": ">= 1.0.0 < 5.0.0"
     },
     {
       "name": "puppet/staging",
       "version_requirement": ">= 2.0.1 < 4.0.0"
     },
     {
+      "name": "puppet/mysql_java_connector",
+      "version_requirement": ">= 3.0.2 < 4.0.0"
+    },
+    {
       "name": "puppetlabs/stdlib",
-      "version_requirement": ">= 4.13.1 < 6.0.0"
+      "version_requirement": ">= 4.13.1 < 7.0.0"
     }
   ],
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 4.10.0 < 6.0.0"
+      "version_requirement": ">= 5.5.8 < 7.0.0"
     }
   ],
   "operatingsystem_support": [
@@ -50,7 +54,15 @@
     {
       "operatingsystem": "Ubuntu",
       "operatingsystemrelease": [
-        "14.04"
+        "14.04",
+        "16.04",
+        "18.04"
+      ]
+    },
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "9"
       ]
     }
   ]
