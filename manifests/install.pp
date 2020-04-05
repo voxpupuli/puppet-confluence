@@ -6,7 +6,7 @@ class confluence::install {
 
   include 'archive'
 
-  if $::confluence::manage_user {
+  if $confluence::manage_user {
     group { $confluence::group:
       ensure => present,
       system => true,
