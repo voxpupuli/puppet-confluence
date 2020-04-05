@@ -77,7 +77,7 @@ class confluence (
     if versioncmp($version, $facts['confluence_version']) > 0 {
       # lint:endignore
       notify { 'Attempting to upgrade CONFLUENCE': }
-      exec { $stop_confluence: before => Anchor['confluence::start'] }
+      exec { $stop_confluence: before => Class['confluence::facts'] }
     }
   }
 
@@ -108,12 +108,12 @@ class confluence (
     }
   }
 
-  anchor { 'confluence::start': }
-  -> class { 'confluence::facts': }
-  -> class { 'confluence::install': }
-  -> class { 'confluence::config': }
-  ~> class { 'confluence::service': }
-  -> anchor { 'confluence::end': }
+  contain confluence::facts
+  contain confluence::install
+  contain confluence::config
+  contain confluence::service
+
+  Class['confluence::facts'] -> Class['confluence::install'] -> Class['confluence::config'] ~> Class['confluence::service']
 
   if $mysql_connector {
     class { 'confluence::mysql_connector': }
