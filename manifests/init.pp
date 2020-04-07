@@ -11,6 +11,9 @@ class confluence (
   $jvm_permgen                                                   = '256m',
   $java_opts                                                     = '',
   Variant[String,Array[String]] $catalina_opts                   = '',
+  $printgcdetails                                                = '-XX:-PrintGCDetails',
+  $printgcdatestamps                                             = '-XX:+PrintGCDateStamps',
+  $printtenuringdistribution                                     = '-XX:-PrintTenuringDistribution',  
   # Confluence Settings
   Pattern[/^(?:(\d+)\.)?(?:(\d+)\.)?(\*|\d+)(|[a-z])$/] $version = '5.7.1',
   $product                                                       = 'confluence',
