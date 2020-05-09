@@ -20,7 +20,7 @@ assert_private()
   file { "${confluence::installdir}/atlassian-confluence-${confluence::version}/confluence/WEB-INF/lib/mysql-connector-java-${connector_version}-bin.jar":
     ensure => present,
     source => "${installpath}/mysql-connector-java-${connector_version}-bin.jar",
-    notify => Service[confluence];
+    notify => Service['confluence'];
   }
 
 }
