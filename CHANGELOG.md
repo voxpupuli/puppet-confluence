@@ -4,6 +4,47 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v4.0.0](https://github.com/voxpupuli/puppet-confluence/tree/v4.0.0) (2020-05-09)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-confluence/compare/v3.2.0...v4.0.0)
+
+**Breaking changes:**
+
+- drop EOL Ubuntu 14.04 [\#187](https://github.com/voxpupuli/puppet-confluence/pull/187) ([bastelfreak](https://github.com/bastelfreak))
+- modulesync 2.5.1 & drop Puppet 4 [\#184](https://github.com/voxpupuli/puppet-confluence/pull/184) ([bastelfreak](https://github.com/bastelfreak))
+
+**Implemented enhancements:**
+
+- Add support for Java11 \(logging options\) [\#197](https://github.com/voxpupuli/puppet-confluence/pull/197) ([jake2184](https://github.com/jake2184))
+- Manage mysql connector [\#189](https://github.com/voxpupuli/puppet-confluence/pull/189) ([hdep](https://github.com/hdep))
+- use service\_provider fact to detect systemd, support Debian 9 [\#183](https://github.com/voxpupuli/puppet-confluence/pull/183) ([rrotter](https://github.com/rrotter))
+- Add support for 18.04 [\#180](https://github.com/voxpupuli/puppet-confluence/pull/180) ([baurmatt](https://github.com/baurmatt))
+
+**Fixed bugs:**
+
+- Don't create confluence.cfg.xml [\#182](https://github.com/voxpupuli/puppet-confluence/pull/182) ([rrotter](https://github.com/rrotter))
+
+**Closed issues:**
+
+- Support Ubuntu 18.04 [\#179](https://github.com/voxpupuli/puppet-confluence/issues/179)
+- check debian support [\#158](https://github.com/voxpupuli/puppet-confluence/issues/158)
+- spec tests fail when run on non-Debian OSes [\#135](https://github.com/voxpupuli/puppet-confluence/issues/135)
+- example request [\#127](https://github.com/voxpupuli/puppet-confluence/issues/127)
+- Module puppet/staging marked deprecated [\#123](https://github.com/voxpupuli/puppet-confluence/issues/123)
+- Should default to https for Confluence download URL [\#61](https://github.com/voxpupuli/puppet-confluence/issues/61)
+- Support the mysql connector natively [\#34](https://github.com/voxpupuli/puppet-confluence/issues/34)
+
+**Merged pull requests:**
+
+- Use voxpupuli-acceptance [\#199](https://github.com/voxpupuli/puppet-confluence/pull/199) ([ekohl](https://github.com/ekohl))
+- Remove duplicate CONTRIBUTING.md file [\#195](https://github.com/voxpupuli/puppet-confluence/pull/195) ([dhoppe](https://github.com/dhoppe))
+- Clean up acceptance spec helper [\#192](https://github.com/voxpupuli/puppet-confluence/pull/192) ([ekohl](https://github.com/ekohl))
+- Add mysql\_connector parameters to README [\#190](https://github.com/voxpupuli/puppet-confluence/pull/190) ([hdep](https://github.com/hdep))
+- Allow `puppetlabs/stdlib` 6.x and `puppet/archive` 4.x [\#186](https://github.com/voxpupuli/puppet-confluence/pull/186) ([alexjfisher](https://github.com/alexjfisher))
+- replace deprecated has\_key\(\) with `in` [\#176](https://github.com/voxpupuli/puppet-confluence/pull/176) ([bastelfreak](https://github.com/bastelfreak))
+- replace validate\_\* with assert\_type in init.pp [\#175](https://github.com/voxpupuli/puppet-confluence/pull/175) ([bastelfreak](https://github.com/bastelfreak))
+- confluence.cfg.xml little automation [\#170](https://github.com/voxpupuli/puppet-confluence/pull/170) ([posteingang](https://github.com/posteingang))
+
 ## [v3.2.0](https://github.com/voxpupuli/puppet-confluence/tree/v3.2.0) (2018-10-20)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-confluence/compare/v3.1.2...v3.2.0)
@@ -182,7 +223,7 @@ These should not affect the functionality of the module.
 - Add crowd SSO functionality [\#57](https://github.com/voxpupuli/puppet-confluence/pull/57) ([patricktoelle](https://github.com/patricktoelle))
 - Update based on voxpupuli/modulesync\_config [\#56](https://github.com/voxpupuli/puppet-confluence/pull/56) ([dhoppe](https://github.com/dhoppe))
 - Fix TravisCI badge [\#52](https://github.com/voxpupuli/puppet-confluence/pull/52) ([juniorsysadmin](https://github.com/juniorsysadmin))
-- centos 7 service template fixes [\#51](https://github.com/voxpupuli/puppet-confluence/pull/51) ([dmm92](https://github.com/dmm92))
+- centos 7 service template fixes [\#51](https://github.com/voxpupuli/puppet-confluence/pull/51) ([hypertext418](https://github.com/hypertext418))
 - Prepare for 2.2.0 release [\#50](https://github.com/voxpupuli/puppet-confluence/pull/50) ([juniorsysadmin](https://github.com/juniorsysadmin))
 - Deprecate the downloadURL parameter [\#49](https://github.com/voxpupuli/puppet-confluence/pull/49) ([juniorsysadmin](https://github.com/juniorsysadmin))
 - Install systemd file before starting [\#48](https://github.com/voxpupuli/puppet-confluence/pull/48) ([ericlaflamme](https://github.com/ericlaflamme))
