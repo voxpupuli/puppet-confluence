@@ -39,6 +39,7 @@ class confluence (
   Enum['augeas', 'template'] $manage_server_xml                  = 'augeas',
   $tomcat_port                                                   = 8090,
   $tomcat_max_threads                                            = 150,
+  $tomcat_max_http_header_size                                   = 32768,
   $tomcat_accept_count                                           = 100,
   # Reverse https proxy setting for tomcat
   Hash $tomcat_proxy                                             = {},

@@ -5,6 +5,7 @@
 class confluence::config(
   $tomcat_port         = $confluence::tomcat_port,
   $tomcat_max_threads  = $confluence::tomcat_max_threads,
+  $tomcat_max_http_header_size = $confluence::tomcat_max_http_header_size,
   $tomcat_accept_count = $confluence::tomcat_accept_count,
   $tomcat_proxy        = $confluence::tomcat_proxy,
   $tomcat_extras       = $confluence::tomcat_extras,
@@ -32,10 +33,11 @@ class confluence::config(
 
   if $manage_server_xml == 'augeas' {
     $_tomcat_max_threads  = { maxThreads  => $tomcat_max_threads }
+    $_tomcat_max_http_header_size  = { maxHttpHeaderSize  => $tomcat_max_http_header_size }
     $_tomcat_accept_count = { acceptCount => $tomcat_accept_count }
     $_tomcat_port         = { port        => $tomcat_port }
 
-    $parameters = merge($_tomcat_max_threads, $_tomcat_accept_count, $tomcat_proxy, $tomcat_extras, $_tomcat_port )
+    $parameters = merge($_tomcat_max_threads, $_tomcat_max_http_header_size, $_tomcat_accept_count, $tomcat_proxy, $tomcat_extras, $_tomcat_port )
 
     if versioncmp($facts['augeasversion'], '1.0.0') < 0 {
       fail('This module requires Augeas >= 1.0.0')
