@@ -70,13 +70,13 @@ echo "--------------------------------------------------------------------------
 JVM_MINIMUM_MEMORY="<%= scope['confluence::jvm_xms'] %>"
 JVM_MAXIMUM_MEMORY="<%= scope['confluence::jvm_xmx'] %>"
 JVM_PERMGEN_MEMORY="<%= scope['confluence::jvm_permgen'] %>"
+<%- end -%>
 
 #
 # Additional JAVA_OPTS
 #
 JAVA_OPTS="<%= scope['confluence::java_opts'] %> $JAVA_OPTS"
 export JAVA_OPTS
-<%- end -%>
 <%- if version[0] >= 5 -%>
 
 # Set the JVM arguments used to start Confluence. For a description of the options, see
@@ -126,4 +126,3 @@ CATALINA_OPTS="<%= catalina_opts %> ${CATALINA_OPTS}"
 
 export CATALINA_OPTS
 <%- end # if version[0] >= 5 -%>
-
