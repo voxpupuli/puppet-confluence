@@ -2,7 +2,7 @@
 #
 # Install confluence, See README.md for more.
 #
-class confluence::config(
+class confluence::config (
   $tomcat_port         = $confluence::tomcat_port,
   $tomcat_max_threads  = $confluence::tomcat_max_threads,
   $tomcat_accept_count = $confluence::tomcat_accept_count,
@@ -12,14 +12,13 @@ class confluence::config(
   $context_path        = $confluence::context_path,
   $ajp                 = $confluence::ajp,
 ) {
-
   File {
     owner => $confluence::user,
     group => $confluence::group,
   }
 
-  file {"${confluence::webappdir}/bin/setenv.sh":
-    ensure  => present,
+  file { "${confluence::webappdir}/bin/setenv.sh":
+    ensure  => file,
     content => template('confluence/setenv.sh.erb'),
     mode    => '0755',
   }
@@ -37,7 +36,7 @@ class confluence::config(
 
     $parameters = merge($_tomcat_max_threads, $_tomcat_accept_count, $tomcat_proxy, $tomcat_extras, $_tomcat_port )
 
-    if versioncmp($facts['augeasversion'], '1.0.0') < 0 {
+    if versioncmp($facts['augeas']['version'], '1.0.0') < 0 {
       fail('This module requires Augeas >= 1.0.0')
     }
 
@@ -60,15 +59,12 @@ class confluence::config(
         changes => $changes,
       }
     }
-
   } elsif $manage_server_xml == 'template' {
-
     file { "${confluence::webappdir}/conf/server.xml":
       content => template('confluence/server.xml.erb'),
       mode    => '0600',
       require => Class['confluence::install'],
       notify  => Class['confluence::service'],
     }
-
   }
 }
