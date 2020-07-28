@@ -127,6 +127,54 @@ describe 'confluence' do
           end
         end
 
+        context 'tomcat additional connectors' do
+          let(:params) do
+            {
+              version: '5.5.6',
+              javahome: '/opt/java',
+              manage_server_xml: 'template',
+              tomcat_additional_connectors: {
+                8081 => {
+                  'URIEncoding' => 'UTF-8',
+                  'connectionTimeout' => '20000',
+                  'protocol' => 'HTTP/1.1',
+                  'proxyName' => 'foo.example.com',
+                  'proxyPort' => '8123',
+                  'secure' => true,
+                  'scheme' => 'https'
+                },
+                8082 => {
+                  'URIEncoding' => 'UTF-8',
+                  'connectionTimeout' => '20000',
+                  'protocol' => 'HTTP/1.1',
+                  'proxyName' => 'bar.example.com',
+                  'proxyPort' => '8124',
+                  'scheme' => 'http'
+                }
+              }
+            }
+          end
+
+          it do
+            is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/conf/server.xml').
+              with_content(%r{<Connector port="8081"}).
+              with_content(%r{connectionTimeout="20000"}).
+              with_content(%r{protocol="HTTP/1\.1"}).
+              with_content(%r{proxyName="foo\.example\.com"}).
+              with_content(%r{proxyPort="8123"}).
+              with_content(%r{scheme="https"}).
+              with_content(%r{secure="true"}).
+              with_content(%r{URIEncoding="UTF-8"}).
+              with_content(%r{<Connector port="8082"}).
+              with_content(%r{connectionTimeout="20000"}).
+              with_content(%r{protocol="HTTP/1\.1"}).
+              with_content(%r{proxyName="bar\.example\.com"}).
+              with_content(%r{proxyPort="8124"}).
+              with_content(%r{scheme="http"}).
+              with_content(%r{URIEncoding="UTF-8"})
+          end
+        end
+
         context 'catalina_opts set to a string' do
           let(:params) do
             {

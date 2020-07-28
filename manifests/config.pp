@@ -11,6 +11,8 @@ class confluence::config(
   $manage_server_xml   = $confluence::manage_server_xml,
   $context_path        = $confluence::context_path,
   $ajp                 = $confluence::ajp,
+  # Additional connectors in server.xml
+  Confluence::Tomcat_connectors $tomcat_additional_connectors = $confluence::tomcat_additional_connectors,
 ) {
 
   File {

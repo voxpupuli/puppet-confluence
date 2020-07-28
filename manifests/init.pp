@@ -44,6 +44,8 @@ class confluence (
   $context_path                                                  = '',
   # Options for the AJP connector
   Hash $ajp                                                      = {},
+  # Additional connectors in server.xml
+  Confluence::Tomcat_connectors $tomcat_additional_connectors    = {},
   # Command to stop confluence in preparation to updgrade. This is configurable
   # incase the confluence service is managed outside of puppet. eg: using the
   # puppetlabs-corosync module: 'crm resource stop confluence && sleep 15'
