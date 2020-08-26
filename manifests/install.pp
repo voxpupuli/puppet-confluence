@@ -3,7 +3,6 @@
 # Install confluence, See README.md for more.
 #
 class confluence::install {
-
   include 'archive'
 
   if $confluence::manage_user {
@@ -25,8 +24,6 @@ class confluence::install {
       gid              => $confluence::gid,
     }
   }
-
-
 
   if ! defined(File[$confluence::installdir]) {
     file { $confluence::installdir:
@@ -64,7 +61,7 @@ class confluence::install {
         require => [
           File[$confluence::installdir],
           User[$confluence::user],
-          File[$confluence::webappdir] ],
+        File[$confluence::webappdir]],
       }
     }
     'archive': {
@@ -96,7 +93,7 @@ class confluence::install {
     }
   }
 
-  file { [ $confluence::homedir, "${confluence::homedir}/logs" ]:
+  file { [$confluence::homedir, "${confluence::homedir}/logs"]:
     ensure => 'directory',
     group  => $confluence::group,
     owner  => $confluence::user,

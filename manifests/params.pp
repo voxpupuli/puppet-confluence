@@ -3,7 +3,6 @@
 # Defines default values for confluence module
 #
 class confluence::params {
-
   case $facts['service_provider'] {
     'systemd': {
       case $facts['os']['family'] {
@@ -26,5 +25,4 @@ class confluence::params {
       $refresh_systemd       = false
     }
   }
-
 }

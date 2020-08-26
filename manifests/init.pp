@@ -65,8 +65,7 @@ class confluence (
   Stdlib::Absolutepath $mysql_connector_install                  = '/opt/MySQL-connector',
   Boolean $mysql_connector                                       = false,
 ) inherits confluence::params {
-
-  Exec { path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ] }
+  Exec { path => ['/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/'] }
 
   $webappdir    = "${installdir}/atlassian-${product}-${version}"
 

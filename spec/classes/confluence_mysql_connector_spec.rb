@@ -21,7 +21,7 @@ describe 'confluence' do
 
             it { is_expected.to compile.with_all_deps }
             it { is_expected.to contain_file('/opt/MySQL-connector').with_ensure('directory') }
-            it { is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.7.1/confluence/WEB-INF/lib/mysql-connector-java-5.1.47-bin.jar').with_ensure('present') }
+            it { is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.7.1/confluence/WEB-INF/lib/mysql-connector-java-5.1.47-bin.jar').with_ensure('file') }
           end
 
           context 'mysql_connector_manage equals false' do

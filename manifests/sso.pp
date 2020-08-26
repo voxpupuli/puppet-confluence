@@ -2,7 +2,7 @@
 #
 # Install confluence SSO via crowd, See README.md for more.
 #
-class confluence::sso(
+class confluence::sso (
   $application_name                                                = $confluence::application_name,
   $application_password                                            = $confluence::application_password,
   Variant[Stdlib::HTTPSUrl,Stdlib::HTTPUrl] $application_login_url = $confluence::application_login_url,
@@ -13,9 +13,8 @@ class confluence::sso(
   $session_validationinterval                                      = $confluence::session_validationinterval,
   $session_lastvalidation                                          = $confluence::session_lastvalidation,
 ) {
-
   file { "${confluence::webappdir}/confluence/WEB-INF/classes/crowd.properties":
-    ensure  => present,
+    ensure  => file,
     content => template('confluence/crowd.properties'),
     mode    => '0660',
     owner   => $confluence::user,

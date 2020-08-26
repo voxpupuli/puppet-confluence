@@ -3,7 +3,6 @@ define confluence::conf (
   $key = $name,
   $config_file = "${confluence::homedir}/confluence.cfg.xml",
 ) {
-
   require Class[confluence::install]
 
   $aug_path = "set /files${config_file}/confluence-configuration/properties/property[#attribute/name = \"${key}\"]/#text \"${value}\""
