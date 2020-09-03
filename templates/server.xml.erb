@@ -16,7 +16,7 @@
 <%   @tomcat_proxy.sort.each do |key,value| -%>
                    <%= key %>=<%= "\"#{value}\"" %>
 <%   end -%>
-<% end -%> 
+<% end -%>
 />
 
 <% if @ajp and ! @ajp.empty? -%>
@@ -25,6 +25,15 @@
                    <%= key %> = <%= "\"#{value}\"" %>
 <%   end -%>
         />
+<% end -%>
+<% if @tomcat_additional_connectors and ! @tomcat_additional_connectors.empty? -%>
+<% @tomcat_additional_connectors.sort.map do |port, attrs| -%>
+        <Connector port="<%= port -%>"
+<% attrs.sort.map do |key, value| -%>
+                   <%= key -%>="<%= value -%>"
+<% end -%>
+                   />
+<% end -%>
 <% end -%>
 
         <Engine name="Standalone" defaultHost="localhost" debug="0">
