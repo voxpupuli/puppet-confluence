@@ -11,6 +11,11 @@ class confluence::params {
         $service_file_template = 'confluence/confluence.service.erb'
         $service_lockfile      = '/var/lock/subsys/confluence'
         $refresh_systemd       = true
+      } elsif $facts['os']['name'] == 'Amazon' and $facts['os']['release']['major'] == '2' {
+        $service_file_location = '/usr/lib/systemd/system/confluence.service'
+        $service_file_template = 'confluence/confluence.service.erb'
+        $service_lockfile      = '/var/lock/subsys/confluence'
+        $refresh_systemd       = true      
       } elsif $facts['os']['release']['major'] == '6' {
         $service_file_location = '/etc/init.d/confluence'
         $service_file_template = 'confluence/confluence.initscript.erb'
