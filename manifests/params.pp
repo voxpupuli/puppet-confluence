@@ -9,12 +9,10 @@ class confluence::params {
         /RedHat/: {
           $service_file_location = '/usr/lib/systemd/system/confluence.service'
           $service_file_template = 'confluence/confluence.service.erb'
-          $refresh_systemd       = true
         }
         /Debian/: {
           $service_file_location = '/etc/systemd/system/confluence.service'
           $service_file_template = 'confluence/confluence.service.erb'
-          $refresh_systemd       = true
         }
         default: { fail('Only osfamily Debian and Redhat are supported for systemd') }
       }
@@ -22,7 +20,6 @@ class confluence::params {
     default: {
       $service_file_location = '/etc/init.d/confluence'
       $service_file_template = 'confluence/confluence.initscript.erb'
-      $refresh_systemd       = false
     }
   }
 }

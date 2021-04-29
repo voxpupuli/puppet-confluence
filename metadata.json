@@ -10,10 +10,6 @@
   "description": "Atlassian confluence",
   "dependencies": [
     {
-      "name": "camptocamp/systemd",
-      "version_requirement": ">= 1.0.0 < 3.0.0"
-    },
-    {
       "name": "puppet/archive",
       "version_requirement": ">= 1.0.0 < 5.0.0"
     },
@@ -33,7 +29,7 @@
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 5.5.8 < 7.0.0"
+      "version_requirement": ">= 6.1.0 < 7.0.0"
     }
   ],
   "operatingsystem_support": [
