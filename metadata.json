@@ -11,11 +11,7 @@
   "dependencies": [
     {
       "name": "puppet/archive",
-      "version_requirement": ">= 1.0.0 < 5.0.0"
-    },
-    {
-      "name": "puppet/staging",
-      "version_requirement": ">= 2.0.1 < 4.0.0"
+      "version_requirement": ">= 1.0.0 < 6.0.0"
     },
     {
       "name": "puppet/mysql_java_connector",
@@ -23,13 +19,13 @@
     },
     {
       "name": "puppetlabs/stdlib",
-      "version_requirement": ">= 4.13.1 < 7.0.0"
+      "version_requirement": ">= 4.13.1 < 8.0.0"
     }
   ],
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 6.1.0 < 7.0.0"
+      "version_requirement": ">= 6.1.0 < 8.0.0"
     }
   ],
   "operatingsystem_support": [
