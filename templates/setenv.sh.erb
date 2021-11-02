@@ -88,7 +88,11 @@ CATALINA_OPTS="-XX:+IgnoreUnrecognizedVMOptions ${CATALINA_OPTS}"
 CATALINA_OPTS="-Xlog:gc+age=debug:file=$LOGBASEABS/logs/gc-`date +%F_%H-%M-%S`.log::filecount=5,filesize=2M ${CATALINA_OPTS}"
 <%-     end -%>
 <%-   end -%>
+<%- if scope.lookupvar('confluence::jvm_type') == 'openjdk-11' -%>
+CATALINA_OPTS="-XX:+ExplicitGCInvokesConcurrent -XX:+PrintGCDateStamps ${CATALINA_OPTS}"
+<%- elsif scope.lookupvar('confluence::jvm_type')  == 'oracle-jdk-1.8' -%>
 CATALINA_OPTS="-XX:-PrintGCDetails -XX:+PrintGCDateStamps -XX:-PrintTenuringDistribution ${CATALINA_OPTS}"
+<%- end -%>
 CATALINA_OPTS="-Xloggc:$LOGBASEABS/logs/gc-`date +%F_%H-%M-%S`.log -XX:+UseGCLogFileRotation -XX:NumberOfGCLogFiles=5 -XX:GCLogFileSize=2M ${CATALINA_OPTS}"
 CATALINA_OPTS="-XX:G1ReservePercent=20 ${CATALINA_OPTS}"
 CATALINA_OPTS="-Djava.awt.headless=true ${CATALINA_OPTS}"
@@ -105,15 +109,23 @@ CATALINA_OPTS="${START_CONFLUENCE_JAVA_OPTS} ${CATALINA_OPTS}"
 CATALINA_OPTS="-Dconfluence.context.path=${CONFLUENCE_CONTEXT_PATH} ${CATALINA_OPTS}"
 <%-     if version[0] >= 7 and version[1] >= 1 # 7.1.x or higher -%>
 CATALINA_OPTS="-Djava.locale.providers=JRE,SPI,CLDR ${CATALINA_OPTS}"
-CATALINA_OPTS="-Djdk.tls.server.protocols=TLSv1.1,TLSv1.2 -Djdk.tls.client.protocols=TLSv1.1,TLSv1.2 ${CATALINA_OPTS}"
 <%-     end -%>
 <%-     if version[0] >= 7 or version[1] >= 8 # 6.8.x or higher -%>
 CATALINA_OPTS="-XX:ReservedCodeCacheSize=256m -XX:+UseCodeCacheFlushing ${CATALINA_OPTS}"
+<%- if scope.lookupvar('confluence::big_instances_opts') == true and scope.lookupvar('confluence::jvm_type')  == 'openjdk-11' -%>
+# these will overwrite same options set earlier
+CATALINA_OPTS="-XX:ReservedCodeCacheSize=384m ${CATALINA_OPTS}"
+CATALINA_OPTS="-XX:+PrintTenuringDistribution ${CATALINA_OPTS}"
+CATALINA_OPTS="-XX:+PrintGCDetails -XX:+PrintGCTimeStamps ${CATALINA_OPTS}"
+<%- end -%>
 <%-     end -%>
 <%-   end -%>
 <%-   if version[0] == 5 and version[1] <= 7 # 5.7.x and below -%>
 CATALINA_OPTS="-XX:MaxPermSize=<%= scope['confluence::jvm_permgen'] %> ${CATALINA_OPTS}"
 <%-   end -%>
+<%- if @upgrade_recovery_file == false -%>
+CATALINA_OPTS="-Dconfluence.upgrade.recovery.file.enabled=false ${CATALINA_OPTS}"
+<%- end -%>
 <%- catalina_opts = scope['confluence::catalina_opts'] -%>
 <%-   if catalina_opts.is_a?(Array) # add each option as its own line -%>
 <%-     catalina_opts.each do |opt| -%>

@@ -6,9 +6,11 @@ class confluence (
 
   # JVM Settings
   $javahome                                                      = undef,
+  Enum['openjdk-11', 'oracle-jdk-1.8', 'custom'] $jvm_type       = 'openjdk-11',
   $jvm_xms                                                       = '256m',
   $jvm_xmx                                                       = '1024m',
   $jvm_permgen                                                   = '256m',
+  Boolean $big_instances_opts                                    = false,
   $java_opts                                                     = '',
   Variant[String,Array[String]] $catalina_opts                   = '',
   # Confluence Settings
@@ -50,6 +52,7 @@ class confluence (
   # incase the confluence service is managed outside of puppet. eg: using the
   # puppetlabs-corosync module: 'crm resource stop confluence && sleep 15'
   $stop_confluence                                               = 'service confluence stop && sleep 15',
+  Boolean $upgrade_recovery_file                                 = true,
   # Enable SingleSignOn via Crowd
   $enable_sso                                                    = false,
   $application_name                                              = 'crowd',

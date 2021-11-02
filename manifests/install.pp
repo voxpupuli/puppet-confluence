@@ -107,7 +107,7 @@ class confluence::install {
     command     => "/bin/chown -R ${confluence::user}:${confluence::group} ${confluence::webappdir}",
     refreshonly => true,
   }
-  if $confluence::manage_user{
+  if $confluence::manage_user {
     User[$confluence::user] ~> Exec["chown_${confluence::webappdir}"]
   }
 }
