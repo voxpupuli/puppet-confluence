@@ -35,6 +35,7 @@ class confluence (
   # Should we use augeas to manage server.xml or a template file
   Enum['augeas', 'template'] $manage_server_xml                  = 'augeas',
   $tomcat_port                                                   = 8090,
+  $tomcat_redirect_port                                          = 8443,
   $tomcat_max_threads                                            = 150,
   $tomcat_accept_count                                           = 100,
   # Reverse https proxy setting for tomcat
