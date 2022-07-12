@@ -210,6 +210,53 @@ describe 'confluence' do
           end
         end
 
+        context 'default java 11 specific option' do
+          let(:params) do
+            {
+              version: '7.12.0',
+              javahome: '/opt/java'
+            }
+          end
+
+          it do
+            is_expected.to compile.with_all_deps
+            is_expected.to contain_file('/opt/confluence/atlassian-confluence-7.12.0/bin/setenv.sh').
+              with_content(%r{CATALINA_OPTS=\"-XX:\+ExplicitGCInvokesConcurrent -XX:\+PrintGCDateStamps \${CATALINA_OPTS}\"})
+          end
+        end
+
+        context 'default java 11 big instance option' do
+          let(:params) do
+            {
+              version: '7.12.0',
+              javahome: '/opt/java',
+              big_instances_opts: true
+            }
+          end
+
+          it do
+            is_expected.to compile.with_all_deps
+            is_expected.to contain_file('/opt/confluence/atlassian-confluence-7.12.0/bin/setenv.sh').
+              with_content(%r{CATALINA_OPTS=\"-XX:ReservedCodeCacheSize=384m \${CATALINA_OPTS}\"})
+          end
+        end
+
+        context 'java 8 specific option' do
+          let(:params) do
+            {
+              version: '7.12.0',
+              javahome: '/opt/java',
+              jvm_type: 'oracle-jdk-1.8'
+            }
+          end
+
+          it do
+            is_expected.to compile.with_all_deps
+            is_expected.to contain_file('/opt/confluence/atlassian-confluence-7.12.0/bin/setenv.sh').
+              with_content(%r{CATALINA_OPTS=\"-XX:-PrintGCDetails -XX:\+PrintGCDateStamps -XX:-PrintTenuringDistribution \${CATALINA_OPTS}\"})
+          end
+        end
+
         context 'manage_user set to true' do
           let(:params) do
             {
