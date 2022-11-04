@@ -12,7 +12,7 @@ class confluence (
   $jvm_permgen                                                   = '256m',
   Boolean $big_instances_opts                                    = false,
   $java_opts                                                     = '',
-  Variant[String,Array[String]] $catalina_opts                   = '',
+  Optional[Variant[String,Array[String]]] $catalina_opts         = undef,
   # Confluence Settings
   Pattern[/^(?:(\d+)\.)?(?:(\d+)\.)?(\*|\d+)(|[a-z])$/] $version = '5.7.1',
   $product                                                       = 'confluence',
