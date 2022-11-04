@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper_acceptance'
 
 # It is sometimes faster to host confluence / java files on a local webserver.
@@ -47,13 +49,7 @@ describe 'confluence' do
 
   describe user('confluence') do
     it { is_expected.to exist }
-  end
-
-  describe user('confluence') do
     it { is_expected.to belong_to_group 'confluence' }
-  end
-
-  describe user('confluence') do
     it { is_expected.to have_login_shell '/bin/true' }
   end
 

@@ -1,4 +1,6 @@
-require 'spec_helper.rb'
+# frozen_string_literal: true
+
+require 'spec_helper'
 
 describe 'confluence' do
   on_supported_os.each do |os, fs_facts|
@@ -21,6 +23,7 @@ describe 'confluence' do
           it { is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/confluence-init.properties') }
           it { is_expected.to contain_augeas('/opt/confluence/atlassian-confluence-5.5.6/conf/server.xml') }
         end
+
         context 'with param manage_server_xml set to template' do
           let(:params) do
             {
@@ -34,6 +37,7 @@ describe 'confluence' do
           it { is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/confluence-init.properties') }
           it { is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/conf/server.xml') }
         end
+
         context 'with param manage_server_xml set to template and non default params' do
           let(:params) do
             {
@@ -45,15 +49,16 @@ describe 'confluence' do
               tomcat_max_threads: 999,
               tomcat_accept_count: 999,
               tomcat_proxy: {
-                'scheme'      => 'https',
-                'proxyName'   => 'EXAMPLE',
-                'proxyPort'   => '443'
+                'scheme' => 'https',
+                'proxyName' => 'EXAMPLE',
+                'proxyPort' => '443'
               }
             }
           end
 
           it { is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/bin/setenv.sh') }
           it { is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/confluence-init.properties') }
+
           it do
             is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/conf/server.xml').
               with_content(%r{port="8089"}).
@@ -65,6 +70,7 @@ describe 'confluence' do
               with_content(%r{Context path="/confluence1"})
           end
         end
+
         context 'with param data_dir set' do
           let(:params) do
             {
@@ -79,6 +85,7 @@ describe 'confluence' do
               with_content(%r{confluence.home=/opt/confluence/confluence-data})
           end
         end
+
         context 'with param data_dir not set and param homdir set' do
           let(:params) do
             {
@@ -93,6 +100,7 @@ describe 'confluence' do
               with_content(%r{confluence.home=/opt/confluence/confluence-home})
           end
         end
+
         context 'with param data_dir set and param homdir set' do
           let(:params) do
             {
@@ -108,6 +116,7 @@ describe 'confluence' do
               with_content(%r{confluence.home=/opt/confluence/confluence-data})
           end
         end
+
         context 'ajp proxy' do
           let(:params) do
             {
@@ -187,7 +196,7 @@ describe 'confluence' do
           it do
             is_expected.to compile.with_all_deps
             is_expected.to contain_file('/opt/confluence/atlassian-confluence-6.12.0/bin/setenv.sh').
-              with_content(%r{CATALINA_OPTS=\"-Dconfluence.upgrade.recovery.file.enabled=false -Dconfluence.cluster.node.name=myhostname \${CATALINA_OPTS}\"})
+              with_content(%r{CATALINA_OPTS="-Dconfluence.upgrade.recovery.file.enabled=false -Dconfluence.cluster.node.name=myhostname \${CATALINA_OPTS}"})
           end
         end
 
@@ -203,8 +212,8 @@ describe 'confluence' do
           it do
             is_expected.to compile.with_all_deps
             is_expected.to contain_file('/opt/confluence/atlassian-confluence-6.12.0/bin/setenv.sh').
-              with_content(%r{CATALINA_OPTS=\"-Dconfluence.upgrade.recovery.file.enabled=false \${CATALINA_OPTS}\"}).
-              with_content(%r{CATALINA_OPTS=\"-Dconfluence.cluster.node.name=myhostname \${CATALINA_OPTS}\"})
+              with_content(%r{CATALINA_OPTS="-Dconfluence.upgrade.recovery.file.enabled=false \${CATALINA_OPTS}"}).
+              with_content(%r{CATALINA_OPTS="-Dconfluence.cluster.node.name=myhostname \${CATALINA_OPTS}"})
           end
         end
       end
