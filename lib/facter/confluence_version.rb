@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Facter.add(:confluence_version) do
   setcode do
     pgrep = Facter::Util::Resolution.exec(

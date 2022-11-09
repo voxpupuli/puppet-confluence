@@ -1,4 +1,6 @@
-require 'spec_helper.rb'
+# frozen_string_literal: true
+
+require 'spec_helper'
 
 describe 'confluence' do
   on_supported_os.each do |os, fs_facts|
@@ -21,6 +23,7 @@ describe 'confluence' do
           it { is_expected.to compile.with_all_deps }
           it { is_expected.to contain_exec('service confluence stop && sleep 15') }
         end
+
         context 'custom params' do
           let(:params) do
             {

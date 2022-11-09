@@ -1,4 +1,6 @@
-require 'spec_helper.rb'
+# frozen_string_literal: true
+
+require 'spec_helper'
 
 describe 'confluence' do
   describe 'confluence::params' do
@@ -31,6 +33,10 @@ describe 'confluence' do
         end
 
         context 'service_provider is not systemd' do
+          let :facts do
+            fs_facts.merge(service_provider: 'init')
+          end
+
           it { is_expected.to contain_file('/etc/init.d/confluence') }
           it { is_expected.to compile.with_all_deps }
         end

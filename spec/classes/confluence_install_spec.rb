@@ -1,4 +1,6 @@
-require 'spec_helper.rb'
+# frozen_string_literal: true
+
+require 'spec_helper'
 
 describe 'confluence' do
   on_supported_os.each do |os, fs_facts|
@@ -71,8 +73,8 @@ describe 'confluence' do
           it do
             is_expected.to contain_user('foo').with('home' => '/random/homedir',
                                                     'shell' => '/bin/bash',
-                                                    'uid'   => 333,
-                                                    'gid'   => 444)
+                                                    'uid' => 333,
+                                                    'gid' => 444)
           end
 
           it { is_expected.to contain_group('bar') }
@@ -86,6 +88,7 @@ describe 'confluence' do
                    'group'         => 'bar',
                    'checksum_type' => 'md5')
           end
+
           it 'manages the confluence home directory' do
             is_expected.to contain_file('/random/homedir').with('ensure' => 'directory',
                                                                 'owner' => 'foo',
