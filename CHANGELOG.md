@@ -4,7 +4,41 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
-## [v4.0.0](https://github.com/voxpupuli/puppet-confluence/tree/v4.0.0) (2020-05-09)
+## [v5.0.0](https://github.com/voxpupuli/puppet-confluence/tree/v5.0.0) (2022-12-02)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-confluence/compare/v4.0.0...v5.0.0)
+
+**Breaking changes:**
+
+- Fix modulesync; Drop EoL CentOS 6 support [\#223](https://github.com/voxpupuli/puppet-confluence/pull/223) ([h-haaks](https://github.com/h-haaks))
+- made systemd daemon reload dependent on puppet version; Drop Puppet 5 support [\#213](https://github.com/voxpupuli/puppet-confluence/pull/213) ([KoenDierckx](https://github.com/KoenDierckx))
+
+**Implemented enhancements:**
+
+- Add tomcat\_redirect\_port variable to customise redirectPort in server.xml [\#220](https://github.com/voxpupuli/puppet-confluence/pull/220) ([techtino](https://github.com/techtino))
+- Integrated java parameters added or changed in Confluence 7.12 [\#218](https://github.com/voxpupuli/puppet-confluence/pull/218) ([timdeluxe](https://github.com/timdeluxe))
+
+**Fixed bugs:**
+
+- fix mysql connector source path [\#207](https://github.com/voxpupuli/puppet-confluence/pull/207) ([SimonHoenscheid](https://github.com/SimonHoenscheid))
+
+**Closed issues:**
+
+- mysql connector not found where module is looking for it [\#206](https://github.com/voxpupuli/puppet-confluence/issues/206)
+- Add tomcat SSL Support [\#194](https://github.com/voxpupuli/puppet-confluence/issues/194)
+- Support for the binary installer? [\#116](https://github.com/voxpupuli/puppet-confluence/issues/116)
+
+**Merged pull requests:**
+
+- If manage\_user=false, don't depend on the User resource \(obsoletes \#198\) [\#216](https://github.com/voxpupuli/puppet-confluence/pull/216) ([optiz0r](https://github.com/optiz0r))
+- Allow stdlib 8.0.0 [\#215](https://github.com/voxpupuli/puppet-confluence/pull/215) ([smortex](https://github.com/smortex))
+- allow newer dependencies/drop staging module dep [\#214](https://github.com/voxpupuli/puppet-confluence/pull/214) ([bastelfreak](https://github.com/bastelfreak))
+- Increase mysql\_java\_connector max version limit [\#209](https://github.com/voxpupuli/puppet-confluence/pull/209) ([kobybr](https://github.com/kobybr))
+- modulesync 3.0.0 & puppet-lint updates [\#208](https://github.com/voxpupuli/puppet-confluence/pull/208) ([bastelfreak](https://github.com/bastelfreak))
+- Allow defining additional Tomcat connectors [\#205](https://github.com/voxpupuli/puppet-confluence/pull/205) ([antaflos](https://github.com/antaflos))
+- moving end statement to allow values from java\_opts to be applied to … [\#188](https://github.com/voxpupuli/puppet-confluence/pull/188) ([Tokynet](https://github.com/Tokynet))
+
+## [v4.0.0](https://github.com/voxpupuli/puppet-confluence/tree/v4.0.0) (2020-05-10)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-confluence/compare/v3.2.0...v4.0.0)
 
@@ -213,7 +247,6 @@ These should not affect the functionality of the module.
 
 - add note about the original author [\#70](https://github.com/voxpupuli/puppet-confluence/pull/70) ([bastelfreak](https://github.com/bastelfreak))
 - prepare for 2.2.0 release [\#68](https://github.com/voxpupuli/puppet-confluence/pull/68) ([bastelfreak](https://github.com/bastelfreak))
-- modulesync 0.6.0 [\#67](https://github.com/voxpupuli/puppet-confluence/pull/67) ([bastelfreak](https://github.com/bastelfreak))
 - Update based on voxpupuli/modulesync\_config [\#66](https://github.com/voxpupuli/puppet-confluence/pull/66) ([dhoppe](https://github.com/dhoppe))
 - Update based on voxpupuli/modulesync\_config [\#64](https://github.com/voxpupuli/puppet-confluence/pull/64) ([dhoppe](https://github.com/dhoppe))
 - Update based on voxpupuli/modulesync\_config [\#63](https://github.com/voxpupuli/puppet-confluence/pull/63) ([dhoppe](https://github.com/dhoppe))
