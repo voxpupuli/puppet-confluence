@@ -39,6 +39,7 @@ class confluence (
   $tomcat_port                                                   = 8090,
   $tomcat_redirect_port                                          = 8443,
   $tomcat_max_threads                                            = 150,
+  $tomcat_max_http_header_size                                   = 8192,
   $tomcat_accept_count                                           = 100,
   # Reverse https proxy setting for tomcat
   Hash $tomcat_proxy                                             = {},

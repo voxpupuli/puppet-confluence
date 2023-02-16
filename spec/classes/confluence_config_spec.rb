@@ -43,6 +43,7 @@ describe 'confluence' do
               context_path: '/confluence1',
               tomcat_port: 8089,
               tomcat_redirect_port: 443,
+              tomcat_max_http_header_size: 8192,
               tomcat_max_threads: 999,
               tomcat_accept_count: 999,
               tomcat_proxy: {
@@ -59,6 +60,7 @@ describe 'confluence' do
             is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/conf/server.xml').
               with_content(%r{port="8089"}).
               with_content(%r{redirectPort="443"}).
+              with_content(%r{maxHttpHeaderSize="8192"}).
               with_content(%r{maxThreads="999"}).
               with_content(%r{acceptCount="999"}).
               with_content(%r{scheme="https"}).
