@@ -4,6 +4,23 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v6.0.0](https://github.com/voxpupuli/puppet-confluence/tree/v6.0.0) (2024-01-24)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-confluence/compare/v5.0.0...v6.0.0)
+
+**Breaking changes:**
+
+- Fix modulesync 7.2.0 tests; Drop Debian/Ubutnu 16.04 support [\#232](https://github.com/voxpupuli/puppet-confluence/pull/232) ([h-haaks](https://github.com/h-haaks))
+- Drop Puppet 6 support [\#228](https://github.com/voxpupuli/puppet-confluence/pull/228) ([bastelfreak](https://github.com/bastelfreak))
+
+**Implemented enhancements:**
+
+- feat: stdlib9 and puppet8 compatibility [\#231](https://github.com/voxpupuli/puppet-confluence/pull/231) ([dploeger](https://github.com/dploeger))
+
+**Merged pull requests:**
+
+- Add variable to configure maxHttpHeaderSize attribute [\#221](https://github.com/voxpupuli/puppet-confluence/pull/221) ([danifr](https://github.com/danifr))
+
 ## [v5.0.0](https://github.com/voxpupuli/puppet-confluence/tree/v5.0.0) (2022-12-02)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-confluence/compare/v4.0.0...v5.0.0)
