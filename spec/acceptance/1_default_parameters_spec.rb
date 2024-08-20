@@ -23,8 +23,8 @@ describe 'confluence' do
         cleanup         => true,
       } ->
       class { 'confluence':
-        version      => '5.5.6',
-        jvm_type     => 'oracle-jdk-1.8',
+        version      => '8.5.12',
+        jvm_type     => 'openjdk-11',
         download_url => fact('download_url'),
         javahome     => $jh,
       }

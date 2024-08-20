@@ -24,7 +24,7 @@ describe 'confluence' do
       } ->
       class { 'confluence':
         version      => '5.7',
-        jvm_type     => 'oracle-jdk-1.8',
+        jvm_type     => 'openjdk-11',
         download_url => fact('download_url'),
         javahome     => $jh,
         tomcat_port         => '8091',
