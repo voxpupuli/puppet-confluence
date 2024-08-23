@@ -82,7 +82,7 @@ export JAVA_OPTS
 # Set the JVM arguments used to start Confluence. For a description of the options, see
 # http://www.oracle.com/technetwork/java/javase/tech/vmoptions-jsp-140102.html
 
-<%-   if version[0] >= 7 # 7.x.x or higher -%>
+<%-   if version[0] == 7 # 7.x.x or higher -%>
 <%-     if version[1] >= 1 # 7.1.x or higher -%>
 CATALINA_OPTS="-XX:+IgnoreUnrecognizedVMOptions ${CATALINA_OPTS}"
 CATALINA_OPTS="-Xlog:gc+age=debug:file=$LOGBASEABS/logs/gc-`date +%F_%H-%M-%S`.log::filecount=5,filesize=2M ${CATALINA_OPTS}"
