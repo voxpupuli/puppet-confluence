@@ -6,7 +6,7 @@ class confluence (
 
   # JVM Settings
   $javahome                                                      = undef,
-  Enum['openjdk-11', 'oracle-jdk-1.8', 'custom'] $jvm_type       = 'openjdk-11',
+  Enum['openjdk-17', 'openjdk-11', 'oracle-jdk-1.8', 'custom'] $jvm_type       = 'openjdk-11',
   $jvm_xms                                                       = '256m',
   $jvm_xmx                                                       = '1024m',
   $jvm_permgen                                                   = '256m',
