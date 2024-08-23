@@ -268,6 +268,23 @@ describe 'confluence' do
           end
         end
 
+        context 'jdk17 specific option' do
+          let(:params) do
+            {
+              version: '8.5.14',
+              javahome: '/opt/java',
+              jvm_type: 'openjdk-17'
+            }
+          end
+
+          it do
+            is_expected.to compile.with_all_deps
+            is_expected.to contain_file('/opt/confluence/atlassian-confluence-8.5.14/bin/setenv.sh').
+              with_content(%r{CATALINA_OPTS="-XX:\+ExplicitGCInvokesConcurrent \${CATALINA_OPTS}"}).
+              with_content(%r{CATALINA_OPTS="-Xlog:gc\*:file=\$LOGBASEABS/logs/gc-%t.log:tags,time,uptime,level:filecount=5,filesize=2M \${CATALINA_OPTS}"}) # fix this spec test
+          end
+        end
+
         context 'manage_user set to true' do
           let(:params) do
             {
