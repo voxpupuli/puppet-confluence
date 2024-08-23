@@ -90,8 +90,6 @@ CATALINA_OPTS="-Xlog:gc+age=debug:file=$LOGBASEABS/logs/gc-`date +%F_%H-%M-%S`.l
 <%-   end -%>
 <%- if scope.lookupvar('confluence::jvm_type') == 'openjdk-11' -%>
 CATALINA_OPTS="-XX:+ExplicitGCInvokesConcurrent -XX:+PrintGCDateStamps ${CATALINA_OPTS}"
-<%- elsif scope.lookupvar('confluence::jvm_type')  == 'oracle-jdk-1.8' -%>
-CATALINA_OPTS="-XX:-PrintGCDetails -XX:+PrintGCDateStamps -XX:-PrintTenuringDistribution ${CATALINA_OPTS}"
 <%- end -%>
 CATALINA_OPTS="-Xloggc:$LOGBASEABS/logs/gc-`date +%F_%H-%M-%S`.log -XX:+UseGCLogFileRotation -XX:NumberOfGCLogFiles=5 -XX:GCLogFileSize=2M ${CATALINA_OPTS}"
 CATALINA_OPTS="-XX:G1ReservePercent=20 ${CATALINA_OPTS}"
