@@ -40,7 +40,7 @@ class confluence::config (
     $_tomcat_port                 = { port              => $tomcat_port }
     $_tomcat_redirect_port        = { redirectPort      => $tomcat_redirect_port }
 
-    $parameters = merge($_tomcat_max_threads, $_tomcat_max_http_header_size, $_tomcat_accept_count, $tomcat_proxy, $tomcat_extras, $_tomcat_port, $_tomcat_redirect_port )
+    $parameters = $_tomcat_max_threads + $_tomcat_max_http_header_size + $_tomcat_accept_count + $tomcat_proxy + $tomcat_extras + $_tomcat_port + $_tomcat_redirect_port
 
     if versioncmp($facts['augeas']['version'], '1.0.0') < 0 {
       fail('This module requires Augeas >= 1.0.0')
