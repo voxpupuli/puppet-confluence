@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v6.1.0](https://github.com/voxpupuli/puppet-confluence/tree/v6.1.0) (2025-07-11)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-confluence/compare/v6.0.0...v6.1.0)
+
+**Breaking changes:**
+
+- remove unsupported OS to fix tests [\#244](https://github.com/voxpupuli/puppet-confluence/pull/244) ([SimonHoenscheid](https://github.com/SimonHoenscheid))
+
+**Implemented enhancements:**
+
+- puppet/archive: Allow 8.x [\#255](https://github.com/voxpupuli/puppet-confluence/pull/255) ([bastelfreak](https://github.com/bastelfreak))
+- Replace legacy merge\(\) with native Puppet code [\#254](https://github.com/voxpupuli/puppet-confluence/pull/254) ([bastelfreak](https://github.com/bastelfreak))
+- metadata.json: Add OpenVox [\#250](https://github.com/voxpupuli/puppet-confluence/pull/250) ([jstraw](https://github.com/jstraw))
+- add supported OS to fix tests [\#243](https://github.com/voxpupuli/puppet-confluence/pull/243) ([SimonHoenscheid](https://github.com/SimonHoenscheid))
+- add jdk17 option [\#241](https://github.com/voxpupuli/puppet-confluence/pull/241) ([SimonHoenscheid](https://github.com/SimonHoenscheid))
+
 ## [v6.0.0](https://github.com/voxpupuli/puppet-confluence/tree/v6.0.0) (2024-01-24)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-confluence/compare/v5.0.0...v6.0.0)
