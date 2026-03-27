@@ -14,7 +14,7 @@ describe 'confluence' do
           let(:params) do
             {
               javahome: '/opt/java',
-              version: '5.5.6'
+              version: '5.5.6',
             }
           end
 
@@ -29,7 +29,7 @@ describe 'confluence' do
             {
               javahome: '/opt/java',
               version: '5.5.6',
-              manage_server_xml: 'template'
+              manage_server_xml: 'template',
             }
           end
 
@@ -53,8 +53,8 @@ describe 'confluence' do
               tomcat_proxy: {
                 'scheme' => 'https',
                 'proxyName' => 'EXAMPLE',
-                'proxyPort' => '443'
-              }
+                'proxyPort' => '443',
+              },
             }
           end
 
@@ -62,16 +62,16 @@ describe 'confluence' do
           it { is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/confluence-init.properties') }
 
           it do
-            is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/conf/server.xml').
-              with_content(%r{port="8089"}).
-              with_content(%r{redirectPort="443"}).
-              with_content(%r{maxHttpHeaderSize="8192"}).
-              with_content(%r{maxThreads="999"}).
-              with_content(%r{acceptCount="999"}).
-              with_content(%r{scheme="https"}).
-              with_content(%r{proxyName="EXAMPLE"}).
-              with_content(%r{proxyPort="443"}).
-              with_content(%r{Context path="/confluence1"})
+            is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/conf/server.xml')
+              .with_content(%r{port="8089"})
+              .with_content(%r{redirectPort="443"})
+              .with_content(%r{maxHttpHeaderSize="8192"})
+              .with_content(%r{maxThreads="999"})
+              .with_content(%r{acceptCount="999"})
+              .with_content(%r{scheme="https"})
+              .with_content(%r{proxyName="EXAMPLE"})
+              .with_content(%r{proxyPort="443"})
+              .with_content(%r{Context path="/confluence1"})
           end
         end
 
@@ -80,13 +80,13 @@ describe 'confluence' do
             {
               javahome: '/opt/java',
               version: '5.5.6',
-              data_dir: '/opt/confluence/confluence-data'
+              data_dir: '/opt/confluence/confluence-data',
             }
           end
 
           it do
-            is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/confluence-init.properties').
-              with_content(%r{confluence.home=/opt/confluence/confluence-data})
+            is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/confluence-init.properties')
+              .with_content(%r{confluence.home=/opt/confluence/confluence-data})
           end
         end
 
@@ -95,13 +95,13 @@ describe 'confluence' do
             {
               javahome: '/opt/java',
               version: '5.5.6',
-              homedir: '/opt/confluence/confluence-home'
+              homedir: '/opt/confluence/confluence-home',
             }
           end
 
           it do
-            is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/confluence-init.properties').
-              with_content(%r{confluence.home=/opt/confluence/confluence-home})
+            is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/confluence-init.properties')
+              .with_content(%r{confluence.home=/opt/confluence/confluence-home})
           end
         end
 
@@ -111,13 +111,13 @@ describe 'confluence' do
               javahome: '/opt/java',
               version: '5.5.6',
               data_dir: '/opt/confluence/confluence-data',
-              homedir: '/opt/confluence/confluence-home'
+              homedir: '/opt/confluence/confluence-home',
             }
           end
 
           it do
-            is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/confluence-init.properties').
-              with_content(%r{confluence.home=/opt/confluence/confluence-data})
+            is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/confluence/WEB-INF/classes/confluence-init.properties')
+              .with_content(%r{confluence.home=/opt/confluence/confluence-data})
           end
         end
 
@@ -129,14 +129,14 @@ describe 'confluence' do
               manage_server_xml: 'template',
               ajp: {
                 'port'     => '8009',
-                'protocol' => 'AJP/1.3'
-              }
+                'protocol' => 'AJP/1.3',
+              },
             }
           end
 
           it do
-            is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/conf/server.xml').
-              with_content(%r{<Connector enableLookups="false" URIEncoding="UTF-8"\s+port = "8009"\s+protocol = "AJP/1.3"\s+/>})
+            is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/conf/server.xml')
+              .with_content(%r{<Connector enableLookups="false" URIEncoding="UTF-8"\s+port = "8009"\s+protocol = "AJP/1.3"\s+/>})
           end
         end
 
@@ -154,7 +154,7 @@ describe 'confluence' do
                   'proxyName' => 'foo.example.com',
                   'proxyPort' => '8123',
                   'secure' => true,
-                  'scheme' => 'https'
+                  'scheme' => 'https',
                 },
                 8082 => {
                   'URIEncoding' => 'UTF-8',
@@ -162,29 +162,29 @@ describe 'confluence' do
                   'protocol' => 'HTTP/1.1',
                   'proxyName' => 'bar.example.com',
                   'proxyPort' => '8124',
-                  'scheme' => 'http'
-                }
-              }
+                  'scheme' => 'http',
+                },
+              },
             }
           end
 
           it do
-            is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/conf/server.xml').
-              with_content(%r{<Connector port="8081"}).
-              with_content(%r{connectionTimeout="20000"}).
-              with_content(%r{protocol="HTTP/1\.1"}).
-              with_content(%r{proxyName="foo\.example\.com"}).
-              with_content(%r{proxyPort="8123"}).
-              with_content(%r{scheme="https"}).
-              with_content(%r{secure="true"}).
-              with_content(%r{URIEncoding="UTF-8"}).
-              with_content(%r{<Connector port="8082"}).
-              with_content(%r{connectionTimeout="20000"}).
-              with_content(%r{protocol="HTTP/1\.1"}).
-              with_content(%r{proxyName="bar\.example\.com"}).
-              with_content(%r{proxyPort="8124"}).
-              with_content(%r{scheme="http"}).
-              with_content(%r{URIEncoding="UTF-8"})
+            is_expected.to contain_file('/opt/confluence/atlassian-confluence-5.5.6/conf/server.xml')
+              .with_content(%r{<Connector port="8081"})
+              .with_content(%r{connectionTimeout="20000"})
+              .with_content(%r{protocol="HTTP/1\.1"})
+              .with_content(%r{proxyName="foo\.example\.com"})
+              .with_content(%r{proxyPort="8123"})
+              .with_content(%r{scheme="https"})
+              .with_content(%r{secure="true"})
+              .with_content(%r{URIEncoding="UTF-8"})
+              .with_content(%r{<Connector port="8082"})
+              .with_content(%r{connectionTimeout="20000"})
+              .with_content(%r{protocol="HTTP/1\.1"})
+              .with_content(%r{proxyName="bar\.example\.com"})
+              .with_content(%r{proxyPort="8124"})
+              .with_content(%r{scheme="http"})
+              .with_content(%r{URIEncoding="UTF-8"})
           end
         end
 
@@ -193,14 +193,14 @@ describe 'confluence' do
             {
               version: '6.12.0',
               javahome: '/opt/java',
-              catalina_opts: '-Dconfluence.upgrade.recovery.file.enabled=false -Dconfluence.cluster.node.name=myhostname'
+              catalina_opts: '-Dconfluence.upgrade.recovery.file.enabled=false -Dconfluence.cluster.node.name=myhostname',
             }
           end
 
           it do
             is_expected.to compile.with_all_deps
-            is_expected.to contain_file('/opt/confluence/atlassian-confluence-6.12.0/bin/setenv.sh').
-              with_content(%r{CATALINA_OPTS="-Dconfluence.upgrade.recovery.file.enabled=false -Dconfluence.cluster.node.name=myhostname \${CATALINA_OPTS}"})
+            is_expected.to contain_file('/opt/confluence/atlassian-confluence-6.12.0/bin/setenv.sh')
+              .with_content(%r{CATALINA_OPTS="-Dconfluence.upgrade.recovery.file.enabled=false -Dconfluence.cluster.node.name=myhostname \${CATALINA_OPTS}"})
           end
         end
 
@@ -209,15 +209,15 @@ describe 'confluence' do
             {
               version: '6.12.0',
               javahome: '/opt/java',
-              catalina_opts: ['-Dconfluence.upgrade.recovery.file.enabled=false', '-Dconfluence.cluster.node.name=myhostname']
+              catalina_opts: ['-Dconfluence.upgrade.recovery.file.enabled=false', '-Dconfluence.cluster.node.name=myhostname'],
             }
           end
 
           it do
             is_expected.to compile.with_all_deps
-            is_expected.to contain_file('/opt/confluence/atlassian-confluence-6.12.0/bin/setenv.sh').
-              with_content(%r{CATALINA_OPTS="-Dconfluence.upgrade.recovery.file.enabled=false \${CATALINA_OPTS}"}).
-              with_content(%r{CATALINA_OPTS="-Dconfluence.cluster.node.name=myhostname \${CATALINA_OPTS}"})
+            is_expected.to contain_file('/opt/confluence/atlassian-confluence-6.12.0/bin/setenv.sh')
+              .with_content(%r{CATALINA_OPTS="-Dconfluence.upgrade.recovery.file.enabled=false \${CATALINA_OPTS}"})
+              .with_content(%r{CATALINA_OPTS="-Dconfluence.cluster.node.name=myhostname \${CATALINA_OPTS}"})
           end
         end
 
@@ -225,14 +225,14 @@ describe 'confluence' do
           let(:params) do
             {
               version: '7.12.0',
-              javahome: '/opt/java'
+              javahome: '/opt/java',
             }
           end
 
           it do
             is_expected.to compile.with_all_deps
-            is_expected.to contain_file('/opt/confluence/atlassian-confluence-7.12.0/bin/setenv.sh').
-              with_content(%r{CATALINA_OPTS="-XX:\+ExplicitGCInvokesConcurrent -XX:\+PrintGCDateStamps \${CATALINA_OPTS}"})
+            is_expected.to contain_file('/opt/confluence/atlassian-confluence-7.12.0/bin/setenv.sh')
+              .with_content(%r{CATALINA_OPTS="-XX:\+ExplicitGCInvokesConcurrent -XX:\+PrintGCDateStamps \${CATALINA_OPTS}"})
           end
         end
 
@@ -241,14 +241,14 @@ describe 'confluence' do
             {
               version: '7.12.0',
               javahome: '/opt/java',
-              big_instances_opts: true
+              big_instances_opts: true,
             }
           end
 
           it do
             is_expected.to compile.with_all_deps
-            is_expected.to contain_file('/opt/confluence/atlassian-confluence-7.12.0/bin/setenv.sh').
-              with_content(%r{CATALINA_OPTS="-XX:ReservedCodeCacheSize=384m \${CATALINA_OPTS}"})
+            is_expected.to contain_file('/opt/confluence/atlassian-confluence-7.12.0/bin/setenv.sh')
+              .with_content(%r{CATALINA_OPTS="-XX:ReservedCodeCacheSize=384m \${CATALINA_OPTS}"})
           end
         end
 
@@ -257,14 +257,14 @@ describe 'confluence' do
             {
               version: '7.12.0',
               javahome: '/opt/java',
-              jvm_type: 'oracle-jdk-1.8'
+              jvm_type: 'oracle-jdk-1.8',
             }
           end
 
           it do
             is_expected.to compile.with_all_deps
-            is_expected.to contain_file('/opt/confluence/atlassian-confluence-7.12.0/bin/setenv.sh').
-              with_content(%r{CATALINA_OPTS="-XX:-PrintGCDetails -XX:\+PrintGCDateStamps -XX:-PrintTenuringDistribution \${CATALINA_OPTS}"})
+            is_expected.to contain_file('/opt/confluence/atlassian-confluence-7.12.0/bin/setenv.sh')
+              .with_content(%r{CATALINA_OPTS="-XX:-PrintGCDetails -XX:\+PrintGCDateStamps -XX:-PrintTenuringDistribution \${CATALINA_OPTS}"})
           end
         end
 
@@ -273,15 +273,15 @@ describe 'confluence' do
             {
               version: '8.5.14',
               javahome: '/opt/java',
-              jvm_type: 'openjdk-17'
+              jvm_type: 'openjdk-17',
             }
           end
 
           it do
             is_expected.to compile.with_all_deps
-            is_expected.to contain_file('/opt/confluence/atlassian-confluence-8.5.14/bin/setenv.sh').
-              with_content(%r{CATALINA_OPTS="-XX:\+ExplicitGCInvokesConcurrent \${CATALINA_OPTS}"}).
-              with_content(%r{CATALINA_OPTS="-Xlog:gc\*:file=\$LOGBASEABS/logs/gc-%t.log:tags,time,uptime,level:filecount=5,filesize=2M \${CATALINA_OPTS}"}) # fix this spec test
+            is_expected.to contain_file('/opt/confluence/atlassian-confluence-8.5.14/bin/setenv.sh')
+              .with_content(%r{CATALINA_OPTS="-XX:\+ExplicitGCInvokesConcurrent \${CATALINA_OPTS}"})
+              .with_content(%r{CATALINA_OPTS="-Xlog:gc\*:file=\$LOGBASEABS/logs/gc-%t.log:tags,time,uptime,level:filecount=5,filesize=2M \${CATALINA_OPTS}"}) # fix this spec test
           end
         end
 
@@ -290,7 +290,7 @@ describe 'confluence' do
             {
               version: '6.12.0',
               javahome: '/opt/java',
-              manage_user: true
+              manage_user: true,
             }
           end
 
@@ -305,7 +305,7 @@ describe 'confluence' do
             {
               version: '6.12.0',
               javahome: '/opt/java',
-              manage_user: false
+              manage_user: false,
             }
           end
 
