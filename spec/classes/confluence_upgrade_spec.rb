@@ -13,7 +13,7 @@ describe 'confluence' do
         context 'default params' do
           let(:params) do
             {
-              javahome: '/opt/java'
+              javahome: '/opt/java',
             }
           end
           let(:facts) do
@@ -28,7 +28,7 @@ describe 'confluence' do
           let(:params) do
             {
               javahome: '/opt/java',
-              stop_confluence: 'stop service please'
+              stop_confluence: 'stop service please',
             }
           end
           let(:facts) do

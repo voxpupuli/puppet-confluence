@@ -17,7 +17,7 @@ describe 'confluence' do
                 mysql_connector_version: '5.1.47',
                 mysql_connector_install: '/opt/MySQL-connector',
                 mysql_connector: true,
-                javahome: '/opt/java'
+                javahome: '/opt/java',
               }
             end
 
@@ -32,7 +32,7 @@ describe 'confluence' do
                 mysql_connector_version: '5.1.47',
                 mysql_connector_install: '/opt/MySQL-connector',
                 mysql_connector: false,
-                javahome: '/opt/java'
+                javahome: '/opt/java',
               }
             end
 

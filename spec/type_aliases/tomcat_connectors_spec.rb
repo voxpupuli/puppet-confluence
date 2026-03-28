@@ -13,7 +13,7 @@ describe 'Confluence::Tomcat_connectors' do
           'proxyName' => 'foo.example.com',
           'proxyPort' => '80',
           'secure' => false,
-          'scheme' => 'http'
+          'scheme' => 'http',
         },
         8443 => {
           'URIEncoding' => 'UTF-8',
@@ -22,9 +22,9 @@ describe 'Confluence::Tomcat_connectors' do
           'proxyName' => 'foo.example.com',
           'proxyPort' => '443',
           'secure' => true,
-          'scheme' => 'https'
-        }
-      }
+          'scheme' => 'https',
+        },
+      },
     ].each do |value|
       describe value.inspect do
         it { is_expected.to allow_value(value) }
@@ -43,8 +43,8 @@ describe 'Confluence::Tomcat_connectors' do
             'proxyName' => 'foo.example.com',
             'proxyPort' => '80',
             'secure' => false,
-            'scheme' => 'http'
-          }
+            'scheme' => 'http',
+          },
         },
         {
           1023 => {
@@ -54,8 +54,8 @@ describe 'Confluence::Tomcat_connectors' do
             'proxyName' => 'foo.example.com',
             'proxyPort' => '80',
             'secure' => false,
-            'scheme' => 'http'
-          }
+            'scheme' => 'http',
+          },
         },
         { %w[foo blah] => 'bar' },
         { true => 'false' },
@@ -71,7 +71,7 @@ describe 'Confluence::Tomcat_connectors' do
         '55555',
         '0x123',
         'yess',
-        'nooo'
+        'nooo',
       ].each do |value|
         describe value.inspect do
           it { is_expected.not_to allow_value(value) }
