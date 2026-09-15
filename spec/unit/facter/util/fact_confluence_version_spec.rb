@@ -9,7 +9,7 @@ describe Facter::Util::Fact do
   before do
     Facter.clear
     allow(Facter.fact(:kernel)).to receive(:value).and_return('Linux')
-    allow(Facter::Util::Resolution).to receive(:exec).with('ps ax | grep java.*atlassian-confluence-[0-9].*org.apache.catalina.startup.Bootstrap').and_return(proc_line_result)
+    allow(Facter::Core::Execution).to receive(:execute).with('ps ax | grep java.*atlassian-confluence-[0-9].*org.apache.catalina.startup.Bootstrap').and_return(proc_line_result)
   end
 
   context 'confluence_version with confluence running' do

@@ -2,7 +2,7 @@
 
 Facter.add(:confluence_version) do
   setcode do
-    pgrep = Facter::Util::Resolution.exec(
+    pgrep = Facter::Core::Execution.execute(
       'ps ax | grep java.*atlassian-confluence-[0-9].*org.apache.catalina.startup.Bootstrap',
     )
     pgrep.to_s =~ %r{^.*atlassian-confluence-(\d+\.\d+\.\d+).*}
