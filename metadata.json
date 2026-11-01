@@ -15,7 +15,7 @@
     },
     {
       "name": "puppet/mysql_java_connector",
-      "version_requirement": ">= 3.0.2 < 7.0.0"
+      "version_requirement": ">= 3.0.2 < 8.0.0"
     },
     {
       "name": "puppetlabs/stdlib",
